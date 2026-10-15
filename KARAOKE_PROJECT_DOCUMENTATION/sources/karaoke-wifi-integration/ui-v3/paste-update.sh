@@ -1,0 +1,67 @@
+python3 - <<'PY'
+import base64
+import gzip
+import hashlib
+import os
+from pathlib import Path
+import subprocess
+import tempfile
+import time
+
+if os.geteuid() != 0:
+    raise RuntimeError('Выполните блок в SSH от root.')
+
+encoded = """
+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
+"""
+code = gzip.decompress(base64.b64decode(encoded))
+if hashlib.sha256(code).hexdigest() != '282eb19c2bbe48f8888d90776a5cc5676b8322e6be96e27c256815fe941f46ca':
+    raise RuntimeError('Данные повреждены. Изменения не внесены.')
+folder = Path(tempfile.mkdtemp(prefix='karaoke-qr-update-', dir='/root'))
+folder.chmod(0o700)
+script = folder / 'apply.py'
+script.write_bytes(code)
+script.chmod(0o600)
+unit = 'karaoke-qr-card-' + str(time.time_ns())
+print('Журнал обновления:', unit, flush=True)
+result = subprocess.run([
+    'systemd-run', '--unit=' + unit, '--wait', '--collect',
+    '/usr/bin/python3', '-u', str(script)])
+subprocess.run(['journalctl', '-u', unit, '--no-pager', '-o', 'cat'])
+raise SystemExit(result.returncode)
+PY

@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KARAOKE — настройка Wi-Fi</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; padding: 18px 14px; background: #101827; color: #fff; font: 16px/1.5 Arial,sans-serif; }
+.container { max-width: 460px; margin: 10px auto; }
+.logo { text-align: center; color: #60a5fa; letter-spacing: 3px; font-weight: bold; }
+h1 { font-size: 25px; text-align: center; margin: 12px 0; }
+p { color: #cbd5e1; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 20px; }
+label { display: block; color: #cbd5e1; font-size: 14px; margin: 12px 0 6px; }
+select,input,button { font: inherit; border-radius: 9px; }
+select,input { width: 100%; padding: 12px; color: white; background: #0f172a; border: 1px solid #475569; }
+button,.karaoke-link { display: block; width: 100%; margin: 12px 0 0; padding: 13px; border: 0; color: white; background: #2563eb; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; }
+button:disabled { background: #475569; cursor: wait; }
+.secondary,.karaoke-link { background: #334155; border-radius: 9px; }
+.danger { background: #7f1d1d; font-size: 14px; }
+.status { margin-top: 16px; padding: 14px; background: #0f172a; border-radius: 9px; overflow-wrap: anywhere; }
+.status.error { color: #fca5a5; }
+.status.success { color: #86efac; }
+.note { font-size: 13px; color: #94a3b8; }
+#keyboard-toggle,#keyboard { display: none; }
+#keyboard { position: sticky; bottom: 0; padding: 6px; background: #0f172a; border-radius: 9px; }
+.key-row { display: flex; gap: 3px; margin-top: 4px; }
+.key-row button { flex: 1; width: auto; min-width: 0; margin: 0; padding: 11px 2px; font-size: 17px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">KARAOKE</div>
+  <h1>Подключение к Wi-Fi</h1>
+  <p>Выберите домашнюю сеть для приставки. Телефон пока оставьте в сети <strong>KARAOKE</strong>.</p>
+  <div class="card">
+    <form id="connect-form">
+      <label for="ssid">Доступные сети</label>
+      <select id="ssid"><option value="">Поиск сетей…</option></select>
+      <button id="scanBtn" type="button" class="secondary" onclick="loadNetworks()">Обновить список сетей</button>
+      <label for="manualSsid">Или введите название сети вручную</label>
+      <input id="manualSsid" type="text" placeholder="Для скрытой сети" autocomplete="off" autocapitalize="none" spellcheck="false">
+      <label for="password">Пароль домашней сети</label>
+      <input id="password" type="password" placeholder="Для открытой сети оставьте пустым" autocomplete="new-password">
+      <button type="button" class="secondary" onclick="togglePassword()" id="showPassword">Показать пароль</button>
+      <button type="button" class="secondary" onclick="toggleKeyboard()" id="keyboard-toggle">Экранная клавиатура</button>
+      <div id="keyboard" aria-label="Экранная клавиатура"></div>
+      <button id="connectBtn" type="submit">Подключить приставку</button>
+    </form>
+    <div id="status" class="status" role="status" aria-live="polite">Проверяем состояние подключения…</div>
+    <p class="note">Если пароль неверный, KARAOKE останется доступной: исправьте пароль и повторите. После успешного подключения приставки QR и точка KARAOKE отключатся.</p>
+  </div>
+  <a class="karaoke-link" href="/" target="_top">Караоке без интернета</a>
+  <p class="note">Если окно настройки не открылось автоматически: подключитесь к KARAOKE (пароль 12345678) и откройте http://192.168.100.1 в браузере.</p>
+  <button id="resetBtn" class="danger" type="button" onclick="resetWifi()">Забыть домашние сети и настроить заново</button>
+  <p class="note">Сброс касается только сохранённых подключений встроенного Wi-Fi. Файлы караоке сохраняются.</p>
+</div>
+<script>
+/* KARAOKE_WIFI_SETUP_V2: async XHR also works with the TV's legacy browser. */
+var activeJob = null;
+var terminalStatus = false;
+var jobPollAttempts = 0;
+var lastState = {};
+var keyboardTarget = null;
+var keyboardRussian = false;
+var keyboardUpper = false;
+
+function api(method, url, data, done, timeout) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, url, true);
+    xhr.timeout = timeout || 7000;
+    if (data !== null) xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+        var result;
+        try { result = JSON.parse(xhr.responseText); }
+        catch (e) { done(new Error('Некорректный ответ сервера')); return; }
+        if (xhr.status < 200 || xhr.status >= 300) {
+            var failure = new Error(result.error || 'Не удалось выполнить запрос');
+            failure.status = xhr.status; done(failure); return;
+        }
+        done(null, result);
+    };
+    xhr.onerror = function() { done(new Error('Нет соединения с приставкой. Проверьте подключение к KARAOKE.')); };
+    xhr.ontimeout = function() { done(new Error('Приставка не ответила. Проверьте подключение к KARAOKE.')); };
+    try { xhr.send(data === null ? null : JSON.stringify(data)); }
+    catch (e) { done(new Error('Не удалось отправить запрос приставке')); }
+}
+
+function setStatus(message, kind) {
+    var element = document.getElementById('status');
+    element.textContent = message;
+    element.className = 'status' + (kind ? ' ' + kind : '');
+}
+
+function setBusy(busy) {
+    document.getElementById('connectBtn').disabled = busy;
+    document.getElementById('resetBtn').disabled = busy;
+    document.getElementById('scanBtn').disabled = busy;
+}
+
+function loadNetworks() {
+    if (activeJob) return;
+    var select = document.getElementById('ssid');
+    var oldValue = select.value;
+    document.getElementById('scanBtn').disabled = true;
+    select.textContent = '';
+    var placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = 'Поиск сетей…';
+    select.appendChild(placeholder);
+    api('GET', '/api/wifi/scan', null, function(error, data) {
+        document.getElementById('scanBtn').disabled = !!activeJob;
+        select.textContent = '';
+        placeholder.textContent = error ? 'Не удалось найти сети' : 'Выберите домашнюю сеть';
+        select.appendChild(placeholder);
+        if (error) { if (!activeJob && !terminalStatus) setStatus(error.message, 'error'); return; }
+        var networks = data.networks || [];
+        for (var i = 0; i < networks.length; i++) {
+            var network = networks[i];
+            var option = document.createElement('option');
+            option.value = network.ssid;
+            option.textContent = network.ssid + ' (' + network.signal + '%)' +
+                ((network.in_use === 'yes' || network.in_use === true) ? ' — подключена' : '');
+            select.appendChild(option);
+        }
+        if (oldValue) select.value = oldValue;
+        if (!networks.length && !activeJob && !terminalStatus) setStatus('Сети не найдены. Можно ввести название вручную.');
+    }, 25000);
+}
+
+function loadStatus() {
+    api('GET', '/api/karaoke-wifi-monitor', null, function(error, data) {
+        if (error) { if (!activeJob && !terminalStatus) setStatus(error.message, 'error'); return; }
+        lastState = data;
+        if (activeJob) return;
+        setBusy(!!data.busy);
+        if (terminalStatus) return;
+        if (data.busy) {
+            setStatus('Приставка уже выполняет настройку Wi-Fi. Подождите…');
+        } else if (data.connected) {
+            setStatus('Приставка подключена к ' + (data.network || 'домашней сети') +
+                (data.ip ? '. Адрес: http://' + data.ip + ':8080/' : ''), 'success');
+        } else if (data.ap_active) {
+            setStatus('KARAOKE включена. Выберите домашнюю сеть и введите её пароль.');
+        } else {
+            setStatus('Проверяем подключение. Точка KARAOKE включится, если домашняя сеть недоступна.');
+        }
+    }, 4000);
+}
+
+function pollJob(jobId) {
+    if (activeJob !== jobId) return;
+    jobPollAttempts++;
+    api('GET', '/api/wifi/job/' + encodeURIComponent(jobId), null, function(error, job) {
+        if (activeJob !== jobId) return;
+        if (error) {
+            if (error.status === 404 || jobPollAttempts >= 60) {
+                activeJob = null; terminalStatus = true; setBusy(false);
+                setStatus('Не удалось получить результат. Если KARAOKE исчезла, подключите телефон к домашней сети. Иначе проверьте состояние и повторите настройку.', 'error');
+                return;
+            }
+            setStatus(error.message + ' Настройка может ещё выполняться; подключитесь к KARAOKE снова.');
+            setTimeout(function() { pollJob(jobId); }, 3000);
+            return;
+        }
+        if (job.status === 'success') {
+            activeJob = null;
+            terminalStatus = true;
+            setBusy(false);
+            document.getElementById('password').value = '';
+            if (job.type === 'reset') {
+                setStatus('Домашние сети забыты. Подключитесь к KARAOKE и выберите новую сеть.', 'success');
+                loadNetworks();
+            } else {
+                setStatus('Приставка подключена' + (job.ssid ? ' к ' + job.ssid : '') + '. ' +
+                    'Точка KARAOKE скоро отключится. Переключите телефон на домашнюю сеть.' +
+                    (job.ip ? ' Караоке: http://' + job.ip + ':8080/' : ''), 'success');
+            }
+            return;
+        }
+        if (job.status === 'failed') {
+            activeJob = null;
+            terminalStatus = true;
+            setBusy(false);
+            setStatus(job.message || 'Подключиться не удалось. Проверьте пароль и повторите.', 'error');
+            return;
+        }
+        setStatus(job.message || 'Подключаем приставку. Оставайтесь в сети KARAOKE…');
+        setTimeout(function() { pollJob(jobId); }, 1500);
+    });
+}
+
+function startJob(url, payload) {
+    if (activeJob) return;
+    activeJob = 'submitting';
+    terminalStatus = false;
+    jobPollAttempts = 0;
+    setBusy(true);
+    setStatus('Отправляем настройки приставке…');
+    api('POST', url, payload, function(error, data) {
+        if (error || !data || !data.ok || !data.job_id) {
+            activeJob = null;
+            terminalStatus = true;
+            setBusy(false);
+            setStatus(error ? error.message : ((data && data.error) || 'Не удалось начать настройку'), 'error');
+            return;
+        }
+        activeJob = data.job_id;
+        setStatus('Настройки приняты. Проверяем подключение…');
+        pollJob(activeJob);
+    });
+}
+
+function connectWifi() {
+    var manual = document.getElementById('manualSsid').value;
+    var selected = document.getElementById('ssid').value;
+    var ssid = manual.length ? manual : selected;
+    if (!ssid) { setStatus('Выберите сеть или введите её название вручную.', 'error'); return; }
+    startJob(lastState.ap_active ? '/api/wifi/portal-connect' : '/api/wifi/connect', {
+        ssid: ssid,
+        password: document.getElementById('password').value
+    });
+}
+
+function resetWifi() {
+    if (!window.confirm('Забыть сохранённые домашние сети встроенного Wi-Fi? Приставка отключится от домашней сети и включит KARAOKE.')) return;
+    startJob('/api/wifi/reset', {confirmed: true});
+}
+
+function togglePassword() {
+    var input = document.getElementById('password');
+    input.type = input.type === 'password' ? 'text' : 'password';
+    document.getElementById('showPassword').textContent = input.type === 'password' ? 'Показать пароль' : 'Скрыть пароль';
+}
+
+function keyboardInsert(text) {
+    var input = keyboardTarget || document.getElementById('password');
+    var start = input.selectionStart === null ? input.value.length : input.selectionStart;
+    var end = input.selectionEnd === null ? start : input.selectionEnd;
+    input.value = input.value.slice(0, start) + text + input.value.slice(end);
+    input.setSelectionRange(start + text.length, start + text.length);
+}
+function keyboardBackspace() {
+    var input = keyboardTarget || document.getElementById('password');
+    var start = input.selectionStart === null ? input.value.length : input.selectionStart;
+    var end = input.selectionEnd === null ? start : input.selectionEnd;
+    if (start === end && start > 0) start--;
+    input.value = input.value.slice(0, start) + input.value.slice(end);
+    input.setSelectionRange(start, start);
+}
+function renderKeyboard() {
+    var box = document.getElementById('keyboard');
+    box.textContent = '';
+    var rows = ['1234567890', keyboardRussian ? 'йцукенгшщзхъ' : 'qwertyuiop',
+        keyboardRussian ? 'фывапролджэ' : 'asdfghjkl', keyboardRussian ? 'ячсмитьбю' : 'zxcvbnm', '!@#$%^&*()', '-_+=.,:;?/', '[]{}<>\\|', '\u0027\u0022`~'];
+    for (var i = 0; i < rows.length; i++) {
+        var row = document.createElement('div');
+        row.className = 'key-row';
+        var chars = keyboardUpper ? rows[i].toUpperCase() : rows[i];
+        for (var j = 0; j < chars.length; j++) {
+            var button = document.createElement('button');
+            button.type = 'button';
+            button.textContent = chars.charAt(j);
+            button.onclick = function() { keyboardInsert(this.textContent); };
+            row.appendChild(button);
+        }
+        box.appendChild(row);
+    }
+    var controls = document.createElement('div');
+    controls.className = 'key-row';
+    function control(label, callback) {
+        var button = document.createElement('button');
+        button.type = 'button'; button.textContent = label; button.onclick = callback; controls.appendChild(button);
+    }
+    control('RU/EN', function() { keyboardRussian = !keyboardRussian; renderKeyboard(); });
+    control('⇧', function() { keyboardUpper = !keyboardUpper; renderKeyboard(); });
+    control('Пробел', function() { keyboardInsert(' '); });
+    control('⌫', keyboardBackspace);
+    box.appendChild(controls);
+}
+function toggleKeyboard() {
+    var box = document.getElementById('keyboard');
+    var show = box.style.display !== 'block';
+    box.style.display = show ? 'block' : 'none';
+    if (show) renderKeyboard();
+}
+
+document.getElementById('connect-form').onsubmit = function(event) {
+    event.preventDefault(); connectWifi();
+};
+document.getElementById('manualSsid').onfocus = function() { keyboardTarget = this; };
+document.getElementById('password').onfocus = function() { keyboardTarget = this; };
+if (window.parent !== window) document.getElementById('keyboard-toggle').style.display = 'block';
+loadStatus();
+loadNetworks();
+setInterval(function() { if (!activeJob) loadStatus(); }, 5000);
+</script>
+</body>
+</html>

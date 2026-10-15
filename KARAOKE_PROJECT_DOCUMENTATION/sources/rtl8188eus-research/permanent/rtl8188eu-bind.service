@@ -1,0 +1,12 @@
+[Unit]
+Description=Select 8188eu for the RTL8188EU USB Wi-Fi adapter
+Wants=NetworkManager.service
+After=NetworkManager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/local/libexec/rtl8188eu-bind.py
+TimeoutStartSec=90s
+
+[Install]
+WantedBy=multi-user.target

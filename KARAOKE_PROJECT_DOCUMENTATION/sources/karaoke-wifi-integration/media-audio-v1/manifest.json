@@ -1,0 +1,15 @@
+{
+  "app_before": "8731353016f544c7f46cbf96e0d45dce7f6c52c1239d5777f92ff7f2abf441ba",
+  "app_after": "54fb907fd6eb0ed108863ce747c61e496bbb198850ac65bc140ff54eaaaea29d",
+  "files": {
+    "karaoke_media_optimizer.py": "1ca67ea98f2a558618a7f96d949d90c4312ccf6b1a3c757c44c405b291f5d449",
+    "karaoke_audio_output.py": "ecd9a9dc06ee180d3bfe714ab5fd06e81236c2f372104683bfe5be349c624f7f",
+    "media_optimizer.html": "6f1c8912965da5969c4cea5bde555d655e4c65a3c35bd68dbd59c0f2cb8a5e36"
+  },
+  "unchanged": {
+    "wifi/network.py": "3238e2b0601464333a5555c574ff3e9f7bf8e6a0e7e3fbab5820ee1278b3d7ca",
+    "wifi/setup-qr.png": "5f7a2c3b9f4281fbba4560da80d737bed5f4a7bb94abc1f424b171d834978671",
+    "wifi/control_qr.py": "b3b494f70f7736e338cc3a7fe6ff462a03fe6ceb5585f43e643d0d03bf75ed0d",
+    "wifi/setup.html": "58e6f2efaa367d25e557a7125d63a9424dace1229f99c3153b6de0c3ed45b42c"
+  }
+}

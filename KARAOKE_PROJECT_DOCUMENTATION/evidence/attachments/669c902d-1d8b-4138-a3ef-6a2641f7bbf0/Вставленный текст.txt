@@ -1,0 +1,208 @@
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~# sed -n '174,235p;1275,1335p;2810,2865p;3088,3110p' \
+  /root/karaoke/app.py
+def get_network_status():
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip_address = s.getsockname()[0]
+        s.close()
+        ssid = "Wired/Unknown"
+        try:
+            system = platform.system()
+            if system == "Windows":
+                out = subprocess.check_output(["netsh", "wlan", "show", "interfaces"]).decode('cp866', errors='ignore')
+                for line in out.split('\n'):
+                    if "SSID" in line and ":" in line:
+                        val = line.split(":", 1)[1].strip()
+                        if val:
+                            ssid = val
+                            break
+            elif system == "Linux":
+                out = subprocess.check_output(["iwgetid", "-r"], stderr=subprocess.DEVNULL).decode().strip()
+                ssid = out if out else "Wi-Fi Connected"
+        except Exception:
+            ssid = "Connected (SSID hidden)"
+        return {"status": "connected", "ip": ip_address, "ssid": ssid}
+    except Exception:
+        return {"status": "disconnected", "ip": "0.0.0.0", "ssid": "No Network"}
+
+def allowed_file(filename):
+    if not filename or '.' not in filename:
+        return False
+    parts = filename.rsplit('.', 1)
+    if len(parts) < 2:
+        return False
+    ext = parts[1].lower()
+    return ext in ALLOWED_EXTENSIONS
+
+def parse_filename(filename):
+    name = os.path.splitext(filename)[0]
+    if '-' in name:
+        parts = name.split('-', 1)
+        return parts[0].strip(), parts[1].strip()
+    return "Unknown", name
+
+def find_poster(artist):
+    if not artist:
+        return None
+    search_names = {artist}
+    if '_' in artist:
+        search_names.add(artist.replace('_', ' '))
+    if ' ' in artist:
+        search_names.add(artist.replace(' ', '_'))
+    for name in search_names:
+        for ext in POSTER_EXTENSIONS:
+            path = os.path.join(POSTER_FOLDER, name + '.' + ext)
+            if os.path.exists(path):
+                return name + '.' + ext
+    return None
+
+def safe_filename(filename):
+    if not filename:
+        return ''
+    clean = re.sub(r'[/:*?"<>|]', '_', filename)
+    if not clean:
+function fetchSync(u,o){var x=new XMLHttpRequest();x.open((o&&o.method)||"GET",u,false);if(o&&o.headers)for(var k in o.headers)x.setRequestHeader(k,o.headers[k]);x.send(o&&o.body||null);try{return JSON.parse(x.responseText)}catch(e){return x.responseText}}
+
+    function fetch(url, opts) {
+      var x = new XMLHttpRequest();
+      x.open((opts && opts.method) || 'GET', url, false);
+      if (opts && opts.headers) for (var k in opts.headers) x.setRequestHeader(k, opts.headers[k]);
+      x.send(opts && opts.body || null);
+      var resp = { json: function() { try { return JSON.parse(x.responseText); } catch(e) { return {}; } }, text: function() { return x.responseText; }, status: x.status };
+      function Chain(val, err) {
+        this.then = function(cb) { if (err) return this; try { return new Chain(cb(val), false); } catch(e) { return new Chain(e, true); } };
+        this.catch = function(cb) { if (err) { try { return new Chain(cb(val), false); } catch(e2) { return new Chain(e2, true); } } return this; };
+      }
+      return new Chain(resp, false);
+    }
+    var videoPlaying = false;
+    var bgmEnabled = true;
+    var bgmVolume = 25;
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
+      // ===== WiFi =====
+      function scanWiFi() {
+        document.getElementById('wifi-list').innerHTML = '<div style="padding:12px;color:#888;">Сканирование...</div>';
+        fetch('/api/wifi/scan').then(function(r) { return r.json(); }).then(function(d) {
+          if (d.error) {
+            document.getElementById('wifi-list').innerHTML = '<div style="padding:12px;color:#f87171;">' + d.error + '</div>';
+            return;
+          }
+          var html = '';
+          d.networks.forEach(function(n) {
+            var bars = '';
+            if (n.signal >= 80) bars = '\u2582\u2584\u2586\u2588';
+            else if (n.signal >= 60) bars = '\u2582\u2584\u2586';
+            else if (n.signal >= 40) bars = '\u2582\u2584';
+            else bars = '\u2582';
+            var active = n.in_use === 'yes' ? ' active' : '';
+            var tag = n.in_use === 'yes' ? ' <span style="color:#4ade80;font-size:11px;">\u2713</span>' : '';
+            var safeSsid = n.ssid.replace(/"/g, '&quot;');
+            html += '<div class="wifi-item' + active + '" data-ssid="' + safeSsid + '" onclick="selectWiFi(this.dataset.ssid)">';
+            html += '<div><div class="wifi-ssid">' + n.ssid + tag + '</div><div class="wifi-info">' + n.security + '</div></div>';
+            html += '<div class="wifi-signal">' + bars + ' ' + n.signal + '%</div>';
+            html += '</div>';
+          });
+          if (!html) html = '<div style="padding:12px;color:#888;">Сети не найдены</div>';
+          document.getElementById('wifi-list').innerHTML = html;
+        }).catch(function(e) {
+          document.getElementById('wifi-list').innerHTML = '<div style="padding:12px;color:#f87171;">Ошибка сканирования</div>';
+        });
+      }
+      function selectWiFi(ssid) {
+        document.getElementById('wifi-ssid-input').value = ssid;
+        document.getElementById('wifi-ssid-input').style.display = 'block';
+        document.getElementById('wifi-pass-input').focus(); oskShow('wifi-pass-input', 'Пароль WiFi');
+      }
+      function connectWiFi() {
+        var ssid = document.getElementById('wifi-ssid-input').value;
+        var pass = document.getElementById('wifi-pass-input').value;
+        var msg = document.getElementById('wifi-msg');
+    file.save(full_path)
+    return jsonify({'filename': safe_name})
+
+
+# KARAOKE_WIFI_SETUP_INDICATOR_V1
+@app.route('/api/karaoke-wifi-monitor')
+def karaoke_wifi_monitor_status():
+    import json
+    from pathlib import Path
+    try:
+        path = Path('/var/lib/karaoke-wifi/status.json')
+        data = json.loads(path.read_text())
+        import time
+        if time.time() - data.get('updated_at', 0) > 10:
+            return jsonify({'setup_needed': False,
+                            'error': 'monitor_stale'})
+        return jsonify({
+            'connected': bool(data.get('connected', False)),
+            'setup_needed': bool(data.get('setup_needed', False)),
+            'mode': data.get('mode', 'unknown')
+        })
+    except Exception:
+        return jsonify({'setup_needed': False,
+                        'error': 'monitor_unavailable'})
+
+
+
+# KARAOKE_WIFI_SETUP_PAGE_V1
+
+# KARAOKE_PORTAL_CONNECT_V1
+@app.route('/api/wifi/portal-connect', methods=['POST'])
+def karaoke_portal_connect():
+    import json as _json
+    import uuid as _uuid
+
+    state = subprocess.run(
+        ['nmcli', '-g', 'GENERAL.CONNECTION',
+         'device', 'show', 'wlan0'],
+        capture_output=True, text=True, timeout=10
+    )
+
+    if state.stdout.strip() != 'KARAOKE_SYSTEM':
+        return jsonify({
+            'ok': False,
+            'error': 'Подключение разрешено только через KARAOKE_SYSTEM'
+        }), 409
+
+    data = request.get_json(silent=True) or {}
+    ssid = data.get('ssid', '')
+    password = data.get('password', '')
+
+    if not isinstance(ssid, str) or not isinstance(password, str):
+        return jsonify({'ok': False, 'error': 'Неверные данные'}), 400
+
+    ssid = ssid.strip()
+
+
+# ===== WiFi Management API =====
+@app.route('/api/wifi/scan')
+def wifi_scan():
+    try:
+        result = subprocess.run(['nmcli', '-t', '-f', 'SSID,SIGNAL,SECURITY,IN-USE', 'device', 'wifi', 'list', '--rescan', 'yes'],
+                                capture_output=True, text=True, timeout=15)
+        networks = []
+        seen = set()
+        for line in result.stdout.strip().split('\n'):
+            parts = line.split(':')
+            if len(parts) >= 4:
+                ssid = parts[0].strip()
+                if not ssid or ssid == '--' or ssid in seen:
+                    continue
+                seen.add(ssid)
+                signal = int(parts[1]) if parts[1].isdigit() else 0
+                security = parts[2] if parts[2] else 'Open'
+                in_use = 'yes' if parts[3] == '*' else 'no'
+                networks.append({'ssid': ssid, 'signal': signal, 'security': security, 'in_use': in_use})
+        networks.sort(key=lambda x: x['signal'], reverse=True)
+        return jsonify({'networks': networks})
+    except Exception as e:
+root@x96q-v5-1:~#

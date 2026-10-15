@@ -1,0 +1,515 @@
+[
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2488,
+    "handler": "poster_manager_page",
+    "path": "/poster-manager",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2492,
+    "handler": "index",
+    "path": "/",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2496,
+    "handler": "top_artists",
+    "path": "/top_artists",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2510,
+    "handler": "search",
+    "path": "/search",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2534,
+    "handler": "play",
+    "path": "/play",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2554,
+    "handler": "increment",
+    "path": "/increment",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2567,
+    "handler": "queue_add",
+    "path": "/queue/add",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2584,
+    "handler": "queue_list",
+    "path": "/queue/list",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2611,
+    "handler": "queue_next",
+    "path": "/queue/next",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2633,
+    "handler": "queue_remove",
+    "path": "/queue/remove/<int:queue_id>",
+    "methods": [
+      "DELETE"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2643,
+    "handler": "queue_move",
+    "path": "/queue/move",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2676,
+    "handler": "queue_clear",
+    "path": "/queue/clear",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2717,
+    "handler": "api_stop",
+    "path": "/api/stop",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2735,
+    "handler": "api_pause",
+    "path": "/api/pause",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2762,
+    "handler": "api_next",
+    "path": "/api/next",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2791,
+    "handler": "upload",
+    "path": "/upload",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2828,
+    "handler": "refresh_after_upload",
+    "path": "/refresh_after_upload",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2833,
+    "handler": "upload_poster",
+    "path": "/upload_poster",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2861,
+    "handler": "fonsound_list",
+    "path": "/fonsound_list",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2868,
+    "handler": "serve_fonsound",
+    "path": "/fonsound/<path:filename>",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2873,
+    "handler": "api_bgm_start",
+    "path": "/api/bgm/start",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2878,
+    "handler": "api_bgm_stop",
+    "path": "/api/bgm/stop",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2883,
+    "handler": "api_bgm_volume",
+    "path": "/api/bgm/volume",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2889,
+    "handler": "api_bgm_toggle",
+    "path": "/api/bgm/toggle",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2900,
+    "handler": "api_bgm_status",
+    "path": "/api/bgm/status",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2910,
+    "handler": "api_video_volume",
+    "path": "/api/video/volume",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2916,
+    "handler": "api_files_list",
+    "path": "/api/files/list",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2955,
+    "handler": "api_files_delete",
+    "path": "/api/files/delete",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 2992,
+    "handler": "upload_bgm",
+    "path": "/upload_bgm",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3010,
+    "handler": "karaoke_wifi_monitor_status",
+    "path": "/api/karaoke-wifi-monitor",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3056,
+    "handler": "karaoke_portal_connect",
+    "path": "/api/wifi/portal-connect",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3061,
+    "handler": "karaoke_wifi_job",
+    "path": "/api/wifi/job/<job_id>",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3071,
+    "handler": "karaoke_wifi_reset",
+    "path": "/api/wifi/reset",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3082,
+    "handler": "karaoke_wifi_setup_page",
+    "path": "/wifi/setup",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3087,
+    "handler": "karaoke_wifi_setup_qr",
+    "path": "/wifi/setup-qr.png",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3092,
+    "handler": "karaoke_control_qr",
+    "path": "/wifi/control-qr.png",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3106,
+    "handler": "api_network_status",
+    "path": "/api/network_status",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3110,
+    "handler": "settings_info",
+    "path": "/settings/info",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3133,
+    "handler": "api_format_hdd",
+    "path": "/api/format_hdd",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3170,
+    "handler": "settings_refresh_db",
+    "path": "/settings/refresh_db",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3179,
+    "handler": "poster_missing",
+    "path": "/api/posters/missing",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3188,
+    "handler": "poster_search",
+    "path": "/api/posters/search",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3203,
+    "handler": "poster_yandex_preview",
+    "path": "/api/posters/yandex-preview/<token>",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3213,
+    "handler": "poster_download",
+    "path": "/api/posters/download",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3236,
+    "handler": "serve_poster",
+    "path": "/posters/<path:filename>",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3282,
+    "handler": "serve_socket_io",
+    "path": "/socket.io.min.js",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3288,
+    "handler": "wifi_scan",
+    "path": "/api/wifi/scan",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3299,
+    "handler": "wifi_connect",
+    "path": "/api/wifi/connect",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3304,
+    "handler": "wifi_status",
+    "path": "/api/wifi/status",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/app.py",
+    "line": 3334,
+    "handler": "get_stats",
+    "path": "/api/stats",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/karaoke_media_optimizer.py",
+    "line": 687,
+    "handler": "create_blueprint.page",
+    "path": "/video-optimization",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/karaoke_media_optimizer.py",
+    "line": 699,
+    "handler": "create_blueprint.status",
+    "path": "/api/media-optimizer/status",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/karaoke_media_optimizer.py",
+    "line": 703,
+    "handler": "create_blueprint.scan",
+    "path": "/api/media-optimizer/scan",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/karaoke_media_optimizer.py",
+    "line": 707,
+    "handler": "create_blueprint.cancel",
+    "path": "/api/media-optimizer/cancel",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/karaoke_media_optimizer.py",
+    "line": 711,
+    "handler": "create_blueprint.apply",
+    "path": "/api/media-optimizer/apply",
+    "methods": [
+      "POST"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/karaoke_audio_output.py",
+    "line": 145,
+    "handler": "create_blueprint.get_output",
+    "path": "/api/audio/output",
+    "methods": [
+      "GET"
+    ]
+  },
+  {
+    "file": "versions/prepared-media-audio-v1/karaoke_audio_output.py",
+    "line": 152,
+    "handler": "create_blueprint.set_output",
+    "path": "/api/audio/output",
+    "methods": [
+      "POST"
+    ]
+  }
+]

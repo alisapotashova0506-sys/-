@@ -1,0 +1,94 @@
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~# grep -n -E 'KARAOKE_SYSTEM|karaoke-ap-test-rollback' \
+  /var/log/syslog | tail -60
+
+tail -80 /var/log/kern.log
+grep: /var/log/syslog: binary file matches
+2026-10-14T22:17:06.527810+03:00 x96q-v5-1 kernel: [   10.120533] cfg80211: Loading compiled-in X.509 certificates for regulatory database
+2026-10-14T22:17:06.527816+03:00 x96q-v5-1 kernel: [   10.122307] Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+2026-10-14T22:17:06.527820+03:00 x96q-v5-1 kernel: [   10.123117] Loaded X.509 cert 'wens: 61c038651aabdcf94bd0ac7ff06c7248db18c600'
+2026-10-14T22:17:06.527825+03:00 x96q-v5-1 kernel: [   10.191662] cfg80211: loaded regulatory.db is malformed or signature is missing/invalid
+2026-10-14T22:17:06.527829+03:00 x96q-v5-1 kernel: [   10.211542] Bluetooth: Core ver 2.22
+2026-10-14T22:17:06.527834+03:00 x96q-v5-1 kernel: [   10.211741] NET: Registered PF_BLUETOOTH protocol family
+2026-10-14T22:17:06.527848+03:00 x96q-v5-1 kernel: [   10.211755] Bluetooth: HCI device and connection manager initialized
+2026-10-14T22:17:06.527854+03:00 x96q-v5-1 kernel: [   10.211779] Bluetooth: HCI socket layer initialized
+2026-10-14T22:17:06.527859+03:00 x96q-v5-1 kernel: [   10.211787] Bluetooth: L2CAP socket layer initialized
+2026-10-14T22:17:06.527864+03:00 x96q-v5-1 kernel: [   10.211826] Bluetooth: SCO socket layer initialized
+2026-10-14T22:17:06.527868+03:00 x96q-v5-1 kernel: [   10.272565] Bluetooth: HCI UART driver ver 2.3
+2026-10-14T22:17:06.527872+03:00 x96q-v5-1 kernel: [   10.272597] Bluetooth: HCI UART protocol H4 registered
+2026-10-14T22:17:06.527885+03:00 x96q-v5-1 kernel: [   10.272602] Bluetooth: HCI UART protocol BCSP registered
+2026-10-14T22:17:06.527892+03:00 x96q-v5-1 kernel: [   10.272740] Bluetooth: HCI UART protocol LL registered
+2026-10-14T22:17:06.527896+03:00 x96q-v5-1 kernel: [   10.272749] Bluetooth: HCI UART protocol ATH3K registered
+2026-10-14T22:17:06.527901+03:00 x96q-v5-1 kernel: [   10.275576] Bluetooth: HCI UART protocol Three-wire (H5) registered
+2026-10-14T22:17:06.527906+03:00 x96q-v5-1 kernel: [   10.275910] Bluetooth: HCI UART protocol Intel registered
+2026-10-14T22:17:06.527910+03:00 x96q-v5-1 kernel: [   10.276327] Bluetooth: HCI UART protocol Broadcom registered
+2026-10-14T22:17:06.527915+03:00 x96q-v5-1 kernel: [   10.276417] Bluetooth: HCI UART protocol QCA registered
+2026-10-14T22:17:06.527929+03:00 x96q-v5-1 kernel: [   10.276424] Bluetooth: HCI UART protocol AG6XX registered
+2026-10-14T22:17:06.527935+03:00 x96q-v5-1 kernel: [   10.276461] Bluetooth: HCI UART protocol Marvell registered
+2026-10-14T22:17:06.527940+03:00 x96q-v5-1 kernel: [   10.286040] Registered IR keymap rc-beelink-gs1
+2026-10-14T22:17:06.527945+03:00 x96q-v5-1 kernel: [   10.342343] IR NEC protocol handler initialized
+2026-10-14T22:17:06.527950+03:00 x96q-v5-1 kernel: [   10.377811] rc rc0: sunxi-ir as /devices/platform/soc/7040000.ir/rc/rc0
+2026-10-14T22:17:06.527955+03:00 x96q-v5-1 kernel: [   10.381680] rc rc0: lirc_dev: driver sunxi-ir registered at minor = 0, raw IR receiver, no transmitter
+2026-10-14T22:17:06.527969+03:00 x96q-v5-1 kernel: [   10.381909] input: sunxi-ir as /devices/platform/soc/7040000.ir/rc/rc0/input0
+2026-10-14T22:17:06.527976+03:00 x96q-v5-1 kernel: [   10.389752] sunxi-ir 7040000.ir: initialized sunXi IR driver
+2026-10-14T22:17:06.527980+03:00 x96q-v5-1 kernel: [   10.685610] xradio_wlan mmc3:0001:1: missed interrupt
+2026-10-14T22:17:06.527985+03:00 x96q-v5-1 kernel: [   10.685704] xradio_wlan mmc3:0001:1:    Input buffers: 30 x 1632 bytes
+2026-10-14T22:17:06.527989+03:00 x96q-v5-1 kernel: [   10.685704]    Hardware: 7.9
+2026-10-14T22:17:06.527994+03:00 x96q-v5-1 kernel: [   10.685704]    WSM firmware ver: 8, build: 5258, api: 1060, cap: 0x0003
+2026-10-14T22:17:06.528007+03:00 x96q-v5-1 kernel: [   10.685725] xradio_wlan mmc3:0001:1: Firmware Label:XR_C01.08.52.58 Jul 19 2018 18:53:57
+2026-10-14T22:17:06.528013+03:00 x96q-v5-1 kernel: [   10.705327] ieee80211 phy0: Selected rate control algorithm 'minstrel_ht'
+2026-10-14T22:17:06.528018+03:00 x96q-v5-1 kernel: [   10.716273] usb 4-1: RTL8188EU rev D (TSMC) romver 0, 1T1R, TX queues 2, WiFi=1, BT=0, GPS=0, HI PA=0
+2026-10-14T22:17:06.528023+03:00 x96q-v5-1 kernel: [   10.716310] usb 4-1: RTL8188EU MAC: f0:b0:40:f7:f6:99
+2026-10-14T22:17:06.528028+03:00 x96q-v5-1 kernel: [   10.716320] usb 4-1: rtl8xxxu: Loading firmware rtlwifi/rtl8188eufw.bin
+2026-10-14T22:17:06.528032+03:00 x96q-v5-1 kernel: [   10.720192] usb 4-1: Firmware revision 11.1 (signature 0x88e1)
+2026-10-14T22:17:06.528042+03:00 x96q-v5-1 kernel: [   11.390576] usbcore: registered new interface driver rtl8xxxu
+2026-10-14T22:17:06.528051+03:00 x96q-v5-1 kernel: [   11.408039] rtl8xxxu 4-1:1.0 wlxf0b040f7f699: renamed from wlan1
+2026-10-14T22:17:06.528056+03:00 x96q-v5-1 kernel: [   11.778618] EXT4-fs (sda1): recovery complete
+2026-10-14T22:17:06.528061+03:00 x96q-v5-1 kernel: [   11.780053] EXT4-fs (sda1): mounted filesystem bca63520-597d-4adf-88a8-e96ac09fc97c r/w with ordered data mode. Quota mode: none.
+2026-10-14T22:17:06.528067+03:00 x96q-v5-1 kernel: [   12.247617] RPC: Registered named UNIX socket transport module.
+2026-10-14T22:17:06.528071+03:00 x96q-v5-1 kernel: [   12.247639] RPC: Registered udp transport module.
+2026-10-14T22:17:06.528075+03:00 x96q-v5-1 kernel: [   12.247642] RPC: Registered tcp transport module.
+2026-10-14T22:17:06.528089+03:00 x96q-v5-1 kernel: [   12.247645] RPC: Registered tcp-with-tls transport module.
+2026-10-14T22:17:06.528095+03:00 x96q-v5-1 kernel: [   12.247648] RPC: Registered tcp NFSv4.1 backchannel transport module.
+2026-10-14T22:17:11.486559+03:00 x96q-v5-1 kernel: [   18.222115] sunxi-gmac 5030000.ethernet end0: end0: Type(7) PHY ID 00441400 at 0 IRQ poll (5030000.ethernet-0:00)
+2026-10-14T22:17:11.633644+03:00 x96q-v5-1 kernel: [   18.383007] ieee80211 phy0: Interface ID:0 of type:2 added
+2026-10-14T22:17:11.637639+03:00 x96q-v5-1 kernel: [   18.386490] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:17:11.637734+03:00 x96q-v5-1 kernel: [   18.387597] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:17:11.637745+03:00 x96q-v5-1 kernel: [   18.388166] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:17:11.637751+03:00 x96q-v5-1 kernel: [   18.388619] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:17:11.641633+03:00 x96q-v5-1 kernel: [   18.392460] ieee80211 phy0: ignore IEEE80211_CONF_CHANGE_MONITOR (1)IEEE80211_CONF_CHANGE_IDLE (1)
+2026-10-14T22:17:12.277639+03:00 x96q-v5-1 kernel: [   19.028399] xt_connbytes: Forcing CT accounting to be enabled
+2026-10-14T22:17:13.326022+03:00 x96q-v5-1 kernel: [   20.073795] wlan0: authenticate with 50:ff:20:4a:92:4b
+2026-10-14T22:17:13.327562+03:00 x96q-v5-1 kernel: [   20.073918] ieee80211 phy0: ignore IEEE80211_CONF_CHANGE_MONITOR (0)IEEE80211_CONF_CHANGE_IDLE (1)
+2026-10-14T22:17:13.327653+03:00 x96q-v5-1 kernel: [   20.073935] ieee80211 phy0: Freq 2452 (wsm ch: 9).
+2026-10-14T22:17:13.327699+03:00 x96q-v5-1 kernel: [   20.077900] wlan0: send auth to 50:ff:20:4a:92:4b (try 1/3)
+2026-10-14T22:17:13.342679+03:00 x96q-v5-1 kernel: [   20.092484] wlan0: authenticated
+2026-10-14T22:17:13.353827+03:00 x96q-v5-1 kernel: [   20.097587] wlan0: associate with 50:ff:20:4a:92:4b (try 1/3)
+2026-10-14T22:17:13.357684+03:00 x96q-v5-1 kernel: [   20.106039] wlan0: RX AssocResp from 50:ff:20:4a:92:4b (capab=0x1411 status=0 aid=5)
+2026-10-14T22:17:13.357781+03:00 x96q-v5-1 kernel: [   20.106109] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:17:13.357792+03:00 x96q-v5-1 kernel: [   20.106955] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:17:13.357800+03:00 x96q-v5-1 kernel: [   20.107278] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:17:13.357806+03:00 x96q-v5-1 kernel: [   20.107705] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:17:13.374921+03:00 x96q-v5-1 kernel: [   20.124242] wlan0: associated
+2026-10-14T22:17:13.423538+03:00 x96q-v5-1 kernel: [   20.173884] wlan0: Limiting TX power to 20 (20 - 0) dBm as advertised by 50:ff:20:4a:92:4b
+2026-10-14T22:17:13.423645+03:00 x96q-v5-1 kernel: [   20.174214] xradio_wlan mmc3:0001:1: received frame has no key status
+2026-10-14T22:17:13.509722+03:00 x96q-v5-1 kernel: [   20.259129] ieee80211 phy0: CCMP_PAIRWISE keylen=16!
+2026-10-14T22:17:13.527616+03:00 x96q-v5-1 kernel: [   20.277081] xradio_wlan mmc3:0001:1: received frame has no key status
+2026-10-14T22:17:13.653860+03:00 x96q-v5-1 kernel: [   20.403682] wlxf0b040f7f699: authenticate with 50:ff:20:4a:92:4b
+2026-10-14T22:17:13.662151+03:00 x96q-v5-1 kernel: [   20.412049] wlxf0b040f7f699: send auth to 50:ff:20:4a:92:4b (try 1/3)
+2026-10-14T22:17:13.669818+03:00 x96q-v5-1 kernel: [   20.417733] wlxf0b040f7f699: authenticated
+2026-10-14T22:17:13.673731+03:00 x96q-v5-1 kernel: [   20.421889] wlxf0b040f7f699: associate with 50:ff:20:4a:92:4b (try 1/3)
+2026-10-14T22:17:13.678144+03:00 x96q-v5-1 kernel: [   20.428265] wlxf0b040f7f699: RX AssocResp from 50:ff:20:4a:92:4b (capab=0x1411 status=0 aid=4)
+2026-10-14T22:17:13.683565+03:00 x96q-v5-1 kernel: [   20.431255] usb 4-1: rtl8xxxu_bss_info_changed: HT supported
+2026-10-14T22:17:13.688207+03:00 x96q-v5-1 kernel: [   20.436037] wlxf0b040f7f699: associated
+2026-10-14T22:17:13.729702+03:00 x96q-v5-1 kernel: [   20.480860] wlxf0b040f7f699: Limiting TX power to 20 (20 - 0) dBm as advertised by 50:ff:20:4a:92:4b
+2026-10-14T22:38:32.691469+03:00 x96q-v5-1 kernel: [   28.382328] serial serial0-0: deferred probe pending
+2026-10-14T22:38:41.055502+03:00 x96q-v5-1 kernel: [   36.755965] warning: `iwgetid' uses wireless extensions which will stop working for Wi-Fi 7 hardware; use nl80211
+root@x96q-v5-1:~#

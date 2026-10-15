@@ -1,0 +1,21 @@
+[Unit]
+Description=Karaoke home Wi-Fi and USB setup controller
+After=NetworkManager.service rtl8188eu-bind.service
+Wants=NetworkManager.service rtl8188eu-bind.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -u /root/karaoke/wifi/monitor.py
+Restart=always
+RestartSec=3
+User=root
+NoNewPrivileges=true
+ProtectSystem=full
+StateDirectory=karaoke-wifi
+StateDirectoryMode=0700
+ReadWritePaths=/var/lib/karaoke-wifi
+TimeoutStopSec=15
+KillMode=control-group
+
+[Install]
+WantedBy=multi-user.target

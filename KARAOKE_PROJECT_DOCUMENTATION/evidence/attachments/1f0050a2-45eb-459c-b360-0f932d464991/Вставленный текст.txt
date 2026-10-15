@@ -1,0 +1,123 @@
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~# (
+set -eu
+
+if [ "$(printf '%s\n' "$SSH_CONNECTION" | awk '{print $3}')" != "192.168.1.50" ]; then
+  echo "Остановлено: нужен SSH через USB .50"
+  exit 1
+fi
+
+rollback_unit="karaoke-ap-v2-rollback-$(date +%s)"
+systemd-run --unit="$rollback_unit" --on-active=5min \
+  --timer-property=AccuracySec=1s \
+  /usr/bin/nmcli --wait 30 connection up \
+  uuid 64825e49-6414-46eb-86e4-e0bc1c1e2145 ifname wlan0
+
+systemctl is-active --quiet "$rollback_unit.timer"
+printf 'Таймер возврата: %s.timer\n' "$rollback_unit"
+
+nmcli --wait 30 connection up KARAOKE_SYSTEM ifname wlan0
+)
+
+nmcli device status
+ip -br -4 addr
+iw dev wlan0 info
+ip route get 1.1.1.1
+systemctl is-active karaoke-server.service bgutil-pot.service zapret.service
+journalctl -b -k --since "2 minutes ago" --no-pager | tail -60
+Running timer as unit: karaoke-ap-v2-rollback-1792013799.timer
+Will run service as unit: karaoke-ap-v2-rollback-1792013799.service
+Таймер возврата: karaoke-ap-v2-rollback-1792013799.timer
+Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/6)
+DEVICE           TYPE      STATE                   CONNECTION
+wlan0            wifi      connected               KARAOKE_SYSTEM
+wlxf0b040f7f699  wifi      connected               Alisa_USB
+lo               loopback  connected (externally)  lo
+p2p-dev-wlan0    wifi-p2p  disconnected            --
+end0             ethernet  unavailable             --
+lo               UNKNOWN        127.0.0.1/8
+wlxf0b040f7f699  UP             192.168.1.50/24
+wlan0            UP             192.168.100.1/24
+Interface wlan0
+        ifindex 5
+        wdev 0x200000001
+        addr 12:00:da:9f:06:55
+        ssid KARAOKE_SYSTEM
+        type AP
+        wiphy 2
+        channel 6 (2437 MHz), width: 20 MHz, center1: 2437 MHz
+        txpower 20.00 dBm
+        multicast TXQ:
+                qsz-byt qsz-pkt flows   drops   marks   overlmt hashcol tx-bytes        tx-packets
+                0       0       0       0       0       0       0       0               0
+1.1.1.1 via 192.168.1.1 dev wlxf0b040f7f699 src 192.168.1.50 uid 0
+    cache
+active
+active
+active
+Oct 15 00:35:40 x96q-v5-1 kernel: ieee80211 phy2: ignore IEEE80211_CONF_CHANGE_MONITOR (1)IEEE80211_CONF_CHANGE_IDLE (1)
+Oct 15 00:35:41 x96q-v5-1 kernel: wlan0: authenticate with 50:ff:20:4a:92:4b
+Oct 15 00:35:41 x96q-v5-1 kernel: ieee80211 phy2: ignore IEEE80211_CONF_CHANGE_MONITOR (0)IEEE80211_CONF_CHANGE_IDLE (1)
+Oct 15 00:35:41 x96q-v5-1 kernel: ieee80211 phy2: Freq 2452 (wsm ch: 9).
+Oct 15 00:35:41 x96q-v5-1 kernel: wlan0: send auth to 50:ff:20:4a:92:4b (try 1/3)
+Oct 15 00:35:41 x96q-v5-1 kernel: wlan0: authenticated
+Oct 15 00:35:41 x96q-v5-1 kernel: wlan0: associate with 50:ff:20:4a:92:4b (try 1/3)
+Oct 15 00:35:41 x96q-v5-1 kernel: wlan0: RX AssocResp from 50:ff:20:4a:92:4b (capab=0x1411 status=0 aid=1)
+Oct 15 00:35:41 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:35:41 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:35:41 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:35:41 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:35:41 x96q-v5-1 kernel: wlan0: associated
+Oct 15 00:35:41 x96q-v5-1 kernel: wlan0: Limiting TX power to 20 (20 - 0) dBm as advertised by 50:ff:20:4a:92:4b
+Oct 15 00:35:41 x96q-v5-1 kernel: xradio_wlan mmc3:0001:1: received frame has no key status
+Oct 15 00:35:41 x96q-v5-1 kernel: ieee80211 phy2: CCMP_PAIRWISE keylen=16!
+Oct 15 00:35:43 x96q-v5-1 kernel: wlan0: deauthenticating from 50:ff:20:4a:92:4b by local choice (Reason: 3=DEAUTH_LEAVING)
+Oct 15 00:35:43 x96q-v5-1 kernel: ieee80211 phy2: no station to remove
+Oct 15 00:35:43 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:35:43 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:35:43 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:35:43 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:35:43 x96q-v5-1 kernel: ieee80211 phy2: ignore IEEE80211_CONF_CHANGE_MONITOR (0)IEEE80211_CONF_CHANGE_IDLE (1)
+Oct 15 00:35:44 x96q-v5-1 kernel: wlan0: authenticate with 50:ff:20:4a:92:4b
+Oct 15 00:35:44 x96q-v5-1 kernel: ieee80211 phy2: ignore IEEE80211_CONF_CHANGE_MONITOR (0)IEEE80211_CONF_CHANGE_IDLE (1)
+Oct 15 00:35:44 x96q-v5-1 kernel: wlan0: send auth to 50:ff:20:4a:92:4b (try 1/3)
+Oct 15 00:35:44 x96q-v5-1 kernel: wlan0: authenticated
+Oct 15 00:35:44 x96q-v5-1 kernel: wlan0: associate with 50:ff:20:4a:92:4b (try 1/3)
+Oct 15 00:35:44 x96q-v5-1 kernel: wlan0: RX AssocResp from 50:ff:20:4a:92:4b (capab=0x1411 status=0 aid=1)
+Oct 15 00:35:44 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:35:44 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:35:44 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:35:44 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:35:44 x96q-v5-1 kernel: wlan0: associated
+Oct 15 00:35:44 x96q-v5-1 kernel: wlan0: Limiting TX power to 20 (20 - 0) dBm as advertised by 50:ff:20:4a:92:4b
+Oct 15 00:35:44 x96q-v5-1 kernel: xradio_wlan mmc3:0001:1: received frame has no key status
+Oct 15 00:35:44 x96q-v5-1 kernel: xradio_wlan mmc3:0001:1: received frame has no key status
+Oct 15 00:35:44 x96q-v5-1 kernel: ieee80211 phy2: CCMP_PAIRWISE keylen=16!
+Oct 15 00:35:44 x96q-v5-1 kernel: xradio_wlan mmc3:0001:1: received frame has no key status
+Oct 15 00:35:44 x96q-v5-1 kernel: xradio_wlan mmc3:0001:1: received frame has no key status
+Oct 15 00:36:39 x96q-v5-1 kernel: wlan0: deauthenticating from 50:ff:20:4a:92:4b by local choice (Reason: 3=DEAUTH_LEAVING)
+Oct 15 00:36:39 x96q-v5-1 kernel: ieee80211 phy2: no station to remove
+Oct 15 00:36:39 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:36:39 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:36:39 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:36:39 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:36:39 x96q-v5-1 kernel: ieee80211 phy2: ignore IEEE80211_CONF_CHANGE_MONITOR (0)IEEE80211_CONF_CHANGE_IDLE (1)
+Oct 15 00:36:40 x96q-v5-1 kernel: ieee80211 phy2: changing interface type; new type=3(2), p2p=0(0)
+Oct 15 00:36:40 x96q-v5-1 kernel: ieee80211 phy2: !!! vif_id=0
+Oct 15 00:36:40 x96q-v5-1 kernel: ieee80211 phy2: Interface ID:0 of type:3 added
+Oct 15 00:36:40 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:36:40 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:36:40 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:36:40 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:36:40 x96q-v5-1 kernel: ieee80211 phy2: ignore IEEE80211_CONF_CHANGE_MONITOR (0)IEEE80211_CONF_CHANGE_IDLE (1)
+Oct 15 00:36:40 x96q-v5-1 kernel: ieee80211 phy2: Freq 2437 (wsm ch: 6).
+Oct 15 00:36:41 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:36:41 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:36:41 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+Oct 15 00:36:41 x96q-v5-1 kernel: ieee80211 phy2: vif 0, configuring tx
+root@x96q-v5-1:~#

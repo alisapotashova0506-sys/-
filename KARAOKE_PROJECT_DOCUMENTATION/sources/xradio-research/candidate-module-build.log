@@ -1,0 +1,21 @@
+make: Entering directory '/tmp/linux-6.6.44'
+  MODPOST /tmp/xradio-candidate/Module.symvers
+WARNING: Module.symvers is missing.
+         Modules may not have dependencies or modversions.
+         You may get many unresolved symbol errors.
+         You can set KBUILD_MODPOST_WARN=1 to turn errors into warning
+         if you want to proceed at your own risk.
+WARNING: modpost: "sdio_release_host" [/tmp/xradio-candidate/xradio_wlan.ko] undefined!
+WARNING: modpost: "krealloc" [/tmp/xradio-candidate/xradio_wlan.ko] undefined!
+WARNING: modpost: "sdio_disable_func" [/tmp/xradio-candidate/xradio_wlan.ko] undefined!
+WARNING: modpost: "__skb_pad" [/tmp/xradio-candidate/xradio_wlan.ko] undefined!
+WARNING: modpost: "ieee80211_connection_loss" [/tmp/xradio-candidate/xradio_wlan.ko] undefined!
+WARNING: modpost: "release_firmware" [/tmp/xradio-candidate/xradio_wlan.ko] undefined!
+WARNING: modpost: "sdio_set_block_size" [/tmp/xradio-candidate/xradio_wlan.ko] undefined!
+WARNING: modpost: "alloc_workqueue" [/tmp/xradio-candidate/xradio_wlan.ko] undefined!
+WARNING: modpost: "devm_request_threaded_irq" [/tmp/xradio-candidate/xradio_wlan.ko] undefined!
+WARNING: modpost: "skb_put" [/tmp/xradio-candidate/xradio_wlan.ko] undefined!
+WARNING: modpost: suppressed 115 unresolved symbol warnings because there were too many)
+  CC [M]  /tmp/xradio-candidate/xradio_wlan.mod.o
+  LD [M]  /tmp/xradio-candidate/xradio_wlan.ko
+make: Leaving directory '/tmp/linux-6.6.44'

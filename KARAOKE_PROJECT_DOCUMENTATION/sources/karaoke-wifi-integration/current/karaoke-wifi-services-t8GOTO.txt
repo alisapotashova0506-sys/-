@@ -1,0 +1,298 @@
+UNIT FILE                         STATE    PRESET
+karaoke-ap-http-check.service     static   -
+karaoke-ap-start.service          static   -
+karaoke-browser.service           disabled enabled
+karaoke-final-auto-rescue.service static   -
+karaoke-final-auto-test.service   static   -
+karaoke-full-diagnostic.service   static   -
+karaoke-full-rescue.service       static   -
+karaoke-http-diagnostic.service   static   -
+karaoke-packet-rescue.service     static   -
+karaoke-packet-test.service       static   -
+karaoke-server.service            enabled  enabled
+karaoke-wifi-auto.service         disabled enabled
+karaoke-wifi-monitor.service      enabled  enabled
+karaoke-wifi-rescue.service       static   -
+rtl8188eu-bind.service            enabled  enabled
+karaoke-ap-http-check.timer       static   -
+karaoke-ap-start.timer            static   -
+karaoke-final-auto-rescue.timer   static   -
+karaoke-final-auto-test.timer     static   -
+karaoke-full-diagnostic.timer     static   -
+karaoke-full-rescue.timer         static   -
+karaoke-packet-rescue.timer       static   -
+karaoke-packet-test.timer         static   -
+karaoke-wifi-rescue.timer         disabled enabled
+
+24 unit files listed.
+  UNIT                         LOAD   ACTIVE   SUB     DESCRIPTION
+  karaoke-server.service       loaded active   running Karaoke Server
+  karaoke-wifi-monitor.service loaded active   running Karaoke Wi-Fi Connection Monitor
+  rtl8188eu-bind.service       loaded inactive dead    Select 8188eu for the RTL8188EU USB Wi-Fi adapter
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+SUB    = The low-level unit activation state, values depend on unit type.
+3 loaded units listed.
+To show all installed unit files use 'systemctl list-unit-files'.
+# /etc/systemd/system/karaoke-ap-http-check.service
+[Unit]
+Description=Karaoke AP HTTP diagnostic
+After=NetworkManager.service
+
+[Service]
+Type=oneshot
+ExecStart=/root/karaoke/wifi/ap-http-check.sh
+TimeoutStartSec=90
+# /etc/systemd/system/karaoke-ap-start.service
+[Unit]
+Description=Karaoke AP test start
+After=NetworkManager.service
+Requires=NetworkManager.service
+
+[Service]
+Type=oneshot
+ExecStart=/root/karaoke/wifi/ap-test.sh
+TimeoutStartSec=60
+# /etc/systemd/system/karaoke-browser.service
+[Unit]
+Description=Karaoke Browser (NetSurf)
+After=network.target lightdm.service karaoke-server.service
+
+[Service]
+Type=simple
+User=root
+Environment="DISPLAY=:0" "XAUTHORITY=/run/lightdm/root/:0"
+ExecStartPre=/bin/sleep 15
+ExecStart=/usr/bin/netsurf-gtk http://127.0.0.1:8080
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=graphical.target
+# /etc/systemd/system/karaoke-final-auto-rescue.service
+[Unit]
+Description=Restore ZZZZ after Wi-Fi test
+
+[Service]
+Type=oneshot
+ExecStart=/root/karaoke/wifi/restore-wifi.sh
+TimeoutStartSec=90
+# /etc/systemd/system/karaoke-final-auto-test.service
+[Unit]
+Description=Karaoke automatic Wi-Fi fallback test
+After=NetworkManager.service
+
+[Service]
+Type=oneshot
+ExecStart=/root/karaoke/wifi/final-auto-test.sh
+TimeoutStartSec=100
+# /etc/systemd/system/karaoke-full-diagnostic.service
+[Unit]
+Description=Karaoke full network diagnostic
+After=NetworkManager.service karaoke-http-diagnostic.service
+
+[Service]
+Type=oneshot
+ExecStart=/root/karaoke/wifi/diagnostic-20261013_183123/run.sh
+TimeoutStartSec=180
+# /etc/systemd/system/karaoke-full-rescue.service
+[Unit]
+Description=Karaoke emergency Wi-Fi restore
+
+[Service]
+Type=oneshot
+ExecStart=/root/karaoke/wifi/diagnostic-20261013_183123/rescue.sh
+TimeoutStartSec=120
+# /etc/systemd/system/karaoke-http-diagnostic.service
+[Unit]
+Description=Karaoke temporary HTTP diagnostic
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /root/karaoke/wifi/diagnostic-20261013_183123/http-test.py
+Restart=on-failure
+# /etc/systemd/system/karaoke-packet-rescue.service
+[Unit]
+Description=Restore Wi-Fi after packet capture
+
+[Service]
+Type=oneshot
+ExecStart=/root/karaoke/wifi/restore-wifi.sh
+TimeoutStartSec=100
+# /etc/systemd/system/karaoke-packet-test.service
+[Unit]
+Description=Karaoke packet capture test
+After=NetworkManager.service
+
+[Service]
+Type=oneshot
+ExecStart=/root/karaoke/wifi/packet-test-20261013_183748/capture.sh
+TimeoutStartSec=160
+# /etc/systemd/system/karaoke-server.service
+[Unit]
+Description=Karaoke Server
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root/karaoke/
+Environment="FLASK_ENV=production"
+ExecStartPre=/root/karaoke/init_karaoke.sh
+ExecStart=/usr/bin/python3 app.py
+Restart=always
+RestartSec=5
+StandardOutput=append:/var/log/karaoke/server.log
+StandardError=append:/var/log/karaoke/error.log
+
+[Install]
+WantedBy=multi-user.target
+
+# /etc/systemd/system/karaoke-server.service.d/10-fix-user.conf
+[Service]
+User=root
+
+# /etc/systemd/system/karaoke-server.service.d/20-disable-init.conf
+[Service]
+# Original init script can download from network, rewrite app.py and alter media links.
+# Disable it until it has been audited and rewritten safely.
+ExecStartPre=
+# /etc/systemd/system/karaoke-wifi-auto.service
+[Unit]
+Description=Karaoke automatic Wi-Fi fallback
+After=NetworkManager.service
+Requires=NetworkManager.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /root/karaoke/wifi/auto-manager.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+# /etc/systemd/system/karaoke-wifi-monitor.service
+[Unit]
+Description=Karaoke Wi-Fi Connection Monitor
+After=NetworkManager.service
+Wants=NetworkManager.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -u /root/karaoke/wifi/monitor.py
+Restart=always
+RestartSec=3
+User=root
+NoNewPrivileges=true
+ProtectSystem=full
+ReadWritePaths=/var/lib/karaoke-wifi
+
+[Install]
+WantedBy=multi-user.target
+# /etc/systemd/system/karaoke-wifi-rescue.service
+[Unit]
+Description=Karaoke Wi-Fi emergency recovery
+After=NetworkManager.service
+Requires=NetworkManager.service
+
+[Service]
+Type=oneshot
+ExecStart=/root/karaoke/wifi/restore-wifi.sh
+TimeoutStartSec=90
+# /etc/systemd/system/karaoke-ap-http-check.timer
+[Unit]
+Description=Run karaoke AP HTTP diagnostic
+
+[Timer]
+OnActiveSec=10s
+AccuracySec=1s
+Unit=karaoke-ap-http-check.service
+Persistent=false
+# /etc/systemd/system/karaoke-ap-start.timer
+[Unit]
+Description=Start karaoke AP after 10 seconds
+
+[Timer]
+OnActiveSec=10s
+AccuracySec=1s
+Unit=karaoke-ap-start.service
+Persistent=false
+# /etc/systemd/system/karaoke-final-auto-rescue.timer
+[Unit]
+Description=Emergency restore after Wi-Fi test
+
+[Timer]
+OnActiveSec=3min
+AccuracySec=1s
+Unit=karaoke-final-auto-rescue.service
+Persistent=false
+# /etc/systemd/system/karaoke-final-auto-test.timer
+[Unit]
+Description=Start karaoke automatic Wi-Fi test
+
+[Timer]
+OnActiveSec=10s
+AccuracySec=1s
+Unit=karaoke-final-auto-test.service
+Persistent=false
+# /etc/systemd/system/karaoke-full-diagnostic.timer
+[Unit]
+Description=Start karaoke network diagnostic
+
+[Timer]
+OnActiveSec=10s
+AccuracySec=1s
+Unit=karaoke-full-diagnostic.service
+Persistent=false
+# /etc/systemd/system/karaoke-full-rescue.timer
+[Unit]
+Description=Karaoke emergency Wi-Fi restore timer
+
+[Timer]
+OnActiveSec=4min
+AccuracySec=1s
+Unit=karaoke-full-rescue.service
+Persistent=false
+# /etc/systemd/system/karaoke-packet-rescue.timer
+[Unit]
+Description=Emergency restore Wi-Fi
+
+[Timer]
+OnActiveSec=3min
+AccuracySec=1s
+Unit=karaoke-packet-rescue.service
+Persistent=false
+# /etc/systemd/system/karaoke-packet-test.timer
+[Unit]
+Description=Start packet capture
+
+[Timer]
+OnActiveSec=10s
+AccuracySec=1s
+Unit=karaoke-packet-test.service
+Persistent=false
+# /etc/systemd/system/karaoke-wifi-rescue.timer
+[Unit]
+Description=Karaoke Wi-Fi recovery safety timer
+
+[Timer]
+OnActiveSec=2min
+AccuracySec=1s
+Unit=karaoke-wifi-rescue.service
+Persistent=false
+
+[Install]
+WantedBy=timers.target
+# /etc/systemd/system/rtl8188eu-bind.service
+[Unit]
+Description=Select 8188eu for the RTL8188EU USB Wi-Fi adapter
+Wants=NetworkManager.service
+After=NetworkManager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/local/libexec/rtl8188eu-bind.py
+TimeoutStartSec=90s
+
+[Install]
+WantedBy=multi-user.target

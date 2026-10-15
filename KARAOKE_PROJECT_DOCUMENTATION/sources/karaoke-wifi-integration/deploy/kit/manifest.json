@@ -1,0 +1,70 @@
+{
+  "app_before": "0ed8de0ea9189af1d801393f2832ded3a5d504c2a083d0bd620256cfe32d88b8",
+  "app_after": "85a1765e0896f3725929d61333e989d426b5672b1f82d8a2accc259aed288395",
+  "qr_sha256": "08e0a2fd23a6f83c3e8197d154a4cd9e9b31e6efc22d854b54571734729242df",
+  "files": [
+    {
+      "source": "payload/root/karaoke/wifi/monitor.py",
+      "target": "/root/karaoke/wifi/monitor.py",
+      "before": "8412fbcc49b92dd3d63f4f460b67093b4254d6ca03056592435d79e9164aabd0",
+      "sha256": "f9dc60af652f4b89655197fd884857e06a29dd5a8b75581028caca61de1a27a4",
+      "mode": 420
+    },
+    {
+      "source": "payload/root/karaoke/wifi/connect-worker.py",
+      "target": "/root/karaoke/wifi/connect-worker.py",
+      "before": "022153f9c6eb21f9c90b664af29f27abb2f68b340daef08a5d6184a0b990c4a4",
+      "sha256": "db1a0fb4dccb436e174aee286c6232a33e1689058e99413ec12fc5d1fad4a4b2",
+      "mode": 420
+    },
+    {
+      "source": "payload/root/karaoke/wifi/setup.html",
+      "target": "/root/karaoke/wifi/setup.html",
+      "before": "36da627ae9e01cac2b6b3060962e0956c4160d025f1efe942c502134ac4f2292",
+      "sha256": "58e6f2efaa367d25e557a7125d63a9424dace1229f99c3153b6de0c3ed45b42c",
+      "mode": 420
+    },
+    {
+      "source": "payload/root/karaoke/wifi/network.py",
+      "target": "/root/karaoke/wifi/network.py",
+      "before": null,
+      "sha256": "b524ee1adcc3c438631016090b092cad7fb7b1a8ed630535f02f3b3687a73a33",
+      "mode": 420
+    },
+    {
+      "source": "payload/root/karaoke/wifi/__init__.py",
+      "target": "/root/karaoke/wifi/__init__.py",
+      "before": null,
+      "sha256": "f80db2e87cb6866c8d5fdc1ceddecf7b8c8bfc96005f869cda1797e340347054",
+      "mode": 420
+    },
+    {
+      "source": "payload/root/karaoke/wifi/captive.py",
+      "target": "/root/karaoke/wifi/captive.py",
+      "before": null,
+      "sha256": "22a78b28fd24e4f0de0615d17befb3123f01b10cdd585e7fd7fbc0a29ff9f8fe",
+      "mode": 420
+    },
+    {
+      "source": "payload/root/karaoke/wifi/setup-qr.png",
+      "target": "/root/karaoke/wifi/setup-qr.png",
+      "before": null,
+      "sha256": "08e0a2fd23a6f83c3e8197d154a4cd9e9b31e6efc22d854b54571734729242df",
+      "mode": 420
+    },
+    {
+      "source": "payload/etc/systemd/system/karaoke-wifi-monitor.service.d/30-usb-fallback.conf",
+      "target": "/etc/systemd/system/karaoke-wifi-monitor.service.d/30-usb-fallback.conf",
+      "before": null,
+      "sha256": "0eb6fe62f42fd929120b063887a82856c761a7d07ce9db792c4669e40e1cc797",
+      "mode": 420
+    },
+    {
+      "source": "payload/etc/NetworkManager/dnsmasq-shared.d/99-karaoke-setup.conf",
+      "target": "/etc/NetworkManager/dnsmasq-shared.d/99-karaoke-setup.conf",
+      "before": null,
+      "sha256": "cc1e721d857a831572e331ccb2c5b53c132c3897551bac6282c061a4dc574a0e",
+      "mode": 420
+    }
+  ]
+}

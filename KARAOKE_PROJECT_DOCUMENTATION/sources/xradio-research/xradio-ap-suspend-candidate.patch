@@ -1,0 +1,11 @@
+--- a/wsm.c
++++ b/wsm.c
+@@ -1641,7 +1641,7 @@
+ 					 struct wsm_buf *buf)
+ {
+ 		u32 flags;
+-		struct wsm_suspend_resume arg;
++		struct wsm_suspend_resume arg = {0};
+ 		struct xradio_vif *priv;
+ 
+ 		if (is_hardware_xradio(hw_priv)) {

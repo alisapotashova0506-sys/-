@@ -1,0 +1,302 @@
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~# sed -n '901400,901680p' /var/log/syslog |
+  tr -d '\000' |
+  grep -aEi 'NetworkManager|wpa_supplicant|systemd|kernel|dnsmasq'
+
+LC_ALL=C grep -a -E '^2026-10-14T22:3[0-3]:.*(karaoke-ap-test-rollback|NetworkManager|xradio|rtl8|wlxf|wlan0)' \
+  /var/log/syslog | tr -d '\000' | tail -100
+2026-10-14T22:25:38.059067+03:00 x96q-v5-1 wpa_supplicant[494]: wlxf0b040f7f699: CTRL-EVENT-BEACON-LOSS
+2026-10-14T22:25:41.067234+03:00 x96q-v5-1 wpa_supplicant[494]: wlxf0b040f7f699: CTRL-EVENT-BEACON-LOSS
+2026-10-14T22:25:53.035090+03:00 x96q-v5-1 wpa_supplicant[494]: wlxf0b040f7f699: CTRL-EVENT-BEACON-LOSS
+2026-10-14T22:25:59.083111+03:00 x96q-v5-1 wpa_supplicant[494]: wlxf0b040f7f699: CTRL-EVENT-BEACON-LOSS
+2026-10-14T22:26:01.067014+03:00 x96q-v5-1 wpa_supplicant[494]: wlxf0b040f7f699: CTRL-EVENT-BEACON-LOSS
+2026-10-14T22:26:07.051160+03:00 x96q-v5-1 wpa_supplicant[494]: wlxf0b040f7f699: CTRL-EVENT-BEACON-LOSS
+2026-10-14T22:26:33.067105+03:00 x96q-v5-1 wpa_supplicant[494]: wlxf0b040f7f699: CTRL-EVENT-BEACON-LOSS
+2026-10-14T22:27:16.375128+03:00 x96q-v5-1 systemd[1]: Started session-20.scope - Session 20 of User root.
+2026-10-14T22:28:25.869484+03:00 x96q-v5-1 systemd[1]: Started karaoke-ap-test-rollback.timer - /usr/bin/nmcli --wait 30 connection up uuid 64825e49-6414-46eb-86e4-e0bc1c1e2145 ifname wlan0.
+2026-10-14T22:28:25.997960+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006105.9963] agent-manager: agent[8752c251847b995e,:1.4957/nmcli-connect/0]: agent registered
+2026-10-14T22:28:26.004080+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.0035] device (wlan0): disconnecting for new activation request.
+2026-10-14T22:28:26.004745+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.0037] device (wlan0): state change: activated -> deactivating (reason 'new-activation', sys-iface-state: 'managed')
+2026-10-14T22:28:26.011469+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.0103] audit: op="connection-activate" uuid="28752177-7ad8-44ec-9a38-0e32a29d42a7" name="KARAOKE_SYSTEM" pid=33915 uid=0 result="success"
+2026-10-14T22:28:26.014947+03:00 x96q-v5-1 dbus-daemon[450]: [system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='dbus-org.freedesktop.nm-dispatcher.service' requested by ':1.4' (uid=0 pid=492 comm="/usr/sbin/NetworkManager --no-daemon")
+2026-10-14T22:28:26.060661+03:00 x96q-v5-1 systemd[1]: Starting NetworkManager-dispatcher.service - Network Manager Script Dispatcher Service...
+2026-10-14T22:28:26.097764+03:00 x96q-v5-1 systemd[1]: Started NetworkManager-dispatcher.service - Network Manager Script Dispatcher Service.
+2026-10-14T22:28:26.109004+03:00 x96q-v5-1 kernel: [10434.908772] wlan0: deauthenticating from 50:ff:20:4a:92:4b by local choice (Reason: 3=DEAUTH_LEAVING)
+2026-10-14T22:28:26.164998+03:00 x96q-v5-1 kernel: [10434.964858] ieee80211 phy0: no station to remove
+2026-10-14T22:28:26.165108+03:00 x96q-v5-1 kernel: [10434.966169] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:28:26.165127+03:00 x96q-v5-1 kernel: [10434.966729] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:28:26.165229+03:00 x96q-v5-1 kernel: [10434.967274] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:28:26.165256+03:00 x96q-v5-1 kernel: [10434.967818] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:28:26.165271+03:00 x96q-v5-1 kernel: [10434.968402] ieee80211 phy0: ignore IEEE80211_CONF_CHANGE_MONITOR (0)IEEE80211_CONF_CHANGE_IDLE (1)
+2026-10-14T22:28:26.207245+03:00 x96q-v5-1 wpa_supplicant[494]: wlan0: CTRL-EVENT-DISCONNECTED bssid=50:ff:20:4a:92:4b reason=3 locally_generated=1
+2026-10-14T22:28:26.209804+03:00 x96q-v5-1 wpa_supplicant[494]: wlan0: CTRL-EVENT-DSCP-POLICY clear_all
+2026-10-14T22:28:26.211993+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.2113] device (wlan0): state change: deactivating -> disconnected (reason 'new-activation', sys-iface-state: 'managed')
+2026-10-14T22:28:26.241677+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.2411] dhcp4 (wlan0): canceled DHCP transaction
+2026-10-14T22:28:26.242474+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.2413] dhcp4 (wlan0): activation: beginning transaction (timeout in 45 seconds)
+2026-10-14T22:28:26.243373+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.2414] dhcp4 (wlan0): state changed no lease
+2026-10-14T22:28:26.274865+03:00 x96q-v5-1 systemd-resolved[446]: wlan0: Bus client set default route setting: no
+2026-10-14T22:28:26.278952+03:00 x96q-v5-1 systemd-resolved[446]: wlan0: Bus client reset DNS server list.
+2026-10-14T22:28:26.316062+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3153] device (wlan0): Activation: starting connection 'KARAOKE_SYSTEM' (28752177-7ad8-44ec-9a38-0e32a29d42a7)
+2026-10-14T22:28:26.322620+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3209] device (wlan0): supplicant interface state: completed -> disconnected
+2026-10-14T22:28:26.323201+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3212] device (p2p-dev-wlan0): supplicant management interface state: completed -> disconnected
+2026-10-14T22:28:26.327683+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3261] device (wlan0): state change: disconnected -> prepare (reason 'none', sys-iface-state: 'managed')
+2026-10-14T22:28:26.334968+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3315] device (wlan0): state change: prepare -> config (reason 'none', sys-iface-state: 'managed')
+2026-10-14T22:28:26.336613+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3350] device (wlan0): Activation: (wifi) access point 'KARAOKE_SYSTEM' has security, but secrets are required.
+2026-10-14T22:28:26.337650+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3352] device (wlan0): state change: config -> need-auth (reason 'none', sys-iface-state: 'managed')
+2026-10-14T22:28:26.344459+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3433] device (wlan0): state change: need-auth -> prepare (reason 'none', sys-iface-state: 'managed')
+2026-10-14T22:28:26.352810+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3513] device (wlan0): state change: prepare -> config (reason 'none', sys-iface-state: 'managed')
+2026-10-14T22:28:26.354370+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3538] device (wlan0): Activation: (wifi) connection 'KARAOKE_SYSTEM' has security, and secrets exist.  No new secrets needed.
+2026-10-14T22:28:26.360008+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3543] Config: added 'ssid' value 'KARAOKE_SYSTEM'
+2026-10-14T22:28:26.362550+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3544] Config: added 'mode' value '2'
+2026-10-14T22:28:26.363658+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3545] Config: added 'frequency' value '2437'
+2026-10-14T22:28:26.364201+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3546] Config: added 'freq_list' value '2437'
+2026-10-14T22:28:26.364665+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3547] Config: added 'key_mgmt' value 'WPA-PSK WPA-PSK-SHA256'
+2026-10-14T22:28:26.365929+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3547] Config: added 'psk' value '<hidden>'
+2026-10-14T22:28:26.373891+03:00 x96q-v5-1 wpa_supplicant[494]: Note: nl80211 driver interface is not designed to be used with ap_scan=2; this can result in connection failures
+2026-10-14T22:28:27.445002+03:00 x96q-v5-1 kernel: [10436.244773] ieee80211 phy0: changing interface type; new type=3(2), p2p=0(0)
+2026-10-14T22:28:27.445107+03:00 x96q-v5-1 kernel: [10436.244819] ieee80211 phy0: !!! vif_id=0
+2026-10-14T22:28:27.445125+03:00 x96q-v5-1 kernel: [10436.244874] ieee80211 phy0: Interface ID:0 of type:3 added
+2026-10-14T22:28:27.445138+03:00 x96q-v5-1 kernel: [10436.244895] Unable to handle kernel paging request at virtual address ffff8000812c5061
+2026-10-14T22:28:27.455775+03:00 x96q-v5-1 kernel: [10436.252883] Mem abort info:
+2026-10-14T22:28:27.455844+03:00 x96q-v5-1 kernel: [10436.255691]   ESR = 0x0000000096000047
+2026-10-14T22:28:27.455852+03:00 x96q-v5-1 kernel: [10436.259462]   EC = 0x25: DABT (current EL), IL = 32 bits
+2026-10-14T22:28:27.467312+03:00 x96q-v5-1 kernel: [10436.264811]   SET = 0, FnV = 0
+2026-10-14T22:28:27.467378+03:00 x96q-v5-1 kernel: [10436.267870]   EA = 0, S1PTW = 0
+2026-10-14T22:28:27.467385+03:00 x96q-v5-1 kernel: [10436.271020]   FSC = 0x07: level 3 translation fault
+2026-10-14T22:28:27.475101+03:00 x96q-v5-1 kernel: [10436.275912] Data abort info:
+2026-10-14T22:28:27.475171+03:00 x96q-v5-1 kernel: [10436.278809]   ISV = 0, ISS = 0x00000047, ISS2 = 0x00000000
+2026-10-14T22:28:27.485654+03:00 x96q-v5-1 kernel: [10436.284308]   CM = 0, WnR = 1, TnD = 0, TagAccess = 0
+2026-10-14T22:28:27.485712+03:00 x96q-v5-1 kernel: [10436.289369]   GCS = 0, Overlay = 0, DirtyBit = 0, Xs = 0
+2026-10-14T22:28:27.497697+03:00 x96q-v5-1 kernel: [10436.294693] swapper pgtable: 4k pages, 48-bit VAs, pgdp=00000000413e7000
+2026-10-14T22:28:27.497771+03:00 x96q-v5-1 kernel: [10436.301404] [ffff8000812c5061] pgd=10000000bffff003, p4d=10000000bffff003, pud=10000000bfffe003, pmd=10000000bfffa003, pte=0000000000000000
+2026-10-14T22:28:27.731407+03:00 x96q-v5-1 kernel: [10436.313942] Internal error: Oops: 0000000096000047 [#1] SMP
+2026-10-14T22:28:27.731527+03:00 x96q-v5-1 kernel: [10436.319516] Modules linked in: rtl8xxxu ac200_phy xt_connmark xt_NFQUEUE xt_connbytes xt_mark nft_chain_nat xt_nat nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 xt_set xt_multiport xt_owner nft_compat nf_tables nfnetlink_queue ip_set_hash_net ip_set nfnetlink sunrpc binfmt_misc snd_soc_hdmi_codec ir_nec_decoder polyval_ce hci_uart xradio_wlan btqca polyval_generic btrtl rc_beelink_gs1 snd_soc_sunxi_ahub btintel mac80211 btbcm sunxi_cir dw_hdmi_cec snd_soc_sunxi_machine rc_core bluetooth ecdh_generic ecc dw_hdmi_i2s_audio cfg80211 snd_soc_sunxi_ahub_dam libarc4 panfrost sunxi_cedrus(C) v4l2_mem2mem videobuf2_dma_contig videobuf2_memops videobuf2_v4l2 videodev videobuf2_common sun50iw9_codec gpu_sched mc drm_shmem_helper dump_reg display_connector cpufreq_dt sprdbt_tty uwe5622_bsp_sdio rfkill fuse dm_mod uas sunxi_gmac sunxi_ephy sunxi_ac200
+2026-10-14T22:28:27.731558+03:00 x96q-v5-1 kernel: [10436.394289] CPU: 1 PID: 403 Comm: xradio_bh Tainted: G         C         6.6.44-current-sunxi64 #2
+2026-10-14T22:28:27.731567+03:00 x96q-v5-1 kernel: [10436.403239] Hardware name: hechuang,x96-q DDR3L v5.1 (DT)
+2026-10-14T22:28:27.731573+03:00 x96q-v5-1 kernel: [10436.408630] pstate: 80000005 (Nzcv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+2026-10-14T22:28:27.731580+03:00 x96q-v5-1 kernel: [10436.415584] pc : queued_spin_lock_slowpath+0x208/0x328
+2026-10-14T22:28:27.731588+03:00 x96q-v5-1 kernel: [10436.420732] lr : wsm_get_tx+0x6b4/0x8fc [xradio_wlan]
+2026-10-14T22:28:27.731594+03:00 x96q-v5-1 kernel: [10436.425801] sp : ffff8000828abc60
+2026-10-14T22:28:27.731600+03:00 x96q-v5-1 kernel: [10436.429110] x29: ffff8000828abc60 x28: ffff00000744a040 x27: 0000000000000000
+2026-10-14T22:28:27.731607+03:00 x96q-v5-1 kernel: [10436.436242] x26: 0000000000000000 x25: ffff00000744a760 x24: ffff800079b27af8
+2026-10-14T22:28:27.731613+03:00 x96q-v5-1 kernel: [10436.443373] x23: ffff00000488a098 x22: ffff000004889c70 x21: ffff00000744a040
+2026-10-14T22:28:27.731619+03:00 x96q-v5-1 kernel: [10436.450504] x20: ffff8000828abdb0 x19: ffff00000744a424 x18: 0000000000000001
+2026-10-14T22:28:27.731625+03:00 x96q-v5-1 kernel: [10436.457634] x17: 0000000000041c10 x16: 0000000000163000 x15: 0000000000000004
+2026-10-14T22:28:27.731631+03:00 x96q-v5-1 kernel: [10436.464765] x14: ffff00007fb81340 x13: 0000000000000002 x12: 0000000000000000
+2026-10-14T22:28:27.731637+03:00 x96q-v5-1 kernel: [10436.471895] x11: 0000000000000400 x10: 00000000000009a0 x9 : 0000000000000031
+2026-10-14T22:28:27.731644+03:00 x96q-v5-1 kernel: [10436.479025] x8 : ffff8000812c5030 x7 : 0000000000080000 x6 : 0000000000000000
+2026-10-14T22:28:27.731650+03:00 x96q-v5-1 kernel: [10436.486156] x5 : ffff00007fb82000 x4 : ffff8000812c5030 x3 : ffff00007fb82000
+2026-10-14T22:28:27.731655+03:00 x96q-v5-1 kernel: [10436.493287] x2 : ffff8000812c5000 x1 : ffff00007fb82008 x0 : ffff00000488a09c
+2026-10-14T22:28:27.731661+03:00 x96q-v5-1 kernel: [10436.500418] Call trace:
+2026-10-14T22:28:27.731666+03:00 x96q-v5-1 kernel: [10436.502861]  queued_spin_lock_slowpath+0x208/0x328
+2026-10-14T22:28:27.731672+03:00 x96q-v5-1 kernel: [10436.507654]  xradio_bh_exchange+0x130/0x6d0 [xradio_wlan]
+2026-10-14T22:28:27.731678+03:00 x96q-v5-1 kernel: [10436.513061]  xradio_bh+0x178/0x3e4 [xradio_wlan]
+2026-10-14T22:28:27.731684+03:00 x96q-v5-1 kernel: [10436.517686]  kthread+0xe4/0xe8
+2026-10-14T22:28:27.731690+03:00 x96q-v5-1 kernel: [10436.520744]  ret_from_fork+0x10/0x20
+2026-10-14T22:28:27.731696+03:00 x96q-v5-1 kernel: [10436.524323] Code: 910020a1 8b080048 f864d929 aa0803e4 (f8296885)
+2026-10-14T22:28:27.731702+03:00 x96q-v5-1 kernel: [10436.530408] ---[ end trace 0000000000000000 ]---
+2026-10-14T22:28:29.771692+03:00 x96q-v5-1 kernel: [10438.252763] xradio_wlan mmc3:0001:1: ***CMD timeout!>>> 0x0013 (48), buf_use=1, bh_state=0
+2026-10-14T22:28:29.771798+03:00 x96q-v5-1 kernel: [10438.261276] ------------[ cut here ]------------
+2026-10-14T22:28:29.771809+03:00 x96q-v5-1 kernel: [10438.265907] WARNING: CPU: 2 PID: 494 at drivers/net/wireless/xradio/sta.c:1909 xradio_vif_setup+0x45c/0x46c [xradio_wlan]
+2026-10-14T22:28:29.771819+03:00 x96q-v5-1 kernel: [10438.276918] Modules linked in: rtl8xxxu ac200_phy xt_connmark xt_NFQUEUE xt_connbytes xt_mark nft_chain_nat xt_nat nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 xt_set xt_multiport xt_owner nft_compat nf_tables nfnetlink_queue ip_set_hash_net ip_set nfnetlink sunrpc binfmt_misc snd_soc_hdmi_codec ir_nec_decoder polyval_ce hci_uart xradio_wlan btqca polyval_generic btrtl rc_beelink_gs1 snd_soc_sunxi_ahub btintel mac80211 btbcm sunxi_cir dw_hdmi_cec snd_soc_sunxi_machine rc_core bluetooth ecdh_generic ecc dw_hdmi_i2s_audio cfg80211 snd_soc_sunxi_ahub_dam libarc4 panfrost sunxi_cedrus(C) v4l2_mem2mem videobuf2_dma_contig videobuf2_memops videobuf2_v4l2 videodev videobuf2_common sun50iw9_codec gpu_sched mc drm_shmem_helper dump_reg display_connector cpufreq_dt sprdbt_tty uwe5622_bsp_sdio rfkill fuse dm_mod uas sunxi_gmac sunxi_ephy sunxi_ac200
+2026-10-14T22:28:29.771828+03:00 x96q-v5-1 kernel: [10438.351959] CPU: 2 PID: 494 Comm: wpa_supplicant Tainted: G      D  C         6.6.44-current-sunxi64 #2
+2026-10-14T22:28:29.771835+03:00 x96q-v5-1 kernel: [10438.361355] Hardware name: hechuang,x96-q DDR3L v5.1 (DT)
+2026-10-14T22:28:29.771841+03:00 x96q-v5-1 kernel: [10438.366754] pstate: 60000005 (nZCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+2026-10-14T22:28:29.771847+03:00 x96q-v5-1 kernel: [10438.373723] pc : xradio_vif_setup+0x45c/0x46c [xradio_wlan]
+2026-10-14T22:28:29.771852+03:00 x96q-v5-1 kernel: [10438.379335] lr : xradio_vif_setup+0x3cc/0x46c [xradio_wlan]
+2026-10-14T22:28:29.771858+03:00 x96q-v5-1 kernel: [10438.384942] sp : ffff80008282b5b0
+2026-10-14T22:28:29.771864+03:00 x96q-v5-1 kernel: [10438.388259] x29: ffff80008282b5b0 x28: ffff0000036fd400 x27: ffff80008282bda0
+2026-10-14T22:28:29.771869+03:00 x96q-v5-1 kernel: [10438.395411] x26: ffff0000074483c0 x25: 0000000000000003 x24: ffff00000744a040
+2026-10-14T22:28:29.771875+03:00 x96q-v5-1 kernel: [10438.402562] x23: ffff00000488a0b8 x22: 0000000000000001 x21: ffff8000800734cc
+2026-10-14T22:28:29.771881+03:00 x96q-v5-1 kernel: [10438.409712] x20: 00000000ffffff92 x19: ffff00000488a098 x18: ffffffffffffffff
+2026-10-14T22:28:29.771886+03:00 x96q-v5-1 kernel: [10438.416861] x17: 6573755f66756220 x16: 2c29383428203331 x15: 30307830203e3e3e
+2026-10-14T22:28:29.771892+03:00 x96q-v5-1 kernel: [10438.423993] x14: 2174756f656d6974 x13: 000000000000046b x12: 00000000ffffffea
+2026-10-14T22:28:29.771897+03:00 x96q-v5-1 kernel: [10438.431123] x11: 00000000ffffefff x10: 00000000ffffefff x9 : ffff800081567ba8
+2026-10-14T22:28:29.771903+03:00 x96q-v5-1 kernel: [10438.438254] x8 : 0000000000017fe8 x7 : c0000000ffffefff x6 : ffff00000744a588
+2026-10-14T22:28:29.771908+03:00 x96q-v5-1 kernel: [10438.445385] x5 : ffff80008282b490 x4 : 0000000000000000 x3 : 0000000000000000
+2026-10-14T22:28:29.771914+03:00 x96q-v5-1 kernel: [10438.452515] x2 : ffff0000036fd400 x1 : ffff0000036fd400 x0 : 00000000ffffff92
+2026-10-14T22:28:29.771920+03:00 x96q-v5-1 kernel: [10438.459646] Call trace:
+2026-10-14T22:28:29.771925+03:00 x96q-v5-1 kernel: [10438.462089]  xradio_vif_setup+0x45c/0x46c [xradio_wlan]
+2026-10-14T22:28:29.771931+03:00 x96q-v5-1 kernel: [10438.467324]  xradio_add_interface+0x26c/0x340 [xradio_wlan]
+2026-10-14T22:28:29.771937+03:00 x96q-v5-1 kernel: [10438.472903]  xradio_change_interface+0x8c/0xa0 [xradio_wlan]
+2026-10-14T22:28:29.771943+03:00 x96q-v5-1 kernel: [10438.478568]  drv_change_interface+0x54/0xbc [mac80211]
+2026-10-14T22:28:29.771948+03:00 x96q-v5-1 kernel: [10438.483767]  ieee80211_if_change_type+0x29c/0x454 [mac80211]
+2026-10-14T22:28:29.771954+03:00 x96q-v5-1 kernel: [10438.489461]  ieee80211_change_iface+0x38/0x208 [mac80211]
+2026-10-14T22:28:29.771959+03:00 x96q-v5-1 kernel: [10438.494896]  cfg80211_change_iface+0x194/0x308 [cfg80211]
+2026-10-14T22:28:29.771964+03:00 x96q-v5-1 kernel: [10438.500330]  nl80211_set_interface+0x130/0x288 [cfg80211]
+2026-10-14T22:28:29.771970+03:00 x96q-v5-1 kernel: [10438.505748]  genl_family_rcv_msg_doit+0xbc/0x124
+2026-10-14T22:28:29.771975+03:00 x96q-v5-1 kernel: [10438.510369]  genl_rcv_msg+0x1e4/0x26c
+2026-10-14T22:28:29.771980+03:00 x96q-v5-1 kernel: [10438.514028]  netlink_rcv_skb+0x5c/0x128
+2026-10-14T22:28:29.771987+03:00 x96q-v5-1 kernel: [10438.517861]  genl_rcv+0x38/0x50
+2026-10-14T22:28:29.771992+03:00 x96q-v5-1 kernel: [10438.520999]  netlink_unicast+0x2c0/0x328
+2026-10-14T22:28:29.771998+03:00 x96q-v5-1 kernel: [10438.524917]  netlink_sendmsg+0x1d4/0x440
+2026-10-14T22:28:29.772003+03:00 x96q-v5-1 kernel: [10438.528836]  __sock_sendmsg+0x54/0x60
+2026-10-14T22:28:29.772008+03:00 x96q-v5-1 kernel: [10438.532497]  ____sys_sendmsg+0x27c/0x2e0
+2026-10-14T22:28:29.772014+03:00 x96q-v5-1 kernel: [10438.536417]  ___sys_sendmsg+0x80/0xdc
+2026-10-14T22:28:29.772019+03:00 x96q-v5-1 kernel: [10438.540076]  __sys_sendmsg+0x68/0xc4
+2026-10-14T22:28:29.772024+03:00 x96q-v5-1 kernel: [10438.543648]  __arm64_sys_sendmsg+0x24/0x30
+2026-10-14T22:28:29.772030+03:00 x96q-v5-1 kernel: [10438.547742]  invoke_syscall+0x48/0x118
+2026-10-14T22:28:29.772035+03:00 x96q-v5-1 kernel: [10438.551492]  el0_svc_common.constprop.0+0x40/0xe8
+2026-10-14T22:28:29.772041+03:00 x96q-v5-1 kernel: [10438.556194]  do_el0_svc+0x20/0x2c
+2026-10-14T22:28:29.772046+03:00 x96q-v5-1 kernel: [10438.559507]  el0_svc+0x40/0xf4
+2026-10-14T22:28:29.772052+03:00 x96q-v5-1 kernel: [10438.562563]  el0t_64_sync_handler+0x13c/0x158
+2026-10-14T22:28:29.772058+03:00 x96q-v5-1 kernel: [10438.566917]  el0t_64_sync+0x190/0x194
+2026-10-14T22:28:29.772063+03:00 x96q-v5-1 kernel: [10438.570578] ---[ end trace 0000000000000000 ]---
+2026-10-14T22:28:29.772100+03:00 x96q-v5-1 kernel: [10438.575445] ------------[ cut here ]------------
+2026-10-14T22:28:30.081062+03:00 x96q-v5-1 kernel: [10438.580077] WARNING: CPU: 2 PID: 494 at drivers/net/wireless/xradio/sta.c:244 xradio_add_interface+0x2e0/0x340 [xradio_wlan]
+2026-10-14T22:28:30.081142+03:00 x96q-v5-1 kernel: [10438.591312] Modules linked in: rtl8xxxu ac200_phy xt_connmark xt_NFQUEUE xt_connbytes xt_mark nft_chain_nat xt_nat nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 xt_set xt_multiport xt_owner nft_compat nf_tables nfnetlink_queue ip_set_hash_net ip_set nfnetlink sunrpc binfmt_misc snd_soc_hdmi_codec ir_nec_decoder polyval_ce hci_uart xradio_wlan btqca polyval_generic btrtl rc_beelink_gs1 snd_soc_sunxi_ahub btintel mac80211 btbcm sunxi_cir dw_hdmi_cec snd_soc_sunxi_machine rc_core bluetooth ecdh_generic ecc dw_hdmi_i2s_audio cfg80211 snd_soc_sunxi_ahub_dam libarc4 panfrost sunxi_cedrus(C) v4l2_mem2mem videobuf2_dma_contig videobuf2_memops videobuf2_v4l2 videodev videobuf2_common sun50iw9_codec gpu_sched mc drm_shmem_helper dump_reg display_connector cpufreq_dt sprdbt_tty uwe5622_bsp_sdio rfkill fuse dm_mod uas sunxi_gmac sunxi_ephy sunxi_ac200
+2026-10-14T22:28:30.081152+03:00 x96q-v5-1 kernel: [10438.666073] CPU: 2 PID: 494 Comm: wpa_supplicant Tainted: G      D WC         6.6.44-current-sunxi64 #2
+2026-10-14T22:28:30.081158+03:00 x96q-v5-1 kernel: [10438.675455] Hardware name: hechuang,x96-q DDR3L v5.1 (DT)
+2026-10-14T22:28:30.081164+03:00 x96q-v5-1 kernel: [10438.680845] pstate: a0000005 (NzCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+2026-10-14T22:28:30.081170+03:00 x96q-v5-1 kernel: [10438.687800] pc : xradio_add_interface+0x2e0/0x340 [xradio_wlan]
+2026-10-14T22:28:30.081175+03:00 x96q-v5-1 kernel: [10438.693734] lr : xradio_add_interface+0x290/0x340 [xradio_wlan]
+2026-10-14T22:28:30.081181+03:00 x96q-v5-1 kernel: [10438.699659] sp : ffff80008282b5f0
+2026-10-14T22:28:30.081187+03:00 x96q-v5-1 kernel: [10438.702968] x29: ffff80008282b5f0 x28: ffff0000036fd400 x27: ffff80008282bda0
+2026-10-14T22:28:30.081275+03:00 x96q-v5-1 kernel: [10438.710100] x26: ffff0000074483c0 x25: 0000000000000003 x24: ffff0000048889d0
+2026-10-14T22:28:30.081286+03:00 x96q-v5-1 kernel: [10438.717230] x23: ffff000007448900 x22: ffff000004889c70 x21: ffff00000744a440
+2026-10-14T22:28:30.081293+03:00 x96q-v5-1 kernel: [10438.724361] x20: ffff00000488a098 x19: ffff00000744a040 x18: ffffffffffffffff
+2026-10-14T22:28:30.081299+03:00 x96q-v5-1 kernel: [10438.731491] x17: 6573755f66756220 x16: 2c29383428203331 x15: 30307830203e3e3e
+2026-10-14T22:28:30.081306+03:00 x96q-v5-1 kernel: [10438.738621] x14: 2174756f656d6974 x13: 000000000000046b x12: 00000000ffffffea
+2026-10-14T22:28:30.081311+03:00 x96q-v5-1 kernel: [10438.745752] x11: 00000000ffffefff x10: 00000000ffffefff x9 : ffff800081567ba8
+2026-10-14T22:28:30.081317+03:00 x96q-v5-1 kernel: [10438.752883] x8 : 000000001000000d x7 : c0000000ffffefff x6 : 0000000000000001
+2026-10-14T22:28:30.081323+03:00 x96q-v5-1 kernel: [10438.760013] x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+2026-10-14T22:28:30.081328+03:00 x96q-v5-1 kernel: [10438.767143] x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000001
+2026-10-14T22:28:30.081334+03:00 x96q-v5-1 kernel: [10438.774273] Call trace:
+2026-10-14T22:28:30.081339+03:00 x96q-v5-1 kernel: [10438.776717]  xradio_add_interface+0x2e0/0x340 [xradio_wlan]
+2026-10-14T22:28:30.081345+03:00 x96q-v5-1 kernel: [10438.782298]  xradio_change_interface+0x8c/0xa0 [xradio_wlan]
+2026-10-14T22:28:30.081351+03:00 x96q-v5-1 kernel: [10438.787962]  drv_change_interface+0x54/0xbc [mac80211]
+2026-10-14T22:28:30.081357+03:00 x96q-v5-1 kernel: [10438.793164]  ieee80211_if_change_type+0x29c/0x454 [mac80211]
+2026-10-14T22:28:30.081363+03:00 x96q-v5-1 kernel: [10438.798859]  ieee80211_change_iface+0x38/0x208 [mac80211]
+2026-10-14T22:28:30.081368+03:00 x96q-v5-1 kernel: [10438.804293]  cfg80211_change_iface+0x194/0x308 [cfg80211]
+2026-10-14T22:28:30.081374+03:00 x96q-v5-1 kernel: [10438.809727]  nl80211_set_interface+0x130/0x288 [cfg80211]
+2026-10-14T22:28:30.081380+03:00 x96q-v5-1 kernel: [10438.815148]  genl_family_rcv_msg_doit+0xbc/0x124
+2026-10-14T22:28:30.081385+03:00 x96q-v5-1 kernel: [10438.819769]  genl_rcv_msg+0x1e4/0x26c
+2026-10-14T22:28:30.081390+03:00 x96q-v5-1 kernel: [10438.823428]  netlink_rcv_skb+0x5c/0x128
+2026-10-14T22:28:30.081396+03:00 x96q-v5-1 kernel: [10438.827261]  genl_rcv+0x38/0x50
+2026-10-14T22:28:30.081402+03:00 x96q-v5-1 kernel: [10438.830399]  netlink_unicast+0x2c0/0x328
+2026-10-14T22:28:30.081408+03:00 x96q-v5-1 kernel: [10438.834318]  netlink_sendmsg+0x1d4/0x440
+2026-10-14T22:28:30.081414+03:00 x96q-v5-1 kernel: [10438.838237]  __sock_sendmsg+0x54/0x60
+2026-10-14T22:28:30.081419+03:00 x96q-v5-1 kernel: [10438.841897]  ____sys_sendmsg+0x27c/0x2e0
+2026-10-14T22:28:30.081425+03:00 x96q-v5-1 kernel: [10438.845816]  ___sys_sendmsg+0x80/0xdc
+2026-10-14T22:28:30.081431+03:00 x96q-v5-1 kernel: [10438.849476]  __sys_sendmsg+0x68/0xc4
+2026-10-14T22:28:30.081436+03:00 x96q-v5-1 kernel: [10438.853048]  __arm64_sys_sendmsg+0x24/0x30
+2026-10-14T22:28:30.081442+03:00 x96q-v5-1 kernel: [10438.857141]  invoke_syscall+0x48/0x118
+2026-10-14T22:28:30.081447+03:00 x96q-v5-1 kernel: [10438.860892]  el0_svc_common.constprop.0+0x40/0xe8
+2026-10-14T22:28:30.081452+03:00 x96q-v5-1 kernel: [10438.865593]  do_el0_svc+0x20/0x2c
+2026-10-14T22:28:30.081457+03:00 x96q-v5-1 kernel: [10438.868907]  el0_svc+0x40/0xf4
+2026-10-14T22:28:30.081462+03:00 x96q-v5-1 kernel: [10438.871963]  el0t_64_sync_handler+0x13c/0x158
+2026-10-14T22:28:30.081468+03:00 x96q-v5-1 kernel: [10438.876319]  el0t_64_sync+0x190/0x194
+2026-10-14T22:28:30.081473+03:00 x96q-v5-1 kernel: [10438.879979] ---[ end trace 0000000000000000 ]---
+2026-10-14T22:28:30.081509+03:00 x96q-v5-1 kernel: [10438.884796] ------------[ cut here ]------------
+2026-10-14T22:28:30.397317+03:00 x96q-v5-1 kernel: [10438.889421] WARNING: CPU: 2 PID: 494 at drivers/net/wireless/xradio/ap.c:657 xradio_bss_info_changed+0x9e0/0xd2c [xradio_wlan]
+2026-10-14T22:28:30.397393+03:00 x96q-v5-1 kernel: [10438.900829] Modules linked in: rtl8xxxu ac200_phy xt_connmark xt_NFQUEUE xt_connbytes xt_mark nft_chain_nat xt_nat nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 xt_set xt_multiport xt_owner nft_compat nf_tables nfnetlink_queue ip_set_hash_net ip_set nfnetlink sunrpc binfmt_misc snd_soc_hdmi_codec ir_nec_decoder polyval_ce hci_uart xradio_wlan btqca polyval_generic btrtl rc_beelink_gs1 snd_soc_sunxi_ahub btintel mac80211 btbcm sunxi_cir dw_hdmi_cec snd_soc_sunxi_machine rc_core bluetooth ecdh_generic ecc dw_hdmi_i2s_audio cfg80211 snd_soc_sunxi_ahub_dam libarc4 panfrost sunxi_cedrus(C) v4l2_mem2mem videobuf2_dma_contig videobuf2_memops videobuf2_v4l2 videodev videobuf2_common sun50iw9_codec gpu_sched mc drm_shmem_helper dump_reg display_connector cpufreq_dt sprdbt_tty uwe5622_bsp_sdio rfkill fuse dm_mod uas sunxi_gmac sunxi_ephy sunxi_ac200
+2026-10-14T22:28:30.397403+03:00 x96q-v5-1 kernel: [10438.975592] CPU: 2 PID: 494 Comm: wpa_supplicant Tainted: G      D WC         6.6.44-current-sunxi64 #2
+2026-10-14T22:28:30.397409+03:00 x96q-v5-1 kernel: [10438.984973] Hardware name: hechuang,x96-q DDR3L v5.1 (DT)
+2026-10-14T22:28:30.397416+03:00 x96q-v5-1 kernel: [10438.990363] pstate: 60000005 (nZCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+2026-10-14T22:28:30.397421+03:00 x96q-v5-1 kernel: [10438.997317] pc : xradio_bss_info_changed+0x9e0/0xd2c [xradio_wlan]
+2026-10-14T22:28:30.397428+03:00 x96q-v5-1 kernel: [10439.003505] lr : xradio_bss_info_changed+0x5e4/0xd2c [xradio_wlan]
+2026-10-14T22:28:30.397434+03:00 x96q-v5-1 kernel: [10439.009689] sp : ffff80008282b560
+2026-10-14T22:28:30.397514+03:00 x96q-v5-1 kernel: [10439.012998] x29: ffff80008282b560 x28: ffff0000036fd400 x27: ffff80008282bda0
+2026-10-14T22:28:30.397527+03:00 x96q-v5-1 kernel: [10439.020130] x26: ffff00000744a440 x25: ffff000007448900 x24: 0000000000000000
+2026-10-14T22:28:30.397533+03:00 x96q-v5-1 kernel: [10439.027260] x23: ffff000004889cc8 x22: ffff00000744a040 x21: ffff000004889c70
+2026-10-14T22:28:30.397539+03:00 x96q-v5-1 kernel: [10439.034391] x20: 000000000000000e x19: ffff00000488a098 x18: ffffffffffffffff
+2026-10-14T22:28:30.397545+03:00 x96q-v5-1 kernel: [10439.041521] x17: 6573755f66756220 x16: 2c29383428203331 x15: 30307830203e3e3e
+2026-10-14T22:28:30.397551+03:00 x96q-v5-1 kernel: [10439.048651] x14: 2174756f656d6974 x13: 000000000000046b x12: 00000000ffffffea
+2026-10-14T22:28:30.397557+03:00 x96q-v5-1 kernel: [10439.055783] x11: 00000000ffffefff x10: 00000000ffffefff x9 : 0000000000000000
+2026-10-14T22:28:30.397562+03:00 x96q-v5-1 kernel: [10439.062913] x8 : 0000000000000014 x7 : 0000000000000000 x6 : 0000000000000001
+2026-10-14T22:28:30.397568+03:00 x96q-v5-1 kernel: [10439.070044] x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+2026-10-14T22:28:30.397574+03:00 x96q-v5-1 kernel: [10439.077173] x2 : 0000000000000000 x1 : 0000000000000000 x0 : 00000000ffffff92
+2026-10-14T22:28:30.397580+03:00 x96q-v5-1 kernel: [10439.084304] Call trace:
+2026-10-14T22:28:30.397586+03:00 x96q-v5-1 kernel: [10439.086747]  xradio_bss_info_changed+0x9e0/0xd2c [xradio_wlan]
+2026-10-14T22:28:30.397593+03:00 x96q-v5-1 kernel: [10439.092592]  drv_link_info_changed+0x104/0x154 [mac80211]
+2026-10-14T22:28:30.397599+03:00 x96q-v5-1 kernel: [10439.098053]  ieee80211_link_info_change_notify+0xc8/0xe4 [mac80211]
+2026-10-14T22:28:30.397604+03:00 x96q-v5-1 kernel: [10439.104357]  ieee80211_do_open+0x10c/0x6c4 [mac80211]
+2026-10-14T22:28:30.397610+03:00 x96q-v5-1 kernel: [10439.109445]  ieee80211_if_change_type+0x2f4/0x454 [mac80211]
+2026-10-14T22:28:30.397616+03:00 x96q-v5-1 kernel: [10439.115140]  ieee80211_change_iface+0x38/0x208 [mac80211]
+2026-10-14T22:28:30.397621+03:00 x96q-v5-1 kernel: [10439.120576]  cfg80211_change_iface+0x194/0x308 [cfg80211]
+2026-10-14T22:28:30.397627+03:00 x96q-v5-1 kernel: [10439.126010]  nl80211_set_interface+0x130/0x288 [cfg80211]
+2026-10-14T22:28:30.397632+03:00 x96q-v5-1 kernel: [10439.131428]  genl_family_rcv_msg_doit+0xbc/0x124
+2026-10-14T22:28:30.397638+03:00 x96q-v5-1 kernel: [10439.136049]  genl_rcv_msg+0x1e4/0x26c
+2026-10-14T22:28:30.397644+03:00 x96q-v5-1 kernel: [10439.139708]  netlink_rcv_skb+0x5c/0x128
+2026-10-14T22:28:30.397650+03:00 x96q-v5-1 kernel: [10439.143541]  genl_rcv+0x38/0x50
+2026-10-14T22:28:30.397655+03:00 x96q-v5-1 kernel: [10439.146679]  netlink_unicast+0x2c0/0x328
+2026-10-14T22:28:30.397661+03:00 x96q-v5-1 kernel: [10439.150598]  netlink_sendmsg+0x1d4/0x440
+2026-10-14T22:28:30.397667+03:00 x96q-v5-1 kernel: [10439.154518]  __sock_sendmsg+0x54/0x60
+2026-10-14T22:28:30.397672+03:00 x96q-v5-1 kernel: [10439.158178]  ____sys_sendmsg+0x27c/0x2e0
+2026-10-14T22:28:30.397678+03:00 x96q-v5-1 kernel: [10439.162097]  ___sys_sendmsg+0x80/0xdc
+2026-10-14T22:28:30.397684+03:00 x96q-v5-1 kernel: [10439.165757]  __sys_sendmsg+0x68/0xc4
+2026-10-14T22:28:30.397689+03:00 x96q-v5-1 kernel: [10439.169329]  __arm64_sys_sendmsg+0x24/0x30
+2026-10-14T22:28:30.397695+03:00 x96q-v5-1 kernel: [10439.173422]  invoke_syscall+0x48/0x118
+2026-10-14T22:28:30.397700+03:00 x96q-v5-1 kernel: [10439.177173]  el0_svc_common.constprop.0+0x40/0xe8
+2026-10-14T22:28:30.397706+03:00 x96q-v5-1 kernel: [10439.181874]  do_el0_svc+0x20/0x2c
+2026-10-14T22:28:30.397712+03:00 x96q-v5-1 kernel: [10439.185188]  el0_svc+0x40/0xf4
+2026-10-14T22:28:30.397717+03:00 x96q-v5-1 kernel: [10439.188243]  el0t_64_sync_handler+0x13c/0x158
+2026-10-14T22:28:30.397723+03:00 x96q-v5-1 kernel: [10439.192597]  el0t_64_sync+0x190/0x194
+2026-10-14T22:28:30.397728+03:00 x96q-v5-1 kernel: [10439.196258] ---[ end trace 0000000000000000 ]---
+2026-10-14T22:28:30.397734+03:00 x96q-v5-1 kernel: [10439.200930] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:28:30.407575+03:00 x96q-v5-1 kernel: [10439.205688] ieee80211 phy0: wsm_set_tx_queue_params failed!
+2026-10-14T22:28:30.407639+03:00 x96q-v5-1 kernel: [10439.211290] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:28:30.417941+03:00 x96q-v5-1 kernel: [10439.216042] ieee80211 phy0: wsm_set_tx_queue_params failed!
+2026-10-14T22:28:30.418005+03:00 x96q-v5-1 kernel: [10439.221636] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:28:30.428260+03:00 x96q-v5-1 kernel: [10439.226377] ieee80211 phy0: wsm_set_tx_queue_params failed!
+2026-10-14T22:28:30.428321+03:00 x96q-v5-1 kernel: [10439.231971] ieee80211 phy0: vif 0, configuring tx
+2026-10-14T22:28:30.438584+03:00 x96q-v5-1 kernel: [10439.236716] ieee80211 phy0: wsm_set_tx_queue_params failed!
+2026-10-14T22:28:36.429633+03:00 x96q-v5-1 systemd[1]: NetworkManager-dispatcher.service: Deactivated successfully.
+2026-10-14T22:28:51.250211+03:00 x96q-v5-1 NetworkManager[492]: <warn>  [1792006131.2473] device (wlan0): Activation: (wifi) Hotspot network creation took too long, failing activation
+2026-10-14T22:28:51.251082+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006131.2476] device (wlan0): state change: config -> failed (reason 'supplicant-timeout', sys-iface-state: 'managed')
+2026-10-14T22:28:51.253561+03:00 x96q-v5-1 NetworkManager[492]: <warn>  [1792006131.2525] device (wlan0): Activation: failed for connection 'KARAOKE_SYSTEM'
+2026-10-14T22:28:51.255855+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006131.2546] device (wlan0): state change: failed -> disconnected (reason 'none', sys-iface-state: 'managed')
+2026-10-14T22:28:51.288988+03:00 x96q-v5-1 kernel: [10460.084932] ieee80211 phy0: !!! vif_id=0
+2026-10-14T22:29:51.531921+03:00 x96q-v5-1 kernel: [10520.100907] rcu: INFO: rcu_sched self-detected stall on CPU
+2026-10-14T22:29:51.531997+03:00 x96q-v5-1 kernel: [10520.106503] rcu:  2-....: (14999 ticks this GP) idle=249c/1/0x4000000000000000 softirq=437839/437839 fqs=7500
+2026-10-14T22:29:51.532005+03:00 x96q-v5-1 kernel: [10520.116409] rcu:  (t=15000 jiffies g=826053 q=5578 ncpus=4)
+2026-10-14T22:29:51.532011+03:00 x96q-v5-1 kernel: [10520.121980] CPU: 2 PID: 492 Comm: NetworkManager Tainted: G      D WC         6.6.44-current-sunxi64 #2
+2026-10-14T22:29:51.532019+03:00 x96q-v5-1 kernel: [10520.131360] Hardware name: hechuang,x96-q DDR3L v5.1 (DT)
+2026-10-14T22:29:51.532026+03:00 x96q-v5-1 kernel: [10520.136750] pstate: 00000005 (nzcv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+2026-10-14T22:29:51.532033+03:00 x96q-v5-1 kernel: [10520.143704] pc : queued_spin_lock_slowpath+0x50/0x328
+2026-10-14T22:29:51.532038+03:00 x96q-v5-1 kernel: [10520.148764] lr : xradio_remove_interface+0x464/0x47c [xradio_wlan]
+2026-10-14T22:29:51.532044+03:00 x96q-v5-1 kernel: [10520.154959] sp : ffff8000827633b0
+2026-10-14T22:29:51.532130+03:00 x96q-v5-1 kernel: [10520.158269] x29: ffff8000827633b0 x28: ffff00000488a098 x27: 0000000000000798
+2026-10-14T22:29:51.532145+03:00 x96q-v5-1 kernel: [10520.165402] x26: ffff00000744a2d0 x25: ffff00000744a1f8 x24: ffff00000744a120
+2026-10-14T22:29:51.532151+03:00 x96q-v5-1 kernel: [10520.172533] x23: ffff00000744a048 x22: ffff00000744a440 x21: ffff00000744a790
+2026-10-14T22:29:51.532157+03:00 x96q-v5-1 kernel: [10520.179664] x20: ffff000004889c70 x19: ffff00000744a040 x18: ffffffffffffffff
+2026-10-14T22:29:51.532163+03:00 x96q-v5-1 kernel: [10520.186795] x17: 0000000000000000 x16: 0000000000000000 x15: ffff800102762f77
+2026-10-14T22:29:51.532169+03:00 x96q-v5-1 kernel: [10520.193925] x14: 0000000000000000 x13: 00000000000004fd x12: 00000000ffffffea
+2026-10-14T22:29:51.532175+03:00 x96q-v5-1 kernel: [10520.201056] x11: 00000000ffffefff x10: 00000000ffffefff x9 : ffff800081567ba8
+2026-10-14T22:29:51.532180+03:00 x96q-v5-1 kernel: [10520.208186] x8 : ffff00007fb8df80 x7 : 0000000000000000 x6 : 0000000000000001
+2026-10-14T22:29:51.532186+03:00 x96q-v5-1 kernel: [10520.215317] x5 : ffff00000744a424 x4 : 0000000000000001 x3 : 0000000000000000
+2026-10-14T22:29:51.532192+03:00 x96q-v5-1 kernel: [10520.222447] x2 : 0000000000000000 x1 : 0000000000000001 x0 : ffff00000744a424
+2026-10-14T22:29:51.532198+03:00 x96q-v5-1 kernel: [10520.229579] Call trace:
+2026-10-14T22:29:51.532204+03:00 x96q-v5-1 kernel: [10520.232022]  queued_spin_lock_slowpath+0x50/0x328
+2026-10-14T22:29:51.532209+03:00 x96q-v5-1 kernel: [10520.236733]  drv_remove_interface+0x44/0xb4 [mac80211]
+2026-10-14T22:29:51.532215+03:00 x96q-v5-1 kernel: [10520.241938]  ieee80211_do_stop+0x68c/0x9a4 [mac80211]
+2026-10-14T22:29:51.532221+03:00 x96q-v5-1 kernel: [10520.247027]  ieee80211_stop+0x4c/0x188 [mac80211]
+2026-10-14T22:29:51.532226+03:00 x96q-v5-1 kernel: [10520.251770]  __dev_close_many+0xb4/0x15c
+2026-10-14T22:29:51.532232+03:00 x96q-v5-1 kernel: [10520.255697]  __dev_change_flags+0xf8/0x2b8
+2026-10-14T22:29:51.532237+03:00 x96q-v5-1 kernel: [10520.259789]  dev_change_flags+0x24/0x6c
+2026-10-14T22:29:51.532242+03:00 x96q-v5-1 kernel: [10520.263622]  do_setlink+0x220/0xe20
+2026-10-14T22:29:51.532248+03:00 x96q-v5-1 kernel: [10520.267108]  __rtnl_newlink+0x494/0x8c0
+2026-10-14T22:29:51.532254+03:00 x96q-v5-1 kernel: [10520.270941]  rtnl_newlink+0x50/0x7c
+2026-10-14T22:29:51.532261+03:00 x96q-v5-1 kernel: [10520.274425]  rtnetlink_rcv_msg+0x2b0/0x384
+2026-10-14T22:29:51.532266+03:00 x96q-v5-1 kernel: [10520.278524]  netlink_rcv_skb+0x5c/0x128
+2026-10-14T22:29:51.532272+03:00 x96q-v5-1 kernel: [10520.282358]  rtnetlink_rcv+0x18/0x24
+2026-10-14T22:29:51.532277+03:00 x96q-v5-1 kernel: [10520.285933]  netlink_unicast+0x2c0/0x328
+2026-10-14T22:29:51.532283+03:00 x96q-v5-1 kernel: [10520.289852]  netlink_sendmsg+0x1d4/0x440
+2026-10-14T22:29:51.532289+03:00 x96q-v5-1 kernel: [10520.293772]  __sock_sendmsg+0x54/0x60
+2026-10-14T22:29:51.532294+03:00 x96q-v5-1 kernel: [10520.297432]  ____sys_sendmsg+0x27c/0x2e0
+2026-10-14T22:29:51.532300+03:00 x96q-v5-1 kernel: [10520.301351]  ___sys_sendmsg+0x80/0xdc
+2026-10-14T22:32:51.763977+03:00 x96q-v5-1 kernel: [10700.354842] CPU: 2 PID: 492 Comm: NetworkManager Tainted: G      D WC         6.6.44-current-sunxi64 #2
+2026-10-14T22:32:51.764004+03:00 x96q-v5-1 kernel: [10700.381625] lr : xradio_remove_interface+0x464/0x47c [xradio_wlan]
+2026-10-14T22:33:19.677198+03:00 x96q-v5-1 kernel: [10728.481934] task:NetworkManager  state:R  running task     stack:0     pid:492   ppid:1      flags:0x0000000e
+root@x96q-v5-1:~#

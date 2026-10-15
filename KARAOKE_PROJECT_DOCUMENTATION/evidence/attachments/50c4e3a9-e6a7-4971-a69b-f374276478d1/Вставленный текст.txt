@@ -1,0 +1,122 @@
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~# LC_ALL=C grep -a -n -E 'KARAOKE_SYSTEM|karaoke-ap-test-rollback' \
+  /var/log/syslog | tail -60 | tr -d '\000'
+
+iw reg get
+
+iw phy phy0 info |
+  grep -A 18 'Frequencies:'
+
+dpkg-query -W wireless-regdb 2>/dev/null
+dpkg -V wireless-regdb 2>/dev/null
+
+ls -l /lib/firmware/regulatory.db* \
+  /usr/lib/firmware/regulatory.db* 2>/dev/null
+880384:2026-10-13T18:31:37.114394+03:00 x96q-v5-1 NetworkManager[1601]: <info>  [1791905497.1074] device (wlan0): Activation: (wifi) Stage 2 of 5 (Device Configure) successful. Started Wi-Fi Hotspot "KARAOKE_SYSTEM"
+880417:2026-10-13T18:35:25.563067+03:00 x96q-v5-1 NetworkManager[1601]: <info>  [1791905725.5625] audit: op="connection-deactivate" uuid="28752177-7ad8-44ec-9a38-0e32a29d42a7" name="KARAOKE_SYSTEM" pid=61166 uid=0 result="success"
+880632:2026-10-13T18:39:19.549062+03:00 x96q-v5-1 NetworkManager[1601]: <info>  [1791905959.5477] audit: op="connection-activate" uuid="28752177-7ad8-44ec-9a38-0e32a29d42a7" name="KARAOKE_SYSTEM" pid=78160 uid=0 result="success"
+880656:2026-10-13T18:39:19.839278+03:00 x96q-v5-1 NetworkManager[1601]: <info>  [1791905959.8376] device (wlan0): Activation: starting connection 'KARAOKE_SYSTEM' (28752177-7ad8-44ec-9a38-0e32a29d42a7)
+880660:2026-10-13T18:39:19.862139+03:00 x96q-v5-1 NetworkManager[1601]: <info>  [1791905959.8615] device (wlan0): Activation: (wifi) access point 'KARAOKE_SYSTEM' has security, but secrets are required.
+880669:2026-10-13T18:39:19.899164+03:00 x96q-v5-1 NetworkManager[1601]: <info>  [1791905959.8943] device (wlan0): Activation: (wifi) connection 'KARAOKE_SYSTEM' has security, and secrets exist.  No new secrets needed.
+880670:2026-10-13T18:39:19.900459+03:00 x96q-v5-1 NetworkManager[1601]: <info>  [1791905959.8948] Config: added 'ssid' value 'KARAOKE_SYSTEM'
+880869:2026-10-13T18:39:45.271346+03:00 x96q-v5-1 NetworkManager[1601]: <warn>  [1791905985.2691] device (wlan0): Activation: failed for connection 'KARAOKE_SYSTEM'
+882493:2026-10-13T18:49:33.281270+03:00 x96q-v5-1 NetworkManager[1668]: <info>  [1791906573.2807] audit: op="connection-update" uuid="28752177-7ad8-44ec-9a38-0e32a29d42a7" name="KARAOKE_SYSTEM" args="connection.timestamp" pid=20020 uid=0 result="success"
+882496:2026-10-13T18:51:34.966323+03:00 x96q-v5-1 NetworkManager[1668]: <info>  [1791906694.9631] audit: op="connection-update" uuid="28752177-7ad8-44ec-9a38-0e32a29d42a7" name="KARAOKE_SYSTEM" args="802-11-wireless.ap-isolation" pid=28373 uid=0 result="success"
+882506:2026-10-13T18:53:27.499414+03:00 x96q-v5-1 NetworkManager[1668]: <info>  [1791906807.4980] audit: op="connection-activate" uuid="28752177-7ad8-44ec-9a38-0e32a29d42a7" name="KARAOKE_SYSTEM" pid=36058 uid=0 result="success"
+882530:2026-10-13T18:53:27.760040+03:00 x96q-v5-1 NetworkManager[1668]: <info>  [1791906807.7593] device (wlan0): Activation: starting connection 'KARAOKE_SYSTEM' (28752177-7ad8-44ec-9a38-0e32a29d42a7)
+882534:2026-10-13T18:53:27.785945+03:00 x96q-v5-1 NetworkManager[1668]: <info>  [1791906807.7829] device (wlan0): Activation: (wifi) access point 'KARAOKE_SYSTEM' has security, but secrets are required.
+882538:2026-10-13T18:53:27.801745+03:00 x96q-v5-1 NetworkManager[1668]: <info>  [1791906807.8003] device (wlan0): Activation: (wifi) connection 'KARAOKE_SYSTEM' has security, and secrets exist.  No new secrets needed.
+882539:2026-10-13T18:53:27.803145+03:00 x96q-v5-1 NetworkManager[1668]: <info>  [1791906807.8008] Config: added 'ssid' value 'KARAOKE_SYSTEM'
+882568:2026-10-13T18:53:28.943797+03:00 x96q-v5-1 NetworkManager[1668]: <info>  [1791906808.9399] device (wlan0): Activation: (wifi) Stage 2 of 5 (Device Configure) successful. Started Wi-Fi Hotspot "KARAOKE_SYSTEM"
+882597:2026-10-13T18:54:27.507360+03:00 x96q-v5-1 NetworkManager[1668]: <info>  [1791906867.5068] audit: op="connection-deactivate" uuid="28752177-7ad8-44ec-9a38-0e32a29d42a7" name="KARAOKE_SYSTEM" pid=40201 uid=0 result="success"
+883723:2026-10-13T20:09:22.889501+03:00 x96q-v5-1 NetworkManager[494]: <info>  [1791911362.8889] audit: op="connection-activate" uuid="28752177-7ad8-44ec-9a38-0e32a29d42a7" name="KARAOKE_SYSTEM" pid=4693 uid=0 result="success"
+883747:2026-10-13T20:09:23.153330+03:00 x96q-v5-1 NetworkManager[494]: <info>  [1791911363.1519] device (wlan0): Activation: starting connection 'KARAOKE_SYSTEM' (28752177-7ad8-44ec-9a38-0e32a29d42a7)
+883751:2026-10-13T20:09:23.168623+03:00 x96q-v5-1 NetworkManager[494]: <info>  [1791911363.1668] device (wlan0): Activation: (wifi) access point 'KARAOKE_SYSTEM' has security, but secrets are required.
+883755:2026-10-13T20:09:23.190978+03:00 x96q-v5-1 NetworkManager[494]: <info>  [1791911363.1896] device (wlan0): Activation: (wifi) connection 'KARAOKE_SYSTEM' has security, and secrets exist.  No new secrets needed.
+883756:2026-10-13T20:09:23.191487+03:00 x96q-v5-1 NetworkManager[494]: <info>  [1791911363.1899] Config: added 'ssid' value 'KARAOKE_SYSTEM'
+883786:2026-10-13T20:09:24.311193+03:00 x96q-v5-1 NetworkManager[494]: <info>  [1791911364.3048] device (wlan0): Activation: (wifi) Stage 2 of 5 (Device Configure) successful. Started Wi-Fi Hotspot "KARAOKE_SYSTEM"
+883935:2026-10-13T20:15:32.897606+03:00 x96q-v5-1 NetworkManager[494]: <info>  [1791911732.8970] audit: op="connection-activate" uuid="28752177-7ad8-44ec-9a38-0e32a29d42a7" name="KARAOKE_SYSTEM" pid=6327 uid=0 result="success"
+883959:2026-10-13T20:15:33.182897+03:00 x96q-v5-1 NetworkManager[494]: <info>  [1791911733.1803] device (wlan0): Activation: starting connection 'KARAOKE_SYSTEM' (28752177-7ad8-44ec-9a38-0e32a29d42a7)
+883963:2026-10-13T20:15:33.211003+03:00 x96q-v5-1 NetworkManager[494]: <info>  [1791911733.2101] device (wlan0): Activation: (wifi) access point 'KARAOKE_SYSTEM' has security, but secrets are required.
+883969:2026-10-13T20:15:33.235455+03:00 x96q-v5-1 NetworkManager[494]: <info>  [1791911733.2297] device (wlan0): Activation: (wifi) connection 'KARAOKE_SYSTEM' has security, and secrets exist.  No new secrets needed.
+883971:2026-10-13T20:15:33.236376+03:00 x96q-v5-1 NetworkManager[494]: <info>  [1791911733.2301] Config: added 'ssid' value 'KARAOKE_SYSTEM'
+884173:2026-10-13T20:15:58.011932+03:00 x96q-v5-1 NetworkManager[494]: <warn>  [1791911758.0113] device (wlan0): Activation: failed for connection 'KARAOKE_SYSTEM'
+885107:2026-10-13T20:18:41.358256+03:00 x96q-v5-1 NetworkManager[478]: <info>  [1791911921.3561] audit: op="connection-activate" uuid="28752177-7ad8-44ec-9a38-0e32a29d42a7" name="KARAOKE_SYSTEM" pid=1634 uid=0 result="success"
+885129:2026-10-13T20:18:41.629722+03:00 x96q-v5-1 NetworkManager[478]: <info>  [1791911921.6288] device (wlan0): Activation: starting connection 'KARAOKE_SYSTEM' (28752177-7ad8-44ec-9a38-0e32a29d42a7)
+885135:2026-10-13T20:18:41.661988+03:00 x96q-v5-1 NetworkManager[478]: <info>  [1791911921.6610] device (wlan0): Activation: (wifi) access point 'KARAOKE_SYSTEM' has security, but secrets are required.
+885139:2026-10-13T20:18:41.687101+03:00 x96q-v5-1 NetworkManager[478]: <info>  [1791911921.6820] device (wlan0): Activation: (wifi) connection 'KARAOKE_SYSTEM' has security, and secrets exist.  No new secrets needed.
+885140:2026-10-13T20:18:41.688306+03:00 x96q-v5-1 NetworkManager[478]: <info>  [1791911921.6824] Config: added 'ssid' value 'KARAOKE_SYSTEM'
+885170:2026-10-13T20:18:42.810132+03:00 x96q-v5-1 NetworkManager[478]: <info>  [1791911922.8083] device (wlan0): Activation: (wifi) Stage 2 of 5 (Device Configure) successful. Started Wi-Fi Hotspot "KARAOKE_SYSTEM"
+886321:2026-10-13T20:24:01.712195+03:00 x96q-v5-1 NetworkManager[491]: <info>  [1791912241.7100] audit: op="connection-activate" uuid="28752177-7ad8-44ec-9a38-0e32a29d42a7" name="KARAOKE_SYSTEM" pid=1669 uid=0 result="success"
+886345:2026-10-13T20:24:02.024041+03:00 x96q-v5-1 NetworkManager[491]: <info>  [1791912242.0230] device (wlan0): Activation: starting connection 'KARAOKE_SYSTEM' (28752177-7ad8-44ec-9a38-0e32a29d42a7)
+886349:2026-10-13T20:24:02.051814+03:00 x96q-v5-1 NetworkManager[491]: <info>  [1791912242.0474] device (wlan0): Activation: (wifi) access point 'KARAOKE_SYSTEM' has security, but secrets are required.
+886353:2026-10-13T20:24:02.087270+03:00 x96q-v5-1 NetworkManager[491]: <info>  [1791912242.0834] device (wlan0): Activation: (wifi) connection 'KARAOKE_SYSTEM' has security, and secrets exist.  No new secrets needed.
+886355:2026-10-13T20:24:02.089510+03:00 x96q-v5-1 NetworkManager[491]: <info>  [1791912242.0839] Config: added 'ssid' value 'KARAOKE_SYSTEM'
+886384:2026-10-13T20:24:03.243751+03:00 x96q-v5-1 NetworkManager[491]: <info>  [1791912243.2375] device (wlan0): Activation: (wifi) Stage 2 of 5 (Device Configure) successful. Started Wi-Fi Hotspot "KARAOKE_SYSTEM"
+886536:2026-10-13T20:29:39.800539+03:00 x96q-v5-1 NetworkManager[491]: <info>  [1791912579.7990] audit: op="connection-activate" uuid="28752177-7ad8-44ec-9a38-0e32a29d42a7" name="KARAOKE_SYSTEM" pid=3189 uid=0 result="success"
+886558:2026-10-13T20:29:40.081345+03:00 x96q-v5-1 NetworkManager[491]: <info>  [1791912580.0786] device (wlan0): Activation: starting connection 'KARAOKE_SYSTEM' (28752177-7ad8-44ec-9a38-0e32a29d42a7)
+886564:2026-10-13T20:29:40.117162+03:00 x96q-v5-1 NetworkManager[491]: <info>  [1791912580.1130] device (wlan0): Activation: (wifi) access point 'KARAOKE_SYSTEM' has security, but secrets are required.
+886573:2026-10-13T20:29:40.133770+03:00 x96q-v5-1 NetworkManager[491]: <info>  [1791912580.1333] device (wlan0): Activation: (wifi) connection 'KARAOKE_SYSTEM' has security, and secrets exist.  No new secrets needed.
+886574:2026-10-13T20:29:40.134289+03:00 x96q-v5-1 NetworkManager[491]: <info>  [1791912580.1336] Config: added 'ssid' value 'KARAOKE_SYSTEM'
+886775:2026-10-13T20:30:05.289376+03:00 x96q-v5-1 NetworkManager[491]: <warn>  [1791912605.2858] device (wlan0): Activation: failed for connection 'KARAOKE_SYSTEM'
+887718:2026-10-13T20:35:54.686372+03:00 x96q-v5-1 NetworkManager[486]: <info>  [1791912954.6859] audit: op="connection-activate" uuid="28752177-7ad8-44ec-9a38-0e32a29d42a7" name="KARAOKE_SYSTEM" pid=1987 uid=0 result="success"
+887742:2026-10-13T20:35:54.969970+03:00 x96q-v5-1 NetworkManager[486]: <info>  [1791912954.9686] device (wlan0): Activation: starting connection 'KARAOKE_SYSTEM' (28752177-7ad8-44ec-9a38-0e32a29d42a7)
+887746:2026-10-13T20:35:54.992157+03:00 x96q-v5-1 NetworkManager[486]: <info>  [1791912954.9902] device (wlan0): Activation: (wifi) access point 'KARAOKE_SYSTEM' has security, but secrets are required.
+887750:2026-10-13T20:35:55.010888+03:00 x96q-v5-1 NetworkManager[486]: <info>  [1791912955.0103] device (wlan0): Activation: (wifi) connection 'KARAOKE_SYSTEM' has security, and secrets exist.  No new secrets needed.
+887751:2026-10-13T20:35:55.012621+03:00 x96q-v5-1 NetworkManager[486]: <info>  [1791912955.0120] Config: added 'ssid' value 'KARAOKE_SYSTEM'
+887955:2026-10-13T20:36:20.683483+03:00 x96q-v5-1 NetworkManager[486]: <warn>  [1791912980.6822] device (wlan0): Activation: failed for connection 'KARAOKE_SYSTEM'
+901408:2026-10-14T22:28:25.869484+03:00 x96q-v5-1 systemd[1]: Started karaoke-ap-test-rollback.timer - /usr/bin/nmcli --wait 30 connection up uuid 64825e49-6414-46eb-86e4-e0bc1c1e2145 ifname wlan0.
+901412:2026-10-14T22:28:26.011469+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.0103] audit: op="connection-activate" uuid="28752177-7ad8-44ec-9a38-0e32a29d42a7" name="KARAOKE_SYSTEM" pid=33915 uid=0 result="success"
+901432:2026-10-14T22:28:26.316062+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3153] device (wlan0): Activation: starting connection 'KARAOKE_SYSTEM' (28752177-7ad8-44ec-9a38-0e32a29d42a7)
+901437:2026-10-14T22:28:26.336613+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3350] device (wlan0): Activation: (wifi) access point 'KARAOKE_SYSTEM' has security, but secrets are required.
+901441:2026-10-14T22:28:26.354370+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3538] device (wlan0): Activation: (wifi) connection 'KARAOKE_SYSTEM' has security, and secrets exist.  No new secrets needed.
+901442:2026-10-14T22:28:26.360008+03:00 x96q-v5-1 NetworkManager[492]: <info>  [1792006106.3543] Config: added 'ssid' value 'KARAOKE_SYSTEM'
+901640:2026-10-14T22:28:51.253561+03:00 x96q-v5-1 NetworkManager[492]: <warn>  [1792006131.2525] device (wlan0): Activation: failed for connection 'KARAOKE_SYSTEM'
+global
+country 00: DFS-UNSET
+        (2402 - 2472 @ 40), (6, 20), (N/A)
+        (2457 - 2482 @ 20), (6, 20), (N/A), AUTO-BW, PASSIVE-SCAN
+        (2474 - 2494 @ 20), (6, 20), (N/A), NO-OFDM, PASSIVE-SCAN
+        (5170 - 5250 @ 80), (6, 20), (N/A), AUTO-BW, PASSIVE-SCAN
+        (5250 - 5330 @ 80), (6, 20), (0 ms), DFS, AUTO-BW, PASSIVE-SCAN
+        (5490 - 5730 @ 160), (6, 20), (0 ms), DFS, PASSIVE-SCAN
+        (5735 - 5835 @ 80), (6, 20), (N/A), PASSIVE-SCAN
+        (57240 - 63720 @ 2160), (N/A, 0), (N/A)
+
+                Frequencies:
+                        * 2412 MHz [1] (20.0 dBm)
+                        * 2417 MHz [2] (20.0 dBm)
+                        * 2422 MHz [3] (20.0 dBm)
+                        * 2427 MHz [4] (20.0 dBm)
+                        * 2432 MHz [5] (20.0 dBm)
+                        * 2437 MHz [6] (20.0 dBm)
+                        * 2442 MHz [7] (20.0 dBm)
+                        * 2447 MHz [8] (20.0 dBm)
+                        * 2452 MHz [9] (20.0 dBm)
+                        * 2457 MHz [10] (20.0 dBm)
+                        * 2462 MHz [11] (20.0 dBm)
+                        * 2467 MHz [12] (20.0 dBm)
+                        * 2472 MHz [13] (20.0 dBm)
+                        * 2484 MHz [14] (20.0 dBm) (no IR)
+        Supported commands:
+                 * new_interface
+                 * set_interface
+                 * new_key
+wireless-regdb  2022.06.06-1
+lrwxrwxrwx 1 root root   31 Jul 30  2022 /lib/firmware/regulatory.db -> /etc/alternatives/regulatory.db
+-rw-r--r-- 1 root root 4492 Jul 30  2022 /lib/firmware/regulatory.db-debian
+lrwxrwxrwx 1 root root   35 Jul 30  2022 /lib/firmware/regulatory.db.p7s -> /etc/alternatives/regulatory.db.p7s
+-rw-r--r-- 1 root root 1225 Jul 30  2022 /lib/firmware/regulatory.db.p7s-debian
+-rw-r--r-- 1 root root 1182 Jul 30  2022 /lib/firmware/regulatory.db.p7s-upstream
+-rw-r--r-- 1 root root 4492 Jul 30  2022 /lib/firmware/regulatory.db-upstream
+lrwxrwxrwx 1 root root   31 Jul 30  2022 /usr/lib/firmware/regulatory.db -> /etc/alternatives/regulatory.db
+-rw-r--r-- 1 root root 4492 Jul 30  2022 /usr/lib/firmware/regulatory.db-debian
+lrwxrwxrwx 1 root root   35 Jul 30  2022 /usr/lib/firmware/regulatory.db.p7s -> /etc/alternatives/regulatory.db.p7s
+-rw-r--r-- 1 root root 1225 Jul 30  2022 /usr/lib/firmware/regulatory.db.p7s-debian
+-rw-r--r-- 1 root root 1182 Jul 30  2022 /usr/lib/firmware/regulatory.db.p7s-upstream
+-rw-r--r-- 1 root root 4492 Jul 30  2022 /usr/lib/firmware/regulatory.db-upstream
+root@x96q-v5-1:~#

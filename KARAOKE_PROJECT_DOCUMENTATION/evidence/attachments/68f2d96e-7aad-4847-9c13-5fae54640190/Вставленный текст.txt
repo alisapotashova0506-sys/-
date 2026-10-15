@@ -1,0 +1,115 @@
+
+00:56:40.683342 12:00:da:9f:06:55 > 32:d1:86:ee:6a:2d, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:40.883334 32:d1:86:ee:6a:2d > 12:00:da:9f:06:55, ethertype IPv4 (0x0800), length 54: (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.100.167.59216 > 192.168.100.1.8080: Flags [R], cksum 0x0851 (correct), seq 4027803297, win 0, length 0
+00:56:41.707343 12:00:da:9f:06:55 > 32:d1:86:ee:6a:2d, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:42.731345 12:00:da:9f:06:55 > 32:d1:86:ee:6a:2d, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:43.788864 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:44.811352 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:45.835362 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:46.876646 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:47.883354 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:48.907353 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:49.949153 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:50.113750 32:d1:86:ee:6a:2d > 12:00:da:9f:06:55, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 64, id 52383, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.100.167.57512 > 192.168.100.1.8080: Flags [S], cksum 0x5940 (correct), seq 2504728793, win 65535, options [mss 1460,sackOK,TS val 1101769914 ecr 0,nop,wscale 10], length 0
+00:56:50.132835 32:d1:86:ee:6a:2d > 12:00:da:9f:06:55, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 64, id 37299, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.100.167.57526 > 192.168.100.1.8080: Flags [S], cksum 0x8c25 (correct), seq 542991042, win 65535, options [mss 1460,sackOK,TS val 1101769932 ecr 0,nop,wscale 10], length 0
+00:56:50.955378 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:51.148392 32:d1:86:ee:6a:2d > 12:00:da:9f:06:55, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 64, id 37300, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.100.167.57526 > 192.168.100.1.8080: Flags [S], cksum 0x882f (correct), seq 542991042, win 65535, options [mss 1460,sackOK,TS val 1101770946 ecr 0,nop,wscale 10], length 0
+00:56:51.148681 32:d1:86:ee:6a:2d > 12:00:da:9f:06:55, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 64, id 52384, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.100.167.57512 > 192.168.100.1.8080: Flags [S], cksum 0x5538 (correct), seq 2504728793, win 65535, options [mss 1460,sackOK,TS val 1101770946 ecr 0,nop,wscale 10], length 0
+00:56:51.979350 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:53.042424 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:53.097416 32:d1:86:ee:6a:2d > 12:00:da:9f:06:55, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 64, id 54916, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.100.167.57528 > 192.168.100.1.8080: Flags [S], cksum 0x79f4 (correct), seq 1470968330, win 65535, options [mss 1460,sackOK,TS val 1101772899 ecr 0,nop,wscale 10], length 0
+00:56:53.162789 32:d1:86:ee:6a:2d > 12:00:da:9f:06:55, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 64, id 52385, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.100.167.57512 > 192.168.100.1.8080: Flags [S], cksum 0x4d58 (correct), seq 2504728793, win 65535, options [mss 1460,sackOK,TS val 1101772962 ecr 0,nop,wscale 10], length 0
+00:56:53.166178 32:d1:86:ee:6a:2d > 12:00:da:9f:06:55, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 64, id 37301, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.100.167.57526 > 192.168.100.1.8080: Flags [S], cksum 0x804b (correct), seq 542991042, win 65535, options [mss 1460,sackOK,TS val 1101772966 ecr 0,nop,wscale 10], length 0
+00:56:54.059354 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:54.128873 32:d1:86:ee:6a:2d > 12:00:da:9f:06:55, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 64, id 54917, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.100.167.57528 > 192.168.100.1.8080: Flags [S], cksum 0x75f5 (correct), seq 1470968330, win 65535, options [mss 1460,sackOK,TS val 1101773922 ecr 0,nop,wscale 10], length 0
+00:56:55.083352 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:56.148468 32:d1:86:ee:6a:2d > 12:00:da:9f:06:55, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 64, id 54918, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.100.167.57528 > 192.168.100.1.8080: Flags [S], cksum 0x6e11 (correct), seq 1470968330, win 65535, options [mss 1460,sackOK,TS val 1101775942 ecr 0,nop,wscale 10], length 0
+00:56:56.148733 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:57.163354 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:57.196298 32:d1:86:ee:6a:2d > 12:00:da:9f:06:55, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 64, id 37302, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.100.167.57526 > 192.168.100.1.8080: Flags [S], cksum 0x708f (correct), seq 542991042, win 65535, options [mss 1460,sackOK,TS val 1101776994 ecr 0,nop,wscale 10], length 0
+00:56:57.196627 32:d1:86:ee:6a:2d > 12:00:da:9f:06:55, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 64, id 52386, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.100.167.57512 > 192.168.100.1.8080: Flags [S], cksum 0x3d98 (correct), seq 2504728793, win 65535, options [mss 1460,sackOK,TS val 1101776994 ecr 0,nop,wscale 10], length 0
+00:56:58.187363 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:56:59.219689 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:57:00.235345 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:57:00.324960 32:d1:86:ee:6a:2d > 12:00:da:9f:06:55, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 64, id 54919, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.100.167.57528 > 192.168.100.1.8080: Flags [S], cksum 0x5df5 (correct), seq 1470968330, win 65535, options [mss 1460,sackOK,TS val 1101780066 ecr 0,nop,wscale 10], length 0
+00:57:01.259363 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:57:02.312351 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:57:03.339376 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:57:04.363335 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:57:05.409472 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:57:05.495336 32:d1:86:ee:6a:2d > 12:00:da:9f:06:55, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 64, id 52387, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.100.167.57512 > 192.168.100.1.8080: Flags [S], cksum 0x1d98 (correct), seq 2504728793, win 65535, options [mss 1460,sackOK,TS val 1101785186 ecr 0,nop,wscale 10], length 0
+00:57:05.495582 32:d1:86:ee:6a:2d > 12:00:da:9f:06:55, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 64, id 37303, offset 0, flags [DF], proto TCP (6), length 60)
+    192.168.100.167.57526 > 192.168.100.1.8080: Flags [S], cksum 0x508b (correct), seq 542991042, win 65535, options [mss 1460,sackOK,TS val 1101785190 ecr 0,nop,wscale 10], length 0
+00:57:06.411368 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:57:07.435353 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:57:08.478205 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:57:09.483366 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:57:10.507358 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:57:11.551227 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:57:12.555354 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:57:13.579364 12:00:da:9f:06:55 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.100.167 tell 192.168.100.1, length 28
+00:57:13.973944 32:d1:86:ee:6a:2d > ff:ff:ff:ff:ff:ff, ethertype IPv4 (0x0800), length 360: (tos 0x10, ttl 64, id 0, offset 0, flags [DF], proto UDP (17), length 346)
+    0.0.0.0.68 > 255.255.255.255.67: [udp sum ok] BOOTP/DHCP, Request from 32:d1:86:ee:6a:2d, length 318, xid 0x1f359f2c, Flags [none] (0x0000)
+          Client-Ethernet-Address 32:d1:86:ee:6a:2d
+          Vendor-rfc1048 Extensions
+            Magic Cookie 0x63825363
+            DHCP-Message (53), length 1: Request
+            Client-ID (61), length 7: ether 32:d1:86:ee:6a:2d
+            Requested-IP (50), length 4: 192.168.100.167
+            MSZ (57), length 2: 1500
+            Vendor-Class (60), length 15: "android-dhcp-15"
+            Hostname (12), length 22: "S21-pol-zovatela-Roman"
+            Parameter-Request (55), length 12:
+              Subnet-Mask (1), Default-Gateway (3), Domain-Name-Server (6), Domain-Name (15)
+              MTU (26), BR (28), Lease-Time (51), RN (58)
+              RB (59), Vendor-Option (43), URL (114), Unknown (108)
+00:57:13.974039 32:d1:86:ee:6a:2d > ff:ff:ff:ff:ff:ff, ethertype IPv4 (0x0800), length 360: (tos 0x10, ttl 64, id 0, offset 0, flags [DF], proto UDP (17), length 346)
+    0.0.0.0.68 > 255.255.255.255.67: [udp sum ok] BOOTP/DHCP, Request from 32:d1:86:ee:6a:2d, length 318, xid 0x1f359f2c, Flags [none] (0x0000)
+          Client-Ethernet-Address 32:d1:86:ee:6a:2d
+          Vendor-rfc1048 Extensions
+            Magic Cookie 0x63825363
+            DHCP-Message (53), length 1: Request
+            Client-ID (61), length 7: ether 32:d1:86:ee:6a:2d
+            Requested-IP (50), length 4: 192.168.100.167
+            MSZ (57), length 2: 1500
+            Vendor-Class (60), length 15: "android-dhcp-15"
+            Hostname (12), length 22: "S21-pol-zovatela-Roman"
+            Parameter-Request (55), length 12:
+              Subnet-Mask (1), Default-Gateway (3), Domain-Name-Server (6), Domain-Name (15)
+              MTU (26), BR (28), Lease-Time (51), RN (58)
+              RB (59), Vendor-Option (43), URL (114), Unknown (108)
+00:57:13.983535 12:00:da:9f:06:55 > 32:d1:86:ee:6a:2d, ethertype IPv4 (0x0800), length 342: (tos 0xc0, ttl 64, id 20258, offset 0, flags [none], proto UDP (17), length 328)
+    192.168.100.1.67 > 192.168.100.167.68: [udp sum ok] BOOTP/DHCP, Reply, length 300, xid 0x1f359f2c, Flags [none] (0x0000)
+          Your-IP 192.168.100.167
+          Server-IP 192.168.100.1
+          Client-Ethernet-Address 32:d1:86:ee:6a:2d
+          Vendor-rfc1048 Extensions
+            Magic Cookie 0x63825363
+            DHCP-Message (53), length 1: ACK
+            Server-ID (54), length 4: 192.168.100.1
+            Lease-Time (51), length 4: 3600
+            RN (58), length 4: 1800
+            RB (59), length 4: 3150
+            Subnet-Mask (1), length 4: 255.255.255.0
+            BR (28), length 4: 192.168.100.255
+            Default-Gateway (3), length 4: 192.168.100.1
+            Domain-Name-Server (6), length 4: 192.168.100.1
+
+52 packets captured
+52 packets received by filter
+0 packets dropped by kernel
+root@x96q-v5-1:~#

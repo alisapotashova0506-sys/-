@@ -1,0 +1,9 @@
+{
+  "date": "2026-10-15",
+  "doc_sections": 19,
+  "embedded_text_files": 186,
+  "binary_artifacts_not_embedded": 19,
+  "single_document_bytes": 3465141,
+  "source_policy": "Exact available source files copied; no device changes; no execution of app.py",
+  "device_status": "V5 confirmed; media-audio-v1 pending"
+}

@@ -1,0 +1,18 @@
+{
+  "version": 5,
+  "app_before": "e168e929236a770953bac8e15aef6288662dccbb5bf6935f237c3b4ab13af642",
+  "app_after": "8731353016f544c7f46cbf96e0d45dce7f6c52c1239d5777f92ff7f2abf441ba",
+  "new_files": {
+    "wifi/control_qr.py": "b3b494f70f7736e338cc3a7fe6ff462a03fe6ceb5585f43e643d0d03bf75ed0d",
+    "wifi/vendor/__init__.py": "900516405bc07c9d40391a187364f8e8a6846a00fcfe977cc89fd7563bc440fc",
+    "wifi/vendor/qrcode/LICENSE": "40dfb903c94ee3f789500131311186548ecba5cefd3557623d7700e2522ab994",
+    "wifi/vendor/qrcode/LUT.py": "b8d1b700e9415b4b07d1576304ac8c73bafb746b2d56b7a39c191d09de06c30c",
+    "wifi/vendor/qrcode/VENDORING.md": "b540814bb6a395ff5e875d16fc5a65c072a935ff94ea8c8345a7b1a33f6d7f2a",
+    "wifi/vendor/qrcode/__init__.py": "368200331f6a024be2383f1e8ad52c0b286e793b2aa479d58441cb709d3bf29c",
+    "wifi/vendor/qrcode/base.py": "411b0d5df1136226164b71e0875d46402908a949e1674a9cb04dd441298fb0b6",
+    "wifi/vendor/qrcode/constants.py": "5adb8124e498581142bc11ea819a89280a3bc299847aa5da69266d7437737bae",
+    "wifi/vendor/qrcode/exceptions.py": "1e5492524e69b513565e2211c0c968d30c3e07ea95b1337e6ef9209ec3756ec6",
+    "wifi/vendor/qrcode/main.py": "585def6e17fd8c01493a236ada7560eee87251d14e3e21ddf733a89125ef5f56",
+    "wifi/vendor/qrcode/util.py": "83f2816c011285c64322de01bf497e9669ab937ad759c3b776ec5e6a99eb7ed6"
+  }
+}

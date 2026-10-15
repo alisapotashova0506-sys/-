@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Оптимизация видеофайлов — Караоке</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 24px; color: #f1f5f9; background: #142035; font: 16px/1.5 sans-serif; }
+    main { max-width: 1080px; margin: auto; }
+    a { color: #8bceff; }
+    h1 { margin: 14px 0 10px; font-size: 30px; line-height: 1.2; }
+    h2 { margin: 0 0 14px; font-size: 23px; }
+    p { margin: 8px 0; }
+    button, input, select { font: inherit; }
+    button, .back { min-height: 44px; }
+    button { background: #2384c7; color: white; border: 1px solid transparent; border-radius: 8px; padding: 10px 16px; cursor: pointer; }
+    button:hover { background: #186ba4; }
+    button:disabled { opacity: .5; cursor: default; }
+    button.secondary { background: #334155; border-color: #718096; }
+    button.danger { background: #893c36; }
+    input[type="text"], select { padding: 10px; min-height: 44px; border-radius: 7px; border: 1px solid #64748b; background: #101a2c; color: white; width: 100%; }
+    input[type="checkbox"] { width: 20px; height: 20px; flex: 0 0 auto; margin: 3px 10px 0 0; }
+    input:disabled, select:disabled { opacity: .5; }
+    :focus { outline: 3px solid #fbbf24; outline-offset: 2px; }
+    .panel { background: #1e2e46; border: 1px solid #41516a; border-radius: 12px; padding: 20px; margin: 18px 0; }
+    .muted { color: #c0ccdb; }
+    .small { font-size: 14px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+    .notice { border-left: 4px solid #6cc4ff; padding-left: 12px; }
+    #error { color: #ffd4cc; background: #542c31; padding: 14px; border-radius: 8px; white-space: pre-wrap; }
+    #progress-wrap { height: 12px; border-radius: 8px; background: #0c1626; overflow: hidden; margin: 12px 0; }
+    #progress-fill { height: 100%; background: #4ca9ef; transition: width .3s; width: 0; }
+    #current, .filename, .file-detail, .review-item, #job-message, .result { overflow-wrap: anywhere; word-wrap: break-word; }
+    .filter { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+    .filter input[type="text"] { flex: 1; min-width: 210px; }
+    .check { display: flex; align-items: flex-start; cursor: pointer; margin: 10px 0; }
+    .file { border: 1px solid #53627a; border-radius: 10px; padding: 16px; margin: 12px 0; background: #17243b; }
+    .filename { font-size: 18px; font-weight: bold; margin: 0 0 7px; }
+    .file-detail { color: #b8c7dc; font-size: 14px; }
+    .issues { padding-left: 22px; color: #ffe1a1; }
+    .file-options { border-top: 1px solid #41516a; margin-top: 12px; padding-top: 4px; }
+    .field { margin: 0 0 12px 30px; }
+    .good { color: #9ce6b5; }
+    .result { padding: 10px 0; border-bottom: 1px solid #41516a; }
+    .review-item { padding: 12px 0; border-bottom: 1px solid #53627a; }
+    .pager { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 16px; }
+    [hidden] { display: none !important; }
+    @media (max-width: 600px) {
+      body { padding: 14px; font-size: 15px; }
+      h1 { font-size: 25px; }
+      .panel { padding: 14px; }
+      .file { padding: 12px; }
+      .field { margin-left: 0; }
+      .actions button { flex: 1 1 100%; }
+      .pager { flex-wrap: wrap; }
+      .filename { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Вернуться к караоке</a>
+  <h1>Оптимизация видеофайлов</h1>
+  <p>Проверьте названия, точные копии и параметры всех видео в медиатеке. Затем выберите нужные исправления.</p>
+  <p class="muted small">Формат имени: Исполнитель - Название. Видео: 1920 × 1080, не более 24 кадров/с. Меньшие видео будут увеличены; пропорции сохранятся, при необходимости добавятся поля.</p>
+
+  <section class="panel" aria-labelledby="status-title">
+    <h2 id="status-title">Проверка медиатеки</h2>
+    <p id="job-message" role="status" aria-live="polite">Получаем состояние проверки…</p>
+    <p id="current" class="muted small"></p>
+    <div id="progress-wrap" role="progressbar" aria-label="Ход обработки" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-fill"></div></div>
+    <p id="progress-text" class="muted small"></p>
+    <p id="cancel-note" class="notice small" hidden>Останавливаем обработку. Уже завершённые исправления сохранятся.</p>
+    <div class="actions">
+      <button type="button" id="scan" disabled>Проверить медиатеку</button>
+      <button type="button" id="cancel" class="danger" hidden>Остановить</button>
+      <button type="button" id="retry" class="secondary" hidden>Обновить состояние</button>
+    </div>
+  </section>
+
+  <p id="error" role="alert" hidden></p>
+
+  <section id="report" class="panel" aria-labelledby="report-title" hidden>
+    <h2 id="report-title">Результаты проверки</h2>
+    <p id="report-summary"></p>
+    <p class="notice small">Исходные файлы при исправлении сохраняются в резервной папке на HDD. Точные копии тоже переносятся туда. Для исправления остановите видео и дождитесь окончания загрузок. Очередь сохранится; во время исправлений её изменение временно недоступно.</p>
+    <div class="filter">
+      <input id="filter" type="text" placeholder="Найти файл" aria-label="Поиск по имени файла">
+      <label class="check"><input id="show-all" type="checkbox"><span>Показать и файлы без замечаний</span></label>
+    </div>
+    <div class="actions">
+      <button type="button" id="review" disabled>Просмотреть выбранные исправления</button>
+      <button type="button" id="clear" class="secondary">Снять выбор</button>
+      <span id="selection-count" class="small muted">Выбрано файлов: 0</span>
+    </div>
+    <div id="files"></div>
+    <div class="pager">
+      <button type="button" id="previous" class="secondary">← Назад</button>
+      <span id="page-label" class="small"></span>
+      <button type="button" id="next" class="secondary">Далее →</button>
+    </div>
+  </section>
+
+  <section id="review-panel" class="panel" aria-labelledby="review-title" hidden>
+    <h2 id="review-title">Проверьте изменения перед запуском</h2>
+    <p id="review-summary"></p>
+    <div id="review-files"></div>
+    <p class="notice small">Преобразование может занять много времени. Страницу можно закрыть: обработка продолжится на приставке. Исходные файлы останутся в резервной папке на HDD.</p>
+    <div class="actions">
+      <button type="button" id="apply">Подтвердить и исправить</button>
+      <button type="button" id="back-to-report" class="secondary">Вернуться к выбору</button>
+    </div>
+  </section>
+
+  <section id="results-panel" class="panel" hidden>
+    <h2>Итог исправлений</h2>
+    <div id="results"></div>
+  </section>
+</main>
+<script>
+/* KARAOKE_MEDIA_OPTIMIZER_UI_V1: asynchronous and compatible with ES5 browsers. */
+(function () {
+  'use strict';
+  var job = null, selections = {}, known = false, pending = false, polling = false;
+  var reportSignature = '', reviewed = null, page = 0, pageSize = 30, commandFailure = '';
+  var api = '/api/media-optimizer/';
+  function el(id) { return document.getElementById(id); }
+  function text(node, value) { node.textContent = value === undefined || value === null ? '' : String(value); }
+  function show(node, visible) { node.hidden = !visible; }
+  function empty(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+  function node(tag, value, cls) {
+    var result = document.createElement(tag);
+    if (value !== undefined) text(result, value);
+    if (cls) result.className = cls;
+    return result;
+  }
+  function hasOwn(obj, key) { return Object.prototype.hasOwnProperty.call(obj, key); }
+  function rowMap() {
+    var map = {}, rows = job && job.rows || [], i;
+    for (i = 0; i < rows.length; i++) map['$' + rows[i].id] = rows[i];
+    return map;
+  }
+  function selected(row) {
+    var key = '$' + row.id;
+    if (!hasOwn(selections, key)) selections[key] = { rename: false, rename_to: row.proposed_name || row.name, transcode: false, duplicate: false, duplicate_keep: '' };
+    return selections[key];
+  }
+  function busy() { return !!job && (job.state === 'scanning' || job.state === 'repairing'); }
+  function mutable() { return known && !pending && !!job && job.state === 'ready'; }
+  function problem(row) { return !!(row.issues && row.issues.length); }
+  function formatIssue(row) {
+    var issues = row.issues || [], i;
+    for (i = 0; i < issues.length; i++) if (issues[i].kind === 'resolution' || issues[i].kind === 'fps' || issues[i].kind === 'codec') return true;
+    return false;
+  }
+  function bytes(size) {
+    size = Number(size) || 0;
+    return size >= 1073741824 ? (size / 1073741824).toFixed(2) + ' ГБ' : (size / 1048576).toFixed(1) + ' МБ';
+  }
+  function issueText(row) {
+    var result = [], issues = row.issues || [], i;
+    for (i = 0; i < issues.length; i++) result.push(issues[i].message || issues[i].kind);
+    return result;
+  }
+  function setError(message) { text(el('error'), message || ''); show(el('error'), !!message); }
+  function request(method, path, body, callback) {
+    var xhr = new XMLHttpRequest(), complete = false;
+    function finish(error, data) { if (complete) return; complete = true; callback(error, data); }
+    xhr.open(method, api + path, true);
+    xhr.timeout = 15000;
+    if (body !== null) xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function () {
+      var data;
+      try { data = JSON.parse(xhr.responseText); }
+      catch (e) { finish('Сервер вернул некорректный ответ. Обновите состояние.'); return; }
+      if (xhr.status < 200 || xhr.status >= 300 || data.ok === false) { finish(data.error || 'Ошибка сервера: ' + xhr.status); return; }
+      finish(null, data);
+    };
+    xhr.onerror = function () { finish('Нет соединения с приставкой. После восстановления связи состояние обновится.'); };
+    xhr.ontimeout = function () { finish('Ответ не получен вовремя. Проверяем состояние: повторно запускать исправление не нужно.'); };
+    try { xhr.send(body === null ? null : JSON.stringify(body)); }
+    catch (e) { finish('Не удалось отправить запрос. Обновите состояние.'); }
+  }
+  function actions(validate) {
+    var result = [], rows = job && job.rows || [], map = rowMap(), marked = {}, i, row, s, action, name;
+    for (i = 0; i < rows.length; i++) {
+      row = rows[i]; s = selected(row);
+      if (!s.rename && !s.transcode && !s.duplicate) continue;
+      action = { file_id: row.id };
+      marked['$' + row.id] = true;
+      if (s.duplicate) {
+        if (validate && (!s.duplicate_keep || !map['$' + s.duplicate_keep] || (row.duplicates || []).indexOf(s.duplicate_keep) < 0)) throw new Error('Выберите точную копию, которую нужно оставить: ' + row.name);
+        action.duplicate_keep = s.duplicate_keep;
+        marked['$' + row.id] = true;
+      } else {
+        if (s.rename) {
+          name = String(s.rename_to || '').replace(/^\s+|\s+$/g, '');
+          if (validate && (!name || name === row.name)) throw new Error('Введите новое название файла: ' + row.name);
+          if (validate && /[\\/\x00-\x1f]/.test(name)) throw new Error('Название не должно содержать путь или управляющие символы: ' + row.name);
+          action.rename_to = name;
+        }
+        if (s.transcode) action.transcode = true;
+      }
+      result.push(action);
+    }
+    if (validate) for (i = 0; i < result.length; i++) {
+      if (result[i].duplicate_keep && marked['$' + result[i].duplicate_keep]) throw new Error('Копия, которую нужно оставить, тоже выбрана для исправления. В этом запуске оставляемую копию менять нельзя.');
+    }
+    return result;
+  }
+  function updateSelection() {
+    var count = actions(false).length;
+    text(el('selection-count'), 'Выбрано файлов: ' + count);
+    el('review').disabled = !mutable() || !count;
+    el('clear').disabled = !mutable() || !count;
+  }
+  function clearReview() { reviewed = null; show(el('review-panel'), false); }
+  function addCheck(parent, label, checked, disabled, change) {
+    var wrap = node('label', undefined, 'check'), input = document.createElement('input');
+    input.type = 'checkbox'; input.checked = checked; input.disabled = disabled;
+    input.onchange = function () { clearReview(); change(input.checked); updateSelection(); };
+    wrap.appendChild(input); wrap.appendChild(node('span', label)); parent.appendChild(wrap);
+    return input;
+  }
+  function renderRow(row, map) {
+    var card = node('article', undefined, 'file'), s = selected(row), options, inputWrap, input, rename, transcode, duplicate, keeper, duplicates = row.duplicates || [], i, option, issues;
+    card.appendChild(node('h3', row.name, 'filename'));
+    var details = bytes(row.size), video = row.video || {};
+    if (video.width && video.height) details += ' · ' + video.width + ' × ' + video.height;
+    if (video.fps !== undefined && video.fps !== null) details += ' · ' + video.fps + ' кадров/с';
+    if (video.codec) details += ' · ' + video.codec;
+    card.appendChild(node('p', details, 'file-detail'));
+    issues = issueText(row);
+    if (issues.length) {
+      var list = node('ul', undefined, 'issues');
+      for (i = 0; i < issues.length; i++) list.appendChild(node('li', issues[i]));
+      card.appendChild(list);
+    } else card.appendChild(node('p', 'Замечаний нет', 'good small'));
+    if (row.possible_duplicates && row.possible_duplicates.length) card.appendChild(node('p', 'Похожие названия: ' + row.possible_duplicates.join('; ') + '. Проверьте версии вручную.', 'file-detail'));
+    options = node('div', undefined, 'file-options'); card.appendChild(options);
+    rename = addCheck(options, 'Изменить название', s.rename, !mutable() || s.duplicate, function (value) { s.rename = value; input.disabled = !value || !mutable(); });
+    inputWrap = node('div', undefined, 'field');
+    input = document.createElement('input'); input.type = 'text'; input.value = s.rename_to;
+    input.setAttribute('aria-label', 'Новое название для ' + row.name);
+    input.disabled = !mutable() || !s.rename || s.duplicate;
+    input.oninput = function () { s.rename_to = input.value; clearReview(); updateSelection(); };
+    inputWrap.appendChild(input);
+    inputWrap.appendChild(node('div', 'Исполнитель - Название. Сохраните расширение файла.', 'muted small'));
+    options.appendChild(inputWrap);
+    if (row.can_transcode && formatIssue(row)) {
+      transcode = addCheck(options, 'Преобразовать: 1920 × 1080, до 24 кадров/с, H.264', s.transcode, !mutable() || s.duplicate, function (value) { s.transcode = value; });
+    }
+    if (duplicates.length) {
+      duplicate = addCheck(options, 'Перенести этот файл в резервную папку как точную копию', s.duplicate, !mutable(), function (value) {
+        s.duplicate = value;
+        if (value) { s.rename = false; s.transcode = false; rename.checked = false; if (transcode) transcode.checked = false; }
+        rename.disabled = value || !mutable(); input.disabled = value || !s.rename || !mutable();
+        if (transcode) transcode.disabled = value || !mutable();
+        keeper.disabled = !value || !mutable();
+      });
+      var keepWrap = node('div', undefined, 'field');
+      keepWrap.appendChild(node('label', 'Оставить в медиатеке:'));
+      keeper = document.createElement('select'); keeper.setAttribute('aria-label', 'Какую точную копию оставить вместо ' + row.name);
+      option = node('option', 'Выберите файл'); option.value = ''; keeper.appendChild(option);
+      for (i = 0; i < duplicates.length; i++) if (map['$' + duplicates[i]]) {
+        option = node('option', map['$' + duplicates[i]].name); option.value = duplicates[i]; keeper.appendChild(option);
+      }
+      keeper.value = s.duplicate_keep; keeper.disabled = !mutable() || !s.duplicate;
+      keeper.onchange = function () { s.duplicate_keep = keeper.value; clearReview(); updateSelection(); };
+      keepWrap.appendChild(keeper); options.appendChild(keepWrap);
+    }
+    return card;
+  }
+  function renderRows() {
+    var rows = job && job.rows || [], map = rowMap(), filtered = [], query = el('filter').value.toLowerCase(), all = el('show-all').checked, i;
+    for (i = 0; i < rows.length; i++) if ((all || problem(rows[i])) && (!query || rows[i].name.toLowerCase().indexOf(query) !== -1)) filtered.push(rows[i]);
+    var pages = Math.max(1, Math.ceil(filtered.length / pageSize));
+    if (page >= pages) page = pages - 1;
+    empty(el('files'));
+    if (!filtered.length) el('files').appendChild(node('p', query ? 'По вашему запросу файлов не найдено.' : 'Замечаний нет. При необходимости включите показ всех файлов.', 'muted'));
+    for (i = page * pageSize; i < Math.min((page + 1) * pageSize, filtered.length); i++) el('files').appendChild(renderRow(filtered[i], map));
+    text(el('page-label'), filtered.length ? (page + 1) + ' / ' + pages + ' · файлов: ' + filtered.length : 'Файлов: 0');
+    el('previous').disabled = page === 0; el('next').disabled = page + 1 >= pages;
+    updateSelection();
+  }
+  function renderResults() {
+    var results = job && job.results || [], i, r, line;
+    show(el('results-panel'), results.length > 0); empty(el('results'));
+    var labels = { done: 'Готово', failed: 'Ошибка', cancelled: 'Остановлено', skipped: 'Пропущено' };
+    for (i = 0; i < results.length; i++) {
+      r = results[i]; line = node('div', undefined, 'result');
+      line.appendChild(node('strong', (labels[r.status] || r.status || '') + ': ' + (r.name || r.file_id || '')));
+      if (r.message || r.error) line.appendChild(node('p', r.error || r.message));
+      if (r.new_name) line.appendChild(node('p', 'Новое название: ' + r.new_name, 'small'));
+      if (r.backup) line.appendChild(node('p', 'Резервная копия: ' + r.backup, 'small muted'));
+      el('results').appendChild(line);
+    }
+  }
+  function renderStatus(force) {
+    var active = busy(), state = job && job.state || '', rows = job && job.rows || [], problems = 0, i;
+    var labels = { scanning: 'Проверяем медиатеку…', ready: 'Проверка завершена. Выберите нужные исправления.', repairing: 'Исправляем выбранные файлы…', done: 'Исправления завершены. Для новой проверки нажмите кнопку ниже.', cancelled: 'Обработка остановлена. Можно запустить новую проверку.', failed: 'Не удалось завершить обработку.' };
+    text(el('job-message'), job ? (job.message || labels[state] || 'Состояние обновлено') : 'Начните проверку. Изменения будут предложены после её завершения.');
+    text(el('current'), job && job.current || '');
+    var total = Number(job && job.total) || 0, processed = Number(job && job.processed) || 0, percent = total ? Math.min(100, Math.round(100 * processed / total)) : 0;
+    text(el('progress-text'), job ? 'Обработано: ' + processed + ' из ' + total : '');
+    el('progress-fill').style.width = percent + '%'; el('progress-wrap').setAttribute('aria-valuenow', percent);
+    show(el('progress-wrap'), !!job); show(el('cancel'), active);
+    el('cancel').disabled = !known || pending || !!(job && job.cancel_requested);
+    show(el('cancel-note'), !!(job && job.cancel_requested));
+    el('scan').disabled = !known || pending || active;
+    text(el('scan'), job ? 'Проверить медиатеку заново' : 'Проверить медиатеку');
+    show(el('report'), rows.length > 0 && !reviewed && state !== 'scanning');
+    for (i = 0; i < rows.length; i++) if (problem(rows[i])) problems++;
+    text(el('report-summary'), 'Всего файлов: ' + rows.length + '. С замечаниями: ' + problems + '.');
+    if (!rows.length && state === 'ready') show(el('report'), true);
+    var signature = job ? job.id + ':' + state + ':' + JSON.stringify(rows) : '';
+    if (force || signature !== reportSignature) { reportSignature = signature; renderRows(); }
+    else updateSelection();
+    if (reviewed && !mutable()) { clearReview(); show(el('report'), rows.length > 0 && state !== 'scanning'); }
+    el('apply').disabled = !mutable() || !reviewed;
+    renderResults();
+    if (job && job.error) setError(job.error);
+  }
+  function poll() {
+    if (polling) return;
+    polling = true;
+    request('GET', 'status', null, function (error, data) {
+      polling = false;
+      if (error) { known = false; setError(error); show(el('retry'), true); renderStatus(true); return; }
+      var next = data.job || null;
+      if ((job && job.id || '') !== (next && next.id || '') || (job && job.state || '') !== (next && next.state || '')) commandFailure = '';
+      if ((job && job.id || '') !== (next && next.id || '')) { selections = {}; clearReview(); page = 0; }
+      job = next; known = true; setError(commandFailure); show(el('retry'), false); renderStatus(false);
+    });
+  }
+  function command(path, payload) {
+    pending = true; commandFailure = ''; clearReview(); setError(''); renderStatus(true);
+    request('POST', path, payload, function (error) {
+      pending = false;
+      if (error) { commandFailure = error; setError(error); known = false; show(el('retry'), true); renderStatus(true); }
+      poll();
+    });
+  }
+  el('scan').onclick = function () { if (known && !pending && !busy()) command('scan', {}); };
+  el('cancel').onclick = function () { if (known && !pending && busy()) command('cancel', {}); };
+  el('retry').onclick = poll;
+  el('filter').oninput = function () { page = 0; renderRows(); };
+  el('show-all').onchange = function () { page = 0; renderRows(); };
+  el('previous').onclick = function () { if (page) { page--; renderRows(); } };
+  el('next').onclick = function () { page++; renderRows(); };
+  el('clear').onclick = function () { selections = {}; clearReview(); renderRows(); };
+  el('back-to-report').onclick = function () { clearReview(); renderStatus(false); };
+  el('review').onclick = function () {
+    if (!mutable()) return;
+    var chosen, map = rowMap(), i, item, row, details, counts = { rename: 0, transcode: 0, duplicate: 0 };
+    try { chosen = actions(true); } catch (e) { setError(e.message); return; }
+    if (!chosen.length) return;
+    empty(el('review-files')); setError('');
+    for (i = 0; i < chosen.length; i++) {
+      item = chosen[i]; row = map['$' + item.file_id]; details = node('div', undefined, 'review-item');
+      details.appendChild(node('strong', row.name));
+      if (item.rename_to) { counts.rename++; details.appendChild(node('p', 'Название → ' + item.rename_to)); }
+      if (item.transcode) { counts.transcode++; details.appendChild(node('p', 'Видео → 1920 × 1080, до 24 кадров/с, H.264. Пропорции сохранятся, при необходимости добавятся поля.')); details.appendChild(node('p', 'Имя после преобразования: ' + String(item.rename_to || row.name).replace(/\.[^/.]+$/, '') + '.mkv')); }
+      if (item.duplicate_keep) { counts.duplicate++; details.appendChild(node('p', 'Этот файл → резервная папка. В медиатеке останется: ' + map['$' + item.duplicate_keep].name)); }
+      el('review-files').appendChild(details);
+    }
+    text(el('review-summary'), 'Файлов: ' + chosen.length + '. Переименований: ' + counts.rename + ', преобразований: ' + counts.transcode + ', точных копий в резерв: ' + counts.duplicate + '.');
+    text(el('apply'), 'Подтвердить и исправить (' + chosen.length + ')');
+    reviewed = { job_id: job.id, confirmed: true, actions: chosen };
+    show(el('report'), false); show(el('review-panel'), true); el('apply').disabled = false;
+    el('review-panel').scrollIntoView();
+  };
+  el('apply').onclick = function () {
+    if (!mutable() || !reviewed || reviewed.job_id !== job.id) return;
+    var payload = reviewed;
+    command('apply', payload);
+  };
+  poll();
+  window.setInterval(poll, 2000);
+}());
+</script>
+</body>
+</html>

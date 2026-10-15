@@ -1,0 +1,119 @@
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~# nmcli device status
+iw dev wlan0 station dump
+
+timeout 45 tcpdump -pni wlan0 -c 100 'tcp port 8080'
+DEVICE           TYPE      STATE                   CONNECTION
+wlan0            wifi      connected               KARAOKE_SYSTEM
+wlxf0b040f7f699  wifi      connected               Alisa_USB
+lo               loopback  connected (externally)  lo
+p2p-dev-wlan0    wifi-p2p  disconnected            --
+end0             ethernet  unavailable             --
+Station 32:d1:86:ee:6a:2d (on wlan0)
+        inactive time:  384 ms
+        rx bytes:       231938
+        rx packets:     1911
+        tx bytes:       284230
+        tx packets:     482
+        tx retries:     117
+        tx failed:      4
+        rx drop misc:   0
+        signal:         -54 dBm
+        signal avg:     -57 dBm
+        tx bitrate:     65.0 MBit/s MCS 7
+        tx duration:    0 us
+        rx bitrate:     11.0 MBit/s
+        rx duration:    0 us
+        expected throughput:    31.310Mbps
+        authorized:     yes
+        authenticated:  yes
+        associated:     yes
+        preamble:       short
+        WMM/WME:        yes
+        MFP:            no
+        TDLS peer:      no
+        DTIM period:    2
+        beacon interval:100
+        short slot time:yes
+        connected time: 162 seconds
+        associated at [boottime]:       8640.293s
+        associated at:  1792015324596 ms
+        current time:   1792015486422 ms
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on wlan0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+01:04:53.167547 IP 192.168.100.167.53906 > 192.168.100.1.8080: Flags [F.], seq 2018817698, ack 2968154223, win 74, options [nop,nop,TS val 1102218338 ecr 3473319121], length 0
+01:05:07.286597 IP 192.168.100.167.54592 > 192.168.100.1.8080: Flags [S], seq 3335548, win 65535, options [mss 1460,sackOK,TS val 1102232557 ecr 0,nop,wscale 10], length 0
+01:05:07.286812 IP 192.168.100.1.8080 > 192.168.100.167.54592: Flags [S.], seq 1837439157, ack 3335549, win 65160, options [mss 1460,sackOK,TS val 3473360133 ecr 1102232557,nop,wscale 7], length 0
+01:05:07.287450 IP 192.168.100.167.54608 > 192.168.100.1.8080: Flags [S], seq 4186310539, win 65535, options [mss 1460,sackOK,TS val 1102232562 ecr 0,nop,wscale 10], length 0
+01:05:07.287639 IP 192.168.100.1.8080 > 192.168.100.167.54608: Flags [S.], seq 1503518236, ack 4186310540, win 65160, options [mss 1460,sackOK,TS val 3473360134 ecr 1102232562,nop,wscale 7], length 0
+01:05:07.292527 IP 192.168.100.167.54592 > 192.168.100.1.8080: Flags [.], ack 1, win 64, options [nop,nop,TS val 1102232573 ecr 3473360133], length 0
+01:05:07.292856 IP 192.168.100.167.54608 > 192.168.100.1.8080: Flags [.], ack 1, win 64, options [nop,nop,TS val 1102232574 ecr 3473360134], length 0
+01:05:07.296571 IP 192.168.100.167.54592 > 192.168.100.1.8080: Flags [P.], seq 1:437, ack 1, win 64, options [nop,nop,TS val 1102232575 ecr 3473360133], length 436: HTTP: GET /api/network_status HTTP/1.1
+01:05:07.296777 IP 192.168.100.1.8080 > 192.168.100.167.54592: Flags [.], ack 437, win 506, options [nop,nop,TS val 3473360143 ecr 1102232575], length 0
+01:05:07.297132 IP 192.168.100.167.54608 > 192.168.100.1.8080: Flags [P.], seq 1:443, ack 1, win 64, options [nop,nop,TS val 1102232576 ecr 3473360134], length 442: HTTP: GET /api/karaoke-wifi-monitor HTTP/1.1
+01:05:07.297326 IP 192.168.100.1.8080 > 192.168.100.167.54608: Flags [.], ack 443, win 506, options [nop,nop,TS val 3473360143 ecr 1102232576], length 0
+01:05:07.307805 IP 192.168.100.1.8080 > 192.168.100.167.54608: Flags [P.], seq 1:166, ack 443, win 506, options [nop,nop,TS val 3473360154 ecr 1102232576], length 165: HTTP: HTTP/1.1 200 OK
+01:05:07.308627 IP 192.168.100.1.8080 > 192.168.100.167.54608: Flags [FP.], seq 166:228, ack 443, win 506, options [nop,nop,TS val 3473360155 ecr 1102232576], length 62: HTTP
+01:05:07.316095 IP 192.168.100.1.8080 > 192.168.100.167.54592: Flags [P.], seq 1:166, ack 437, win 506, options [nop,nop,TS val 3473360162 ecr 1102232575], length 165: HTTP: HTTP/1.1 200 OK
+01:05:07.316596 IP 192.168.100.1.8080 > 192.168.100.167.54592: Flags [FP.], seq 166:224, ack 437, win 506, options [nop,nop,TS val 3473360163 ecr 1102232575], length 58: HTTP
+01:05:07.419519 IP 192.168.100.167.54608 > 192.168.100.1.8080: Flags [.], ack 166, win 66, options [nop,nop,TS val 1102232595 ecr 3473360154], length 0
+01:05:07.583452 IP 192.168.100.1.8080 > 192.168.100.167.54592: Flags [FP.], seq 1:224, ack 437, win 506, options [nop,nop,TS val 3473360430 ecr 1102232575], length 223: HTTP: HTTP/1.1 200 OK
+01:05:07.627336 IP 192.168.100.167.54592 > 192.168.100.1.8080: Flags [.], ack 166, win 66, options [nop,nop,TS val 1102232803 ecr 3473360162], length 0
+01:05:07.627517 IP 192.168.100.167.54608 > 192.168.100.1.8080: Flags [F.], seq 443, ack 229, win 66, options [nop,nop,TS val 1102232804 ecr 3473360155], length 0
+01:05:07.627671 IP 192.168.100.1.8080 > 192.168.100.167.54608: Flags [.], ack 444, win 506, options [nop,nop,TS val 3473360474 ecr 1102232804], length 0
+01:05:07.627827 IP 192.168.100.167.54592 > 192.168.100.1.8080: Flags [F.], seq 437, ack 225, win 66, options [nop,nop,TS val 1102232807 ecr 3473360163], length 0
+01:05:07.627929 IP 192.168.100.1.8080 > 192.168.100.167.54592: Flags [.], ack 438, win 506, options [nop,nop,TS val 3473360474 ecr 1102232807], length 0
+01:05:07.628443 IP 192.168.100.167.54592 > 192.168.100.1.8080: Flags [.], ack 225, win 66, options [nop,nop,TS val 1102232874 ecr 3473360430,nop,nop,sack 1 {1:225}], length 0
+01:05:08.257732 IP 192.168.100.167.54614 > 192.168.100.1.8080: Flags [S], seq 676224440, win 65535, options [mss 1460,sackOK,TS val 1102233540 ecr 0,nop,wscale 10], length 0
+01:05:08.257967 IP 192.168.100.1.8080 > 192.168.100.167.54614: Flags [S.], seq 667500849, ack 676224441, win 65160, options [mss 1460,sackOK,TS val 3473361104 ecr 1102233540,nop,wscale 7], length 0
+01:05:08.263472 IP 192.168.100.167.54614 > 192.168.100.1.8080: Flags [.], ack 1, win 64, options [nop,nop,TS val 1102233545 ecr 3473361104], length 0
+01:05:08.283167 IP 192.168.100.167.54614 > 192.168.100.1.8080: Flags [P.], seq 1:656, ack 1, win 64, options [nop,nop,TS val 1102233562 ecr 3473361104], length 655: HTTP: GET /?test=3 HTTP/1.1
+01:05:08.283393 IP 192.168.100.1.8080 > 192.168.100.167.54614: Flags [.], ack 656, win 504, options [nop,nop,TS val 3473361129 ecr 1102233562], length 0
+01:05:08.309287 IP 192.168.100.167.54620 > 192.168.100.1.8080: Flags [S], seq 4068230854, win 65535, options [mss 1460,sackOK,TS val 1102233583 ecr 0,nop,wscale 10], length 0
+01:05:08.309470 IP 192.168.100.1.8080 > 192.168.100.167.54620: Flags [S.], seq 3660296201, ack 4068230855, win 65160, options [mss 1460,sackOK,TS val 3473361156 ecr 1102233583,nop,wscale 7], length 0
+01:05:08.314315 IP 192.168.100.167.54620 > 192.168.100.1.8080: Flags [.], ack 1, win 64, options [nop,nop,TS val 1102233596 ecr 3473361156], length 0
+01:05:10.441216 IP 192.168.100.167.54614 > 192.168.100.1.8080: Flags [F.], seq 656, ack 1, win 64, options [nop,nop,TS val 1102235690 ecr 3473361129], length 0
+01:05:10.441665 IP 192.168.100.167.54620 > 192.168.100.1.8080: Flags [P.], seq 1:598, ack 1, win 64, options [nop,nop,TS val 1102235695 ecr 3473361156], length 597: HTTP: GET /?test=3 HTTP/1.1
+01:05:10.442034 IP 192.168.100.167.54630 > 192.168.100.1.8080: Flags [S], seq 2862826917, win 65535, options [mss 1460,sackOK,TS val 1102235699 ecr 0,nop,wscale 10], length 0
+01:05:10.640125 IP 192.168.100.167.54614 > 192.168.100.1.8080: Flags [F.], seq 656, ack 1, win 64, options [nop,nop,TS val 1102235902 ecr 3473361129], length 0
+01:05:10.646819 IP 192.168.100.167.54620 > 192.168.100.1.8080: Flags [P.], seq 1:598, ack 1, win 64, options [nop,nop,TS val 1102235926 ecr 3473361156], length 597: HTTP: GET /?test=3 HTTP/1.1
+01:05:10.831196 IP 192.168.100.167.54614 > 192.168.100.1.8080: Flags [F.], seq 656, ack 1, win 64, options [nop,nop,TS val 1102236114 ecr 3473361129], length 0
+01:05:10.893019 IP 192.168.100.167.54620 > 192.168.100.1.8080: Flags [P.], seq 1:598, ack 1, win 64, options [nop,nop,TS val 1102236174 ecr 3473361156], length 597: HTTP: GET /?test=3 HTTP/1.1
+01:05:11.268746 IP 192.168.100.167.54614 > 192.168.100.1.8080: Flags [F.], seq 656, ack 1, win 64, options [nop,nop,TS val 1102236546 ecr 3473361129], length 0
+01:05:11.392321 IP 192.168.100.167.54620 > 192.168.100.1.8080: Flags [P.], seq 1:598, ack 1, win 64, options [nop,nop,TS val 1102236674 ecr 3473361156], length 597: HTTP: GET /?test=3 HTTP/1.1
+01:05:11.424722 IP 192.168.100.167.54630 > 192.168.100.1.8080: Flags [S], seq 2862826917, win 65535, options [mss 1460,sackOK,TS val 1102236706 ecr 0,nop,wscale 10], length 0
+01:05:12.135681 IP 192.168.100.167.54614 > 192.168.100.1.8080: Flags [F.], seq 656, ack 1, win 64, options [nop,nop,TS val 1102237410 ecr 3473361129], length 0
+01:05:12.384256 IP 192.168.100.167.54620 > 192.168.100.1.8080: Flags [P.], seq 1:598, ack 1, win 64, options [nop,nop,TS val 1102237666 ecr 3473361156], length 597: HTTP: GET /?test=3 HTTP/1.1
+01:05:13.439151 IP 192.168.100.167.54630 > 192.168.100.1.8080: Flags [S], seq 2862826917, win 65535, options [mss 1460,sackOK,TS val 1102238722 ecr 0,nop,wscale 10], length 0
+01:05:13.830011 IP 192.168.100.167.54614 > 192.168.100.1.8080: Flags [F.], seq 656, ack 1, win 64, options [nop,nop,TS val 1102239106 ecr 3473361129], length 0
+01:05:14.371969 IP 192.168.100.167.54620 > 192.168.100.1.8080: Flags [P.], seq 1:598, ack 1, win 64, options [nop,nop,TS val 1102239650 ecr 3473361156], length 597: HTTP: GET /?test=3 HTTP/1.1
+01:05:15.673836 IP 192.168.100.167.54620 > 192.168.100.1.8080: Flags [F.], seq 598, ack 1, win 64, options [nop,nop,TS val 1102240950 ecr 3473361156], length 0
+01:05:15.698737 IP 192.168.100.167.38682 > 192.168.100.1.8080: Flags [S], seq 2255583400, win 65535, options [mss 1460,sackOK,TS val 1102240979 ecr 0,nop,wscale 10], length 0
+01:05:16.707566 IP 192.168.100.167.38682 > 192.168.100.1.8080: Flags [S], seq 2255583400, win 65535, options [mss 1460,sackOK,TS val 1102241990 ecr 0,nop,wscale 10], length 0
+01:05:17.378271 IP 192.168.100.167.54614 > 192.168.100.1.8080: Flags [F.], seq 656, ack 1, win 64, options [nop,nop,TS val 1102242658 ecr 3473361129], length 0
+01:05:17.640557 IP 192.168.100.167.54630 > 192.168.100.1.8080: Flags [S], seq 2862826917, win 65535, options [mss 1460,sackOK,TS val 1102242914 ecr 0,nop,wscale 10], length 0
+01:05:18.403276 IP 192.168.100.167.54620 > 192.168.100.1.8080: Flags [FP.], seq 1:598, ack 1, win 64, options [nop,nop,TS val 1102243682 ecr 3473361156], length 597: HTTP: GET /?test=3 HTTP/1.1
+01:05:18.720967 IP 192.168.100.167.38682 > 192.168.100.1.8080: Flags [S], seq 2255583400, win 65535, options [mss 1460,sackOK,TS val 1102244002 ecr 0,nop,wscale 10], length 0
+01:05:24.294842 IP 192.168.100.167.54614 > 192.168.100.1.8080: Flags [F.], seq 656, ack 1, win 64, options [nop,nop,TS val 1102249570 ecr 3473361129], length 0
+01:05:26.389684 IP 192.168.100.167.54620 > 192.168.100.1.8080: Flags [FP.], seq 1:598, ack 1, win 64, options [nop,nop,TS val 1102251618 ecr 3473361156], length 597: HTTP: GET /?test=3 HTTP/1.1
+
+55 packets captured
+55 packets received by filter
+0 packets dropped by kernel
+root@x96q-v5-1:~# iw dev wlan0 station dump
+
+systemctl is-active karaoke-server.service bgutil-pot.service zapret.service
+
+journalctl -b -k --since "3 minutes ago" --no-pager |
+  grep -Ei 'xradio|timeout|oops|stall|missed'
+active
+active
+active
+Oct 15 01:02:52 x96q-v5-1 kernel: xradio_wlan mmc3:0001:1: missed interrupt
+Oct 15 01:03:07 x96q-v5-1 kernel: xradio_wlan mmc3:0001:1: missed interrupt
+Oct 15 01:03:44 x96q-v5-1 kernel: xradio_wlan mmc3:0001:1: missed interrupt
+Oct 15 01:03:45 x96q-v5-1 kernel: xradio_wlan mmc3:0001:1: missed interrupt
+Oct 15 01:04:12 x96q-v5-1 kernel: xradio_wlan mmc3:0001:1: missed interrupt
+root@x96q-v5-1:~#

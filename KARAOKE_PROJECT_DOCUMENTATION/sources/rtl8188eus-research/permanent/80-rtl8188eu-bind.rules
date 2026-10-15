@@ -1,0 +1,2 @@
+# Optional: start the same serialized binder after USB interface creation.
+ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_interface", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="8179", TAG+="systemd", ENV{SYSTEMD_WANTS}+="rtl8188eu-bind.service"

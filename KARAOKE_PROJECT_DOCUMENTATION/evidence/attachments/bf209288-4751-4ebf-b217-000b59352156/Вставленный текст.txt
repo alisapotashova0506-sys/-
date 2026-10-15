@@ -1,0 +1,86 @@
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~# nmcli device status
+iw dev wlan0 info
+
+journalctl -b -u NetworkManager.service -u wpa_supplicant.service \
+  --since "5 minutes ago" --no-pager -n 80
+DEVICE           TYPE      STATE                   CONNECTION
+wlxf0b040f7f699  wifi      connected               Alisa_USB
+lo               loopback  connected (externally)  lo
+wlan0            wifi      connected               Alisa
+p2p-dev-wlan0    wifi-p2p  disconnected            --
+end0             ethernet  unavailable             --
+Interface wlan0
+        ifindex 5
+        wdev 0x200000001
+        addr 12:00:da:9f:06:55
+        ssid Alisa
+        type managed
+        wiphy 2
+        channel 9 (2452 MHz), width: 20 MHz, center1: 2452 MHz
+        txpower 20.00 dBm
+        multicast TXQ:
+                qsz-byt qsz-pkt flows   drops   marks   overlmt hashcol tx-bytes        tx-packets
+                0       0       1859    0       0       0       0       434551          1860
+Oct 15 01:23:20 x96q-v5-1 wpa_supplicant[500]: wlxf0b040f7f699: CTRL-EVENT-BEACON-LOSS
+Oct 15 01:23:26 x96q-v5-1 dnsmasq-dhcp[26735]: DHCPREQUEST(wlan0) 192.168.100.167 32:d1:86:ee:6a:2d
+Oct 15 01:23:26 x96q-v5-1 dnsmasq-dhcp[26735]: DHCPACK(wlan0) 192.168.100.167 32:d1:86:ee:6a:2d S21-pol-zovatela-Roman
+Oct 15 01:24:05 x96q-v5-1 dnsmasq-dhcp[26735]: DHCPREQUEST(wlan0) 192.168.100.167 32:d1:86:ee:6a:2d
+Oct 15 01:24:05 x96q-v5-1 dnsmasq-dhcp[26735]: DHCPACK(wlan0) 192.168.100.167 32:d1:86:ee:6a:2d S21-pol-zovatela-Roman
+Oct 15 01:24:44 x96q-v5-1 wpa_supplicant[500]: wlan0: AP-STA-DISCONNECTED 32:d1:86:ee:6a:2d
+Oct 15 01:24:45 x96q-v5-1 wpa_supplicant[500]: Device is trying to offload WPS Probe Response while not supporting this
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.4505] agent-manager: agent[372f5fe05fdbbac2,:1.4798/nmcli-connect/0]: agent registered
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.4581] device (wlan0): disconnecting for new activation request.
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.4582] device (wlan0): state change: activated -> deactivating (reason 'new-activation', sys-iface-state: 'managed')
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.4649] audit: op="connection-activate" uuid="64825e49-6414-46eb-86e4-e0bc1c1e2145" name="Alisa" pid=31416 uid=0 result="success"
+Oct 15 01:25:43 x96q-v5-1 wpa_supplicant[500]: wlan0: interface state ENABLED->DISABLED
+Oct 15 01:25:43 x96q-v5-1 wpa_supplicant[500]: wlan0: AP-DISABLED
+Oct 15 01:25:43 x96q-v5-1 wpa_supplicant[500]: wlan0: CTRL-EVENT-DISCONNECTED bssid=12:00:da:9f:06:55 reason=3 locally_generated=1
+Oct 15 01:25:43 x96q-v5-1 wpa_supplicant[500]: wlan0: CTRL-EVENT-DSCP-POLICY clear_all
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.6355] device (wlan0): supplicant interface state: completed -> disconnected
+Oct 15 01:25:43 x96q-v5-1 dnsmasq[26735]: exiting on receipt of SIGTERM
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.6357] device (p2p-dev-wlan0): supplicant management interface state: completed -> disconnected
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.6363] device (wlan0): state change: deactivating -> disconnected (reason 'new-activation', sys-iface-state: 'managed')
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.9700] device (wlan0): Activation: starting connection 'Alisa' (64825e49-6414-46eb-86e4-e0bc1c1e2145)
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.9766] device (wlan0): state change: disconnected -> prepare (reason 'none', sys-iface-state: 'managed')
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.9815] device (wlan0): state change: prepare -> config (reason 'none', sys-iface-state: 'managed')
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.9853] device (wlan0): Activation: (wifi) access point 'Alisa' has security, but secrets are required.
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.9856] device (wlan0): state change: config -> need-auth (reason 'none', sys-iface-state: 'managed')
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.9940] device (wlan0): state change: need-auth -> prepare (reason 'none', sys-iface-state: 'managed')
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.9963] device (wlan0): state change: prepare -> config (reason 'none', sys-iface-state: 'managed')
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.9981] device (wlan0): Activation: (wifi) connection 'Alisa' has security, and secrets exist.  No new secrets needed.
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.9985] Config: added 'ssid' value 'Alisa'
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.9987] Config: added 'scan_ssid' value '1'
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.9987] Config: added 'bgscan' value 'simple:30:-70:86400'
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.9988] Config: added 'key_mgmt' value 'WPA-PSK WPA-PSK-SHA256 FT-PSK'
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.9989] Config: added 'auth_alg' value 'OPEN'
+Oct 15 01:25:43 x96q-v5-1 NetworkManager[498]: <info>  [1792016743.9989] Config: added 'psk' value '<hidden>'
+Oct 15 01:25:45 x96q-v5-1 NetworkManager[498]: <info>  [1792016745.0764] device (wlan0): supplicant interface state: disconnected -> scanning
+Oct 15 01:25:45 x96q-v5-1 NetworkManager[498]: <info>  [1792016745.0766] device (p2p-dev-wlan0): supplicant management interface state: disconnected -> scanning
+Oct 15 01:25:45 x96q-v5-1 wpa_supplicant[500]: wlan0: SME: Trying to authenticate with 50:ff:20:4a:92:4b (SSID='Alisa' freq=2452 MHz)
+Oct 15 01:25:45 x96q-v5-1 NetworkManager[498]: <info>  [1792016745.7972] device (wlan0): supplicant interface state: scanning -> authenticating
+Oct 15 01:25:45 x96q-v5-1 NetworkManager[498]: <info>  [1792016745.7974] device (p2p-dev-wlan0): supplicant management interface state: scanning -> authenticating
+Oct 15 01:25:45 x96q-v5-1 wpa_supplicant[500]: wlan0: Trying to associate with 50:ff:20:4a:92:4b (SSID='Alisa' freq=2452 MHz)
+Oct 15 01:25:45 x96q-v5-1 NetworkManager[498]: <info>  [1792016745.8146] device (wlan0): supplicant interface state: authenticating -> associating
+Oct 15 01:25:45 x96q-v5-1 NetworkManager[498]: <info>  [1792016745.8148] device (p2p-dev-wlan0): supplicant management interface state: authenticating -> associating
+Oct 15 01:25:45 x96q-v5-1 wpa_supplicant[500]: wlan0: Associated with 50:ff:20:4a:92:4b
+Oct 15 01:25:45 x96q-v5-1 wpa_supplicant[500]: wlan0: CTRL-EVENT-SUBNET-STATUS-UPDATE status=0
+Oct 15 01:25:45 x96q-v5-1 NetworkManager[498]: <info>  [1792016745.8327] device (wlan0): supplicant interface state: associating -> associated
+Oct 15 01:25:45 x96q-v5-1 NetworkManager[498]: <info>  [1792016745.8329] device (p2p-dev-wlan0): supplicant management interface state: associating -> associated
+Oct 15 01:25:45 x96q-v5-1 NetworkManager[498]: <info>  [1792016745.9337] device (wlan0): supplicant interface state: associated -> 4way_handshake
+Oct 15 01:25:45 x96q-v5-1 NetworkManager[498]: <info>  [1792016745.9340] device (p2p-dev-wlan0): supplicant management interface state: associated -> 4way_handshake
+Oct 15 01:25:45 x96q-v5-1 wpa_supplicant[500]: wlan0: WPA: Key negotiation completed with 50:ff:20:4a:92:4b [PTK=CCMP GTK=CCMP]
+Oct 15 01:25:45 x96q-v5-1 wpa_supplicant[500]: wlan0: CTRL-EVENT-CONNECTED - Connection to 50:ff:20:4a:92:4b completed [id=0 id_str=]
+Oct 15 01:25:45 x96q-v5-1 wpa_supplicant[500]: bgscan simple: Failed to enable signal strength monitoring
+Oct 15 01:25:45 x96q-v5-1 NetworkManager[498]: <info>  [1792016745.9861] device (wlan0): supplicant interface state: 4way_handshake -> completed
+Oct 15 01:25:45 x96q-v5-1 NetworkManager[498]: <info>  [1792016745.9864] device (wlan0): Activation: (wifi) Stage 2 of 5 (Device Configure) successful. Connected to wireless network "Alisa"
+Oct 15 01:25:45 x96q-v5-1 NetworkManager[498]: <info>  [1792016745.9866] device (p2p-dev-wlan0): supplicant management interface state: 4way_handshake -> completed
+Oct 15 01:25:45 x96q-v5-1 NetworkManager[498]: <info>  [1792016745.9881] device (wlan0): state change: config -> ip-config (reason 'none', sys-iface-state: 'managed')
+Oct 15 01:25:45 x96q-v5-1 NetworkManager[498]: <info>  [1792016745.9925] dhcp4 (wlan0): activation: beginning transaction (timeout in 45 seconds)
+Oct 15 01:25:46 x96q-v5-1 NetworkManager[498]: <info>  [1792016746.2699] dhcp4 (wlan0): state changed new lease, address=192.168.1.102
+Oct 15 01:25:46 x96q-v5-1 NetworkManager[498]: <info>  [1792016746.3466] device (wlan0): state change: ip-config -> ip-check (reason 'none', sys-iface-state: 'managed')
+Oct 15 01:25:46 x96q-v5-1 NetworkManager[498]: <info>  [1792016746.3585] device (wlan0): state change: ip-check -> secondaries (reason 'none', sys-iface-state: 'managed')
+Oct 15 01:25:46 x96q-v5-1 NetworkManager[498]: <info>  [1792016746.3602] device (wlan0): state change: secondaries -> activated (reason 'none', sys-iface-state: 'managed')
+Oct 15 01:25:46 x96q-v5-1 NetworkManager[498]: <info>  [1792016746.3659] device (wlan0): Activation: successful, device activated.
+root@x96q-v5-1:~#

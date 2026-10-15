@@ -1,0 +1,185 @@
+{
+  "kernel": "6.6.44-current-sunxi64",
+  "driver_commit": "af3bf004458f76b7aec33e9ba552cd382ed1f5c3",
+  "armbian_commit": "de1a1959827c3a274d5b7d52c474e4dd373ae3ef",
+  "symbols": "Actual exports from reconstructed vmlinux, cfg80211 and rfkill; subset covers GCC11/GCC12 import union, all cfg80211/rfkill exports. CONFIG_MODVERSIONS=n. Strict modpost errors retained.",
+  "tests": {
+    "full_kernel_build": "passed GCC11.3",
+    "driver_module_build": "passed GCC11.3 and GCC12.4",
+    "fresh_native_build_script_cross_smoke": "passed GCC12.4; ABI guard added and separately checked unchanged required settings",
+    "hardware_load": "passed: user-loaded native module and bound RTL8188EUS",
+    "AP_hardware": "passed: user opened karaoke through USB AP and confirmed operation after reboot"
+  },
+  "native_device_build": {
+    "path": "/root/rtl8188eus-build-xs4977k0/8188eu-test.ko",
+    "sha256": "d1c545d580901e3bd85504d7c970a729383aaf75b3217724a4940c3b4e353bc3",
+    "status": "BUILD COMPLETE; native module subsequently loaded, AP tested, installed and reboot verified"
+  },
+  "native_device_load": {
+    "status": "passed; native module loaded and USB subsequently switched, installed, reboot verified",
+    "module_size_reported": 1155072,
+    "builtin_connection": "ZZZZ on wlan0 at 192.168.1.102",
+    "usb_state": "wlxf0b040f7f699 disconnected"
+  },
+  "native_device_usb_bind": {
+    "status": "passed; AP subsequently activated and confirmed by user",
+    "interface": "wlxf0b040f7f699",
+    "wiphy": "phy2",
+    "supported_modes": [
+      "IBSS",
+      "managed",
+      "AP",
+      "monitor",
+      "P2P-client",
+      "P2P-GO"
+    ],
+    "builtin_ssh_route": "192.168.1.102 via wlan0, unchanged",
+    "rollback_timer": "stopped by permanent installer",
+    "rollback_script": "/root/rtl8188eus-trial-00w4i_nc/rollback_usb.py"
+  },
+  "native_ap_test": {
+    "status": "User reports karaoke homepage opens without problems through USB AP",
+    "interface": "wlxf0b040f7f699",
+    "driver": "8188eu",
+    "ssid": "KARAOKE_USB_TEST",
+    "ipv4": "192.168.110.1/24",
+    "txpower_dbm": 13,
+    "profile_uuid": "67e9bd92-5f2a-4bab-9645-4afe89fcfc97",
+    "profile_name": "KARAOKE_USB_TEST-1792054352",
+    "profile_persistence": "temporary",
+    "stability_test": "pending",
+    "permanent_install": "performed and reboot verified"
+  },
+  "target_preferences": {
+    "ssid": "KARAOKE",
+    "ipv4": "192.168.100.1/24",
+    "psk_length": 8,
+    "user_confirmed": true
+  },
+  "permanent_installer": {
+    "status": "executed successfully on device; reboot verified",
+    "bundle_sha256": "603ff959e14b3b9b22f74686806f76249aca4130d2a4893a3d8fb0e5aa4c2c67",
+    "files": [
+      "install_on_x96q.py",
+      "rtl8188eu-bind.py",
+      "rtl8188eu-bind.service",
+      "8188eu-power.conf",
+      "80-rtl8188eu-bind.rules",
+      "rollback.sh"
+    ],
+    "validation": "Python AST, shell syntax, systemd unit verify; independent review; binder seven mocked cases"
+  },
+  "permanent_device_install": {
+    "status": "INSTALL COMPLETE reported by user; KARAOKE homepage opens",
+    "ssid": "KARAOKE",
+    "ipv4": "192.168.100.1/24",
+    "saved_profile": "/etc/NetworkManager/system-connections/KARAOKE_USB_AP.nmconnection",
+    "profile_uuid": "67e9bd92-5f2a-4bab-9645-4afe89fcfc97",
+    "rollback_script": "/root/karaoke-usb-install-gtz30b4s/rollback.sh",
+    "boot_service": "rtl8188eu-bind.service",
+    "trial_timer": "stopped by installer",
+    "reboot_test": "passed"
+  },
+  "reboot_validation": {
+    "status": "passed; user reports everything works",
+    "boot_time_reported": "2026-10-15 12:27:56",
+    "usb_interface": "wlxf0b040f7f699",
+    "usb_profile": "KARAOKE_USB_AP",
+    "usb_ip": "192.168.100.1/24",
+    "usb_driver": "8188eu",
+    "builtin_interface": "wlan0",
+    "builtin_connection": "ZZZZ",
+    "builtin_ip": "192.168.1.102/24",
+    "boot_service_result": "success",
+    "boot_service_exit_status": 0,
+    "ssh_reconnected": "192.168.1.102"
+  },
+  "overall_wifi_goal": {
+    "status": "V4 setup scenario confirmed working by user after TV page refresh; V5 home-control QR prepared but not installed",
+    "station_interface": "wlan0",
+    "ap_interface": "wlxf0b040f7f699",
+    "ap_ssid": "KARAOKE",
+    "ap_ipv4": "192.168.100.1/24",
+    "trigger": "No connection to a saved home Wi-Fi for about 30 seconds, not an Internet probe failure",
+    "display": "Automatic top-left QR card; TV display confirmed by user",
+    "setup": "First manually join KARAOKE with password12345678; then scan URL QR to http://192.168.100.1:8080/wifi/setup",
+    "success": "Save successful station network, hide QR, stop temporary USB AP",
+    "boot": "Try saved station networks first, enable AP/QR only after fallback timeout",
+    "offline": "Local HDD karaoke remains usable",
+    "reset": "Require confirmation",
+    "current_limitation": "Individual failure/reboot cases after V4 not separately reported; V5 device install pending",
+    "next_input": "Run inline V5 installer and refresh TV page; verify phone QR on the same home Wi-Fi",
+    "local_update": "/workspace/karaoke-wifi-integration/deploy/karaoke-wifi-update.tar.gz",
+    "local_validation": "18 backend, 12 Flask routes, 2 Node UI harnesses, 7 HTTP, 2 DNS, 4 installer tests; independent QR decoding and real patch round-trip passed"
+  },
+  "qr_fallback_device_install": {
+    "status": "UPDATE COMPLETE; exit status 0",
+    "kit": "/root/karaoke-wifi-update-wfk0nvaq",
+    "backup": "/root/karaoke-wifi-backup-9t4n98fz",
+    "rollback": "python3 /root/karaoke-wifi-backup-9t4n98fz/rollback.py --rollback /root/karaoke-wifi-backup-9t4n98fz",
+    "station_ssid": "ZZZZ",
+    "station_ip": "192.168.1.102",
+    "ap_and_qr": "off as expected with saved home Wi-Fi connected",
+    "reported_service_runtime_s": 17.877,
+    "tv_feedback": "User reports automatic top-left Настроить WiFi control but no visible QR; requires direct visible QR and camera/link instruction"
+  },
+  "qr_card_revision": {
+    "status": "User confirms visible QR/card during three-minute test",
+    "before_sha256": "85a1765e0896f3725929d61333e989d426b5672b1f82d8a2accc259aed288395",
+    "after_sha256": "224d490bd8eeb4ca8f0a65799aeeeeb9f4479e8b4f578c46a629f4fea0fec148",
+    "change": "ordinary visible div card, explicit 222px QR image, requested camera/link caption, separate optional mouse button",
+    "local_checks": "Exact patch hashes, Python AST, unchanged Python functions, two existing Node UI flow harnesses, independent review passed",
+    "network_policy": "unchanged"
+  },
+  "qr_link_revision": {
+    "status": "QR LINK UPDATED confirmed on device; all three installed hashes and served HTML/API match V4",
+    "qr_payload": "http://192.168.100.1:8080/wifi/setup",
+    "qr_sha256": "5f7a2c3b9f4281fbba4560da80d737bed5f4a7bb94abc1f424b171d834978671",
+    "independent_decode": "passed with OpenCV",
+    "instructions": "1. Найдите Wi-Fi KARAOKE и введите пароль 12345678. 2. После подключения наведите камеру телефона на QR-код и настройте Wi-Fi.",
+    "supported_app_baselines": [
+      "V2",
+      "V3"
+    ],
+    "network_policy": "unchanged",
+    "device_phone_flow": "User reports everything works after refreshing the TV page",
+    "device_backup": "/root/karaoke-qr-link-backup-wtq_7b8_",
+    "device_rollback": "python3 /root/karaoke-qr-link-backup-wtq_7b8_/rollback.py --rollback /root/karaoke-qr-link-backup-wtq_7b8_",
+    "device_app_sha256": "e168e929236a770953bac8e15aef6288662dccbb5bf6935f237c3b4ab13af642",
+    "device_network_sha256": "3238e2b0601464333a5555c574ff3e9f7bf8e6a0e7e3fbab5820ee1278b3d7ca",
+    "device_qr_sha256": "5f7a2c3b9f4281fbba4560da80d737bed5f4a7bb94abc1f424b171d834978671",
+    "device_api_wifi_qr": "http://192.168.100.1:8080/wifi/setup",
+    "device_controller_ok": true,
+    "device_ap_active": false,
+    "device_home_network": "ZZZZ",
+    "device_home_ip": "192.168.1.102",
+    "remaining": "No further V4 UI issue reported"
+  },
+  "home_control_qr_revision": {
+    "status": "User confirms V5 works; QR task closed",
+    "app_before": "e168e929236a770953bac8e15aef6288662dccbb5bf6935f237c3b4ab13af642",
+    "app_after": "8731353016f544c7f46cbf96e0d45dce7f6c52c1239d5777f92ff7f2abf441ba",
+    "url": "http://<confirmed home IPv4>:8080/",
+    "placement": "upper right below Wi-Fi and settings icons, hidden on phone screens",
+    "network_policy": "unchanged; original top-left V4 setup card retained",
+    "bundle_sha256": "6bc37731f7726d4943ac9b49cd228aa48bb742c22aae7ae733afea51688d4d06",
+    "inline_command": "/workspace/karaoke-wifi-integration/ui-v5/paste-update.sh",
+    "validation": "19 helper/route tests; JS state/race harness; 18 installer/rollback tests; existing 12 route/2 UI checks; Chromium layout and independent native/screen QR decoding"
+  },
+  "media_audio_revision": {
+    "status": "prepared and tested; device install and audible output check pending",
+    "app_before": "8731353016f544c7f46cbf96e0d45dce7f6c52c1239d5777f92ff7f2abf441ba",
+    "app_after": "54fb907fd6eb0ed108863ce747c61e496bbb198850ac65bc140ff54eaaaea29d",
+    "bundle_sha256": "31231c9a2a96d1784c01394a3dd67916320b74acc3ffbf926b4732d2d772ad98",
+    "inline_command": "/workspace/karaoke-wifi-integration/media-audio-v1/paste-update.sh",
+    "resolution_preference": "User explicitly wants all files 1920x1080 including upscaling, no crop, fps<=24",
+    "device_audio_evidence": {
+      "analog": "audiocodec PCM0 LINEOUT on",
+      "hdmi": "HDMI PCM0",
+      "original_default": "HDMI only; wrapper alsa/plughw:1,0; no independent HDMI mute control"
+    },
+    "device_encoders": "User confirms ffmpeg, ffprobe, libx264 and h264_v4l2m2m",
+    "validation": "32 feature/integration/installer tests; 12 existing routes; 3 JS regression harnesses; real Chromium selection/error/review/cancel/mobile/audio flow; actual FFmpeg audio/subtitle/font preservation",
+    "hardware_validation": "pending installation; no audible-output or whole-library performance claim"
+  }
+}

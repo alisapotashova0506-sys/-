@@ -1,0 +1,201 @@
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~#
+root@x96q-v5-1:~# journalctl -u NetworkManager --no-pager -n 80
+
+ls -lh /var/log/syslog* /var/log/kern.log* 2>/dev/null
+
+grep -Ei 'KARAOKE_SYSTEM|karaoke-ap-test-rollback|Activation.*fail|failed.*AP|xradio.*(error|fail|timeout|missed)' \
+  /var/log/syslog /var/log/syslog.1 /var/log/kern.log /var/log/kern.log.1 \
+  2>/dev/null | tail -100
+
+nmcli -f 802-11-wireless.hidden connection show KARAOKE_SYSTEM
+Oct 14 22:17:11 x96q-v5-1 NetworkManager[498]: <info>  [1792005431.8904] device (lo): state change: secondaries -> activated (reason 'none', sys-iface-state: 'external')
+Oct 14 22:17:11 x96q-v5-1 NetworkManager[498]: <info>  [1792005431.8954] device (lo): Activation: successful, device activated.
+Oct 14 22:17:12 x96q-v5-1 NetworkManager[498]: <info>  [1792005432.1426] device (wlan0): supplicant interface state: internal-starting -> disconnected
+Oct 14 22:17:12 x96q-v5-1 NetworkManager[498]: <info>  [1792005432.1436] Wi-Fi P2P device controlled by interface wlan0 created
+Oct 14 22:17:12 x96q-v5-1 NetworkManager[498]: <info>  [1792005432.1498] manager: (p2p-dev-wlan0): new 802.11 Wi-Fi P2P device (/org/freedesktop/NetworkManager/Devices/5)
+Oct 14 22:17:12 x96q-v5-1 NetworkManager[498]: <info>  [1792005432.1516] device (p2p-dev-wlan0): state change: unmanaged -> unavailable (reason 'managed', sys-iface-state: 'external')
+Oct 14 22:17:12 x96q-v5-1 NetworkManager[498]: <info>  [1792005432.1558] device (wlan0): state change: unavailable -> disconnected (reason 'supplicant-available', sys-iface-state: 'managed')
+Oct 14 22:17:12 x96q-v5-1 NetworkManager[498]: <info>  [1792005432.1604] device (p2p-dev-wlan0): state change: unavailable -> disconnected (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:12 x96q-v5-1 NetworkManager[498]: <info>  [1792005432.1780] device (wlxf0b040f7f699): supplicant interface state: internal-starting -> disconnected
+Oct 14 22:17:12 x96q-v5-1 NetworkManager[498]: <info>  [1792005432.1786] device (wlxf0b040f7f699): state change: unavailable -> disconnected (reason 'supplicant-available', sys-iface-state: 'managed')
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1126] policy: auto-activating connection 'Alisa' (64825e49-6414-46eb-86e4-e0bc1c1e2145)
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1178] device (wlan0): Activation: starting connection 'Alisa' (64825e49-6414-46eb-86e4-e0bc1c1e2145)
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1187] device (wlan0): state change: disconnected -> prepare (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1206] manager: NetworkManager state is now CONNECTING
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1273] device (wlan0): state change: prepare -> config (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1363] device (wlan0): Activation: (wifi) access point 'Alisa' has security, but secrets are required.
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1369] device (wlan0): state change: config -> need-auth (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1402] sup-iface[19bcfef965254f7c,0,wlan0]: wps: type pbc start...
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1660] device (wlan0): state change: need-auth -> prepare (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1689] device (wlan0): state change: prepare -> config (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1807] device (wlan0): Activation: (wifi) connection 'Alisa' has security, and secrets exist.  No new secrets needed.
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1814] Config: added 'ssid' value 'Alisa'
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1884] Config: added 'scan_ssid' value '1'
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1898] Config: added 'bgscan' value 'simple:30:-70:86400'
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1905] Config: added 'key_mgmt' value 'WPA-PSK WPA-PSK-SHA256 FT-PSK'
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1907] Config: added 'auth_alg' value 'OPEN'
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.1908] Config: added 'psk' value '<hidden>'
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.3680] device (wlan0): supplicant interface state: disconnected -> authenticating
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.3683] device (p2p-dev-wlan0): supplicant management interface state: disconnected -> authenticating
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4156] device (wlan0): supplicant interface state: authenticating -> associating
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4159] device (p2p-dev-wlan0): supplicant management interface state: authenticating -> associating
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4442] device (wlan0): supplicant interface state: associating -> associated
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4444] device (p2p-dev-wlan0): supplicant management interface state: associating -> associated
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4459] policy: auto-activating connection 'Alisa_USB' (f60acacb-58a5-4ef1-b4f5-6e9817c008c8)
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4486] device (wlxf0b040f7f699): Activation: starting connection 'Alisa_USB' (f60acacb-58a5-4ef1-b4f5-6e9817c008c8)
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4503] device (wlxf0b040f7f699): state change: disconnected -> prepare (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4534] device (wlxf0b040f7f699): state change: prepare -> config (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4590] device (wlxf0b040f7f699): Activation: (wifi) access point 'Alisa_USB' has security, but secrets are required.
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4592] device (wlxf0b040f7f699): state change: config -> need-auth (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4605] sup-iface[53aa525cae9d35a2,1,wlxf0b040f7f699]: wps: type pbc start...
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4824] device (wlan0): supplicant interface state: associated -> 4way_handshake
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4827] device (p2p-dev-wlan0): supplicant management interface state: associated -> 4way_handshake
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4833] device (wlxf0b040f7f699): state change: need-auth -> prepare (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4880] device (wlxf0b040f7f699): state change: prepare -> config (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4947] device (wlxf0b040f7f699): Activation: (wifi) connection 'Alisa_USB' has security, and secrets exist.  No new secrets needed.
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4952] Config: added 'ssid' value 'Alisa'
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4953] Config: added 'scan_ssid' value '1'
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4955] Config: added 'bgscan' value 'simple:30:-70:86400'
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4956] Config: added 'key_mgmt' value 'WPA-PSK WPA-PSK-SHA256 FT-PSK SAE FT-SAE'
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4957] Config: added 'auth_alg' value 'OPEN'
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.4958] Config: added 'psk' value '<hidden>'
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.5416] device (wlan0): supplicant interface state: 4way_handshake -> completed
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.5419] device (wlan0): Activation: (wifi) Stage 2 of 5 (Device Configure) successful. Connected to wireless network "Alisa"
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.5420] device (p2p-dev-wlan0): supplicant management interface state: 4way_handshake -> completed
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.5442] device (wlan0): state change: config -> ip-config (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.5562] dhcp4 (wlan0): activation: beginning transaction (timeout in 45 seconds)
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.6630] device (wlxf0b040f7f699): supplicant interface state: disconnected -> authenticating
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.6715] device (wlxf0b040f7f699): supplicant interface state: authenticating -> associating
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.6963] device (wlxf0b040f7f699): supplicant interface state: associating -> associated
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.7963] device (wlxf0b040f7f699): supplicant interface state: associated -> 4way_handshake
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.8475] dhcp4 (wlan0): state changed new lease, address=192.168.1.102
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.8559] policy: set 'Alisa' (wlan0) as default for IPv4 routing and DNS
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.9652] device (wlxf0b040f7f699): supplicant interface state: 4way_handshake -> completed
+Oct 14 22:17:13 x96q-v5-1 NetworkManager[498]: <info>  [1792005433.9656] device (wlxf0b040f7f699): Activation: (wifi) Stage 2 of 5 (Device Configure) successful. Connected to wireless network "Alisa"
+Oct 14 22:17:14 x96q-v5-1 NetworkManager[498]: <info>  [1792005434.0079] device (wlan0): state change: ip-config -> ip-check (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:14 x96q-v5-1 NetworkManager[498]: <info>  [1792005434.0225] device (wlxf0b040f7f699): state change: config -> ip-config (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:14 x96q-v5-1 NetworkManager[498]: <info>  [1792005434.0307] dhcp4 (wlxf0b040f7f699): activation: beginning transaction (timeout in 45 seconds)
+Oct 14 22:17:14 x96q-v5-1 NetworkManager[498]: <info>  [1792005434.0520] device (wlan0): state change: ip-check -> secondaries (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:14 x96q-v5-1 NetworkManager[498]: <info>  [1792005434.0571] device (wlan0): state change: secondaries -> activated (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:14 x96q-v5-1 NetworkManager[498]: <info>  [1792005434.0706] device (wlan0): Activation: successful, device activated.
+Oct 14 22:17:14 x96q-v5-1 NetworkManager[498]: <info>  [1792005434.0807] manager: NetworkManager state is now CONNECTED_GLOBAL
+Oct 14 22:17:14 x96q-v5-1 NetworkManager[498]: <info>  [1792005434.3410] dhcp4 (wlxf0b040f7f699): state changed new lease, address=192.168.1.50
+Oct 14 22:17:14 x96q-v5-1 NetworkManager[498]: <info>  [1792005434.3439] manager: NetworkManager state is now CONNECTING
+Oct 14 22:17:14 x96q-v5-1 NetworkManager[498]: <info>  [1792005434.3450] policy: set 'Alisa_USB' (wlxf0b040f7f699) as default for IPv4 routing and DNS
+Oct 14 22:17:14 x96q-v5-1 NetworkManager[498]: <info>  [1792005434.5288] device (wlxf0b040f7f699): state change: ip-config -> ip-check (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:14 x96q-v5-1 NetworkManager[498]: <info>  [1792005434.5543] device (wlxf0b040f7f699): state change: ip-check -> secondaries (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:14 x96q-v5-1 NetworkManager[498]: <info>  [1792005434.5560] device (wlxf0b040f7f699): state change: secondaries -> activated (reason 'none', sys-iface-state: 'managed')
+Oct 14 22:17:14 x96q-v5-1 NetworkManager[498]: <info>  [1792005434.5660] manager: NetworkManager state is now CONNECTED_GLOBAL
+Oct 14 22:17:14 x96q-v5-1 NetworkManager[498]: <info>  [1792005434.5780] device (wlxf0b040f7f699): Activation: successful, device activated.
+Oct 14 22:17:17 x96q-v5-1 NetworkManager[498]: <info>  [1792005437.5123] manager: startup complete
+-rw-r----- 1 root adm  75M Oct 14 22:38 /var/log/kern.log
+-rw-r----- 1 root adm 148K Oct  5 13:22 /var/log/kern.log.1
+-rw-r----- 1 root adm 102M Oct 14 22:39 /var/log/syslog
+-rw-r----- 1 root adm 317K Oct  5 13:22 /var/log/syslog.1
+/var/log/kern.log.1:2025-02-16T21:18:40.827505+03:00 x96q-v5-1 kernel: [  105.878222] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:40.863523+03:00 x96q-v5-1 kernel: [  105.914240] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:40.971498+03:00 x96q-v5-1 kernel: [  106.022257] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:41.007554+03:00 x96q-v5-1 kernel: [  106.058317] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:41.371566+03:00 x96q-v5-1 kernel: [  106.422367] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:41.935508+03:00 x96q-v5-1 kernel: [  106.986231] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:42.115510+03:00 x96q-v5-1 kernel: [  107.166262] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:42.151492+03:00 x96q-v5-1 kernel: [  107.202250] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:42.187580+03:00 x96q-v5-1 kernel: [  107.238286] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:42.223540+03:00 x96q-v5-1 kernel: [  107.274295] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:42.331532+03:00 x96q-v5-1 kernel: [  107.382290] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:42.367564+03:00 x96q-v5-1 kernel: [  107.418318] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:42.739567+03:00 x96q-v5-1 kernel: [  107.790303] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:43.303584+03:00 x96q-v5-1 kernel: [  108.354402] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:43.483567+03:00 x96q-v5-1 kernel: [  108.534314] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:43.591548+03:00 x96q-v5-1 kernel: [  108.642300] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:43.627599+03:00 x96q-v5-1 kernel: [  108.678292] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:43.699684+03:00 x96q-v5-1 kernel: [  108.750309] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:43.739553+03:00 x96q-v5-1 kernel: [  108.790315] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:44.103610+03:00 x96q-v5-1 kernel: [  109.154314] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:44.663509+03:00 x96q-v5-1 kernel: [  109.714275] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:44.843507+03:00 x96q-v5-1 kernel: [  109.894263] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:44.915596+03:00 x96q-v5-1 kernel: [  109.966342] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:44.951515+03:00 x96q-v5-1 kernel: [  110.002266] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:45.059582+03:00 x96q-v5-1 kernel: [  110.110357] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:45.095583+03:00 x96q-v5-1 kernel: [  110.146320] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:45.459505+03:00 x96q-v5-1 kernel: [  110.510278] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:46.015605+03:00 x96q-v5-1 kernel: [  111.066322] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:46.199633+03:00 x96q-v5-1 kernel: [  111.250437] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:46.271598+03:00 x96q-v5-1 kernel: [  111.322392] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:46.307666+03:00 x96q-v5-1 kernel: [  111.358672] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:46.419628+03:00 x96q-v5-1 kernel: [  111.470342] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:46.455652+03:00 x96q-v5-1 kernel: [  111.506359] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:46.819539+03:00 x96q-v5-1 kernel: [  111.870256] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:46.879505+03:00 x96q-v5-1 kernel: [  111.930283] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:46.915498+03:00 x96q-v5-1 kernel: [  111.966301] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:46.951594+03:00 x96q-v5-1 kernel: [  112.002330] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:46.995512+03:00 x96q-v5-1 kernel: [  112.046273] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:47.031707+03:00 x96q-v5-1 kernel: [  112.082377] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:47.067560+03:00 x96q-v5-1 kernel: [  112.118288] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:47.103523+03:00 x96q-v5-1 kernel: [  112.154274] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:47.143534+03:00 x96q-v5-1 kernel: [  112.194296] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:47.179538+03:00 x96q-v5-1 kernel: [  112.230282] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:47.287509+03:00 x96q-v5-1 kernel: [  112.338294] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:47.399503+03:00 x96q-v5-1 kernel: [  112.450248] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:47.471504+03:00 x96q-v5-1 kernel: [  112.522296] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:47.687519+03:00 x96q-v5-1 kernel: [  112.738246] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:47.795506+03:00 x96q-v5-1 kernel: [  112.846315] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:47.903521+03:00 x96q-v5-1 kernel: [  112.954322] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:47.939556+03:00 x96q-v5-1 kernel: [  112.990364] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:47.975502+03:00 x96q-v5-1 kernel: [  113.026294] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:48.199717+03:00 x96q-v5-1 kernel: [  113.250271] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:48.361016+03:00 x96q-v5-1 kernel: [  113.410573] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:48.455616+03:00 x96q-v5-1 kernel: [  113.506530] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:48.511658+03:00 x96q-v5-1 kernel: [  113.562509] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:48.571605+03:00 x96q-v5-1 kernel: [  113.622405] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:48.623816+03:00 x96q-v5-1 kernel: [  113.674439] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:48.671635+03:00 x96q-v5-1 kernel: [  113.722570] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:48.727613+03:00 x96q-v5-1 kernel: [  113.778525] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:48.775563+03:00 x96q-v5-1 kernel: [  113.826382] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:48.859582+03:00 x96q-v5-1 kernel: [  113.910394] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:48.907569+03:00 x96q-v5-1 kernel: [  113.958376] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:48.979592+03:00 x96q-v5-1 kernel: [  114.030360] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:49.015592+03:00 x96q-v5-1 kernel: [  114.066403] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:49.095588+03:00 x96q-v5-1 kernel: [  114.146357] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:49.187582+03:00 x96q-v5-1 kernel: [  114.238373] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:49.295554+03:00 x96q-v5-1 kernel: [  114.346292] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:49.347547+03:00 x96q-v5-1 kernel: [  114.398395] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:49.415496+03:00 x96q-v5-1 kernel: [  114.466309] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:50.119499+03:00 x96q-v5-1 kernel: [  115.170292] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:50.283501+03:00 x96q-v5-1 kernel: [  115.334269] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:50.379549+03:00 x96q-v5-1 kernel: [  115.430398] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:50.507508+03:00 x96q-v5-1 kernel: [  115.558309] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:50.543515+03:00 x96q-v5-1 kernel: [  115.594307] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:50.651526+03:00 x96q-v5-1 kernel: [  115.702351] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:50.759511+03:00 x96q-v5-1 kernel: [  115.810280] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:50.815750+03:00 x96q-v5-1 kernel: [  115.866392] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:50.851531+03:00 x96q-v5-1 kernel: [  115.902381] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:50.959545+03:00 x96q-v5-1 kernel: [  116.010349] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:51.019551+03:00 x96q-v5-1 kernel: [  116.070361] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:51.055519+03:00 x96q-v5-1 kernel: [  116.106394] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:51.163547+03:00 x96q-v5-1 kernel: [  116.214383] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:51.215525+03:00 x96q-v5-1 kernel: [  116.266379] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:51.251503+03:00 x96q-v5-1 kernel: [  116.302352] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:51.287516+03:00 x96q-v5-1 kernel: [  116.338361] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:51.347517+03:00 x96q-v5-1 kernel: [  116.398360] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:51.383525+03:00 x96q-v5-1 kernel: [  116.434368] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:51.479537+03:00 x96q-v5-1 kernel: [  116.530360] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:51.547528+03:00 x96q-v5-1 kernel: [  116.598322] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:51.583543+03:00 x96q-v5-1 kernel: [  116.634374] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:51.691539+03:00 x96q-v5-1 kernel: [  116.742346] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:52.183541+03:00 x96q-v5-1 kernel: [  117.234359] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:52.283543+03:00 x96q-v5-1 kernel: [  117.334355] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:52.499555+03:00 x96q-v5-1 kernel: [  117.550334] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:52.859570+03:00 x96q-v5-1 kernel: [  117.910346] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:53.059565+03:00 x96q-v5-1 kernel: [  118.110359] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:53.479542+03:00 x96q-v5-1 kernel: [  118.530363] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:53.587533+03:00 x96q-v5-1 kernel: [  118.638347] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2025-02-16T21:18:53.683535+03:00 x96q-v5-1 kernel: [  118.734371] xradio_wlan mmc3:0001:1: missed interrupt
+/var/log/kern.log.1:2026-10-05T13:22:54.274330+03:00 x96q-v5-1 kernel: [  118.774422] xradio_wlan mmc3:0001:1: missed interrupt
+802-11-wireless.hidden:                 no
+root@x96q-v5-1:~#

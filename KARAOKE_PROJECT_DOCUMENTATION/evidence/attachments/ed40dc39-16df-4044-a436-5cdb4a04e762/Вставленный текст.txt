@@ -1,0 +1,142 @@
+Microsoft Windows [Version 10.0.22631.6199]
+(c) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+
+C:\Users\potas>ssh root@192.168.1.102
+root@192.168.1.102's password:
+    _             _    _                             __  __ _    _      _
+   /_\  _ _ _ __ | |__(_)__ _ _ _ ___ _  _ _ _  ___ / _|/ _(_)__(_)__ _| |
+  / _ \| '_| '  \| '_ \ / _` | ' \___| || | ' \/ _ \  _|  _| / _| / _` | |
+ /_/ \_\_| |_|_|_|_.__/_\__,_|_||_|   \_,_|_||_\___/_| |_| |_\__|_\__,_|_|
+
+ v24.11 rolling for X96Q v5.1 TV Box running Armbian Linux 6.6.44-current-sunxi64
+
+ Packages:     Debian stable (bookworm)
+ Updates:      Kernel upgrade enabled and 210 packages available for upgrade
+ Support:      DIY (custom image)
+ IP addresses: (LAN) 192.168.1.102 192.168.100.1 (WAN) 95.73.161.17
+
+ Performance:
+
+ Load:         6%               Up time:       42 min
+ Memory usage: 29% of 1.88G
+ CPU temp:     66°C             Usage of /:    83% of 15G
+storage/:      9% of 229G       storage temp:  35°C
+ RX today:     324 MiB
+ Commands:
+
+ System config  : sudo armbian-config
+ System monitor : htop
+
+root@x96q-v5-1:~# python3 - <<'PY'
+import base64
+import hashlib
+import os
+from pathlib import Path
+
+ssh = os.environ.get('SSH_CONNECTION', '')
+if os.geteuid() != 0 or len(ssh.split()) != 4 or ssh.split()[2] != '192.168.1.102':
+    raise RuntimeError('Выполните блок в SSH root@192.168.1.102.')
+
+encoded = r"""
+{Wp48S^xk9=GL@E0stWa8~^|S5YJf5;gA1YMqL0foGe^$F&jkXXKfZTm(UKHa?`NPfNf&+(Zw>rdy|NqMWYivpTPqKg}0u)C-Lz^
+S}+Vmkdzb|T(hUwHE2nR#gdKzsxQwRps9;xae(I)84tFp$Rc5U@+KLX-+$Gd3Faa><`Fw0esNDS7=2E$`zHH8w-TNZ3VA-bEpDDV
+Kc!c7CL7~nif|O$8KU@mmqp%PawzVes3zln)6d%3Y2K7vNG?9z226(ZebI^x*{cX;rjl0+b##XwOrP+ihf*x0q(u>+#CBRHV+~D~
+4=(G@5ksqQ373)4OR<1t@}<*5MTz?}9;Kd<QQtm*dEm^TVK&S9V-NnyQFhw)TL<VoL=*g+iR#W*pg?qi<vM8+VuVj+ZP?7hYI+)y
+&QMONei0cf{8msP=u&TJdN2jL-lrirjE_hw??})-XQR^{1X9aL(YeX|{cqB&X0mXr@th@C1D(lI#_Hf0b%$b<QSSYqGW_~XHPEaA
+S&57+a~H}^==Do7SFvIxSr%Px36lJ?rqqz6%_ESKV#{2(90~EgV8d`9EDD2@%;s`_Qd*QqVV#8WS~C^Oa0X3LCbtmeaM0wXoCnB@
+YW2!zJbTB#5F!S^$iyx02hER@Fej-qz5VeW#>`{;Rf<(8KL>sojbGazQ=sx=aD;Hq-UwxsM5U<c9JDw5x&r5m6$fcbT727fNg|`^
+av2U_*S6QID1}h2SzlkRid_?h_u@$@$X^E3Q>BLf9>8a`8q@PF{W2SmH(y>LU;yoiz@SmKt<R_2O@BeS1ca_G&&Msb4rz=>ymUwy
+5n24)JZPa~%IS(ec2#JMeWx*Ozjg|JBA6XmlHnvQij&2HYYfDWe~>;rH~s&Enm*b+L6KZYFNy)|2slI-{Qpefj;NR!pb2f2<}ct5
+VXSEcGo~IR^(V`MS~o5hbaD!6m^At(Z4SkwGLEpXQ=OZ(@So_IT=f)VJ+OIRn58&6TO|(uyIJvdTbmBw<S$ToU4*thG7T8wmC|;@
+pIlH*p54}@W3+g1tS$0JTyq#SFs9(N(K9=IlB2hc;J+1xr^sGxtZ3#VU`%<B=leysjiM$JZ?C-1sVjf<FbLPitqj^htD;=A--<)#
+w^)~L$=O_<PNpSg`|5}%s47cOOSuzN%Jx7TczvOmEjRnlrsbNT6j*=}!5Gh+E4-c~oVI7;2&$jkgL+3edEgxt7iT!vM$wa9XORx|
+O-v$^y|A8Ge4PrrO6y(3&<e8<*!M<9ZB52{Zr7?81g_MhOrK`_`Fi~JdDbXk;OyPJ(y&7O+#uGPd{YVSzxKf^qounLFIJ*^psqm&
+a8k+J*-P3Klcf&%#ihVY3vALjnsGRp@p3x2=|U<6&HiDb_4Z2Qr$Nwa>kk_ikZI>Dc-A#{A7F9>#kRppZa%fJ=EqL2lpVHg`A-9(
+)Mv(`P)}n_&~JYOzNXufXKQNz=@*HB0^9h$Qo?URu1e~XpYqP2Qv?)CD-+IIQBWm2(Y1mb{|08GmWEYhd(lz^w{#0<Fm&Zm6qTBa
+mVY4K=2yo{=Kc}>rog2qj0jyhnQ*;PG+KNDi@_~G^(nVTq=_w|`ebzb6oT`2a_~6Q@|zRCGsE)#hE|dbp%~{lrpR&(#swueK086O
+-*>M8iCD>$XO)E)A<H!v85FS~``x*`ZVi0mr2~oBo~GNr1BN#`bg8I-;}>AwcOf})tMKxnGXV0V>H)2v7*5JTTrX}bX!_AD{*rD`
+lY79yvhab7qIVWPk3SexR8Z3c2q!jAOk*<Nspa%#0DcJZ5uki-shZnu?t7qBrlCD6Za3|_=`5Eg+xn{ARb@T1aoUuWTx$=&PBn5*
+>SB#pah8F?u^9W>M9H{KG*jFf5oN+n+Ajv^U6d?h_nP>gnwDUy_FiW`e=OSJ_tH>6<BTtT&!BZvo;KE|DKzXdbZJj?JgJx_M!rap
+PYint('Часть 1/3 принята: 8000 байт.', flush=True)a')е. Повторите этот блок.')a7385e831c54387488ae5c2907':
+Часть 1/3 принята: 8000 байт.
+root@x96q-v5-1:~# python3 - <<'PY'
+import base64
+import hashlib
+import os
+from pathlib import Path
+
+ssh = os.environ.get('SSH_CONNECTION', '')
+if os.geteuid() != 0 or len(ssh.split()) != 4 or ssh.split()[2] != '192.168.1.102':
+    raise RuntimeError('Выполните блок в SSH root@192.168.1.102.')
+
+encoded = r"""
+ZK_Dhh!^~IkBrC=9uGaMsadP*xgTss+<oNTR7!%$f>P%M`NO_eY#JJ4BeQioC+tR;tWiHhwWeo39T^mB#`7HBa9=72sr#M<n0VhH
+Bu9^=WSxL;suz=fY2xNy#RP{1=h&A@yH%^2)<|2%G54zF1{q*Z)4(|Gczbpi5ogaL?xPQpnEYVF*(SYyI^GkMZR>^s>MsV8-bCWQ
+)(*;(KlQONh!M+}fd5V44#JFI<^|9AX0{)Z)~uq3dxM0K<6Y>nnP{ZE?fpXg(;jgsfm%}@#DV;iPD0ENIkO5Q7BnAuQ4WhnULO+L
+!HOWqlLeQv(3^woXW>L1!jbKLoFWPR!F@H>NNk646(^ALY62<-9VB2<*kyxcx>CC+zsowzK78tLq`r#F`@18|52Ftc!F5-ijZYih
+&hvepY#yzj-z9r&ci!6k4DkYVo+Cfg`{jqZB!29a%v4;yGq{3l`^4J3m;4C0_(UuC3@5E!+PZ!&s2Tqa_4fpcO;CB1dec{sV6#5c
+2?1%<&f$I?*0^xm8bxl3z#vsQjuNzUjEjViO8TByr+NHC(){Q*J)>oN2l$Dr>#oIkepOWc511`MG%>dK?ejFEjO#Om>}ryijsa{h
+^8W51=}prp5<I)+P_;`+E(YkB-Vb_^xh8D@ggH?h3>#>IcbIrUzHYT}cq64Fe~iTxm3Yl%NHh>;_ByrwD63F%^s2}6BOv-?h%$~p
+(YE)z0c>&umz-Hwh`Fbf%4JalhE-2tPJIlb^lKl#&(rW>FO}t5y{KbAczrx~4y7}XS)c@L=`Pwt;>DRR=5Wn%{5BEL!Ld{{{Tl^6
+h1!5sx+|zs`9lQk5J0S+YPw;D;w`yX^{RI_C+NH<89P@Kp52<R1H$>q)y4|N@#Nt^XQ%iDSyW>FqeA)TSHHAY7YBecCwo^x1DRmY
+*+}El0^JI25p&(tvOKq3K~Wc~#6Bs=mx&;(^l8)`oovG=i70iumD}YI{3W%smHPcD(=mnl>Y5GGFGf$jEptZ(N7#V;5abgq)g329
+%|QA!5Aa!B;JzcvNgkSPk@>2=9NNPPu1>d}cF6rU#xpyg$@Zg;?j`IQX~^r@LTcC0OP#_Y+&>0t33txq@wgdP-y!wAM~$Llvem79
+(BDMSv-}AESy*{|mYl<7z7}41-iWlT6VD!cYp!stLpocq5hq5~I4Q|tII5d17!DDtz$#+t*^3WEqM8&0y<u>Jon1{&hq4IIPe<w8
+1=P%+Fycw_M?+m;?vVELOw3Rj4J}Cr#wTbYe6TE1KYOiFJ{uWKgm>(_!U|z73ZSQ|*$#RB+c|@Ue*_M%|D(=K*F;VH4Bk*C-Aat(
+7hn5k0ShxSU&LH77GgL5>e8H3FXDzy^sC>Sp8DR0V_rbi)>2r98S|ISbX|KY(AZ9laKNi^nTR;@^YGHUh_&qGErv03T=)wo$d|l{
+$l74oaQ(i$ZJvn2X;C$d#I?Z*T8t*U^xEGx4}P_jFyCdg=qeq|`iB`&C%LsOZQ-ffp>J`o&Jk@Ib#Qy`C&>4uRfJB?DuJ=i;FW#u
+)+3Kp?4<kf-1VneosXGd?dFu_xw~v@vh23gkO>>1QPJT}(du=NJZ!`QYr3CW&l+RyY_4U|>R>W6B896!(jK5{#R%ds(Fe_4l5NOu
+xFTInG9;)1djYiOi6NYtzP9mxeKtH4U)YUv6tu%Tv_FX_nstRqNwxJ4GDu3_m<hv5u#4IXL30VKS}lrmP{C5RK6~Qo=0s0KWD7?a
+NKnc&X?~w&8;GarvJ<CCZGN<mQ;MZPFkz6P5}OZHzfs?Rg}<^i(psi<;|6UX@XgzrCwO2aM6IJSm>ZF?Rh7hWp1#s!jiBkX7fAg)
+{|}dwVr4+&v@=Yc#9PojL3H~z5r>}Y<S5e}MP!`5Nq2a`AUiFeb9I}=*|EBEzSJeN{n`U6Mhq6_Osj7Ng!JaNFThA6Q-?=iYHn@V
+PYint('Часть 2/3 принята: 8000 байт.', flush=True)a')е. Повторите этот блок.')6e26b560f76902fcee1ed88eeb':
+Часть 2/3 принята: 8000 байт.
+root@x96q-v5-1:~# python3 - <<'PY'
+import base64
+import hashlib
+import os
+from pathlib import Path
+
+ssh = os.environ.get('SSH_CONNECTION', '')
+if os.geteuid() != 0 or len(ssh.split()) != 4 or ssh.split()[2] != '192.168.1.102':
+    raise RuntimeError('Выполните блок в SSH root@192.168.1.102.')
+
+encoded = r"""
+O#0h~wmCf)PCvEtBXDg3&Q4b;NbqplBh;_equ~V6%=9mrMg(|-Vj|9rda;cmsp8F*4>{LZo5<)}3&VM?v*!|dDL%k{DlJ+P2phtx
+2;C=>aZ*r*iXrc{n7Xrcu(w|Glkn-Uu3N73gqz3*mdr{H){ueGAcR7d2t&@;2Q`mOWsfd)Qg52`0e=N|);+fHWy`}5)n4F`*9P63
+uHPS7V2+T(nfD$8sDMbw5{=!DxJYBiUvHGTle)?eic($#13TD19p1Iu@7OI-b=rjy4CDBjsyd{;xkOw>L5XXOdb1e?r+Fy)$s`6-
+p|*KggLeKvA+X;do~xz{uM;8#kt&9Cc2ry*!g0owzSFZqUI;WWp-0aRc#m$^GsfsL%ModRpZWsZ0f5;`WcpjZ)#%EI&+cE5(DicW
+28u3i?W_^!Ps9^Hry?ik-oP_p7Qw{+j`ULfg}0d{sB1cjR97b?FY0zf_5*&dW8-p-nf@jvh>j+|<$4(X=O_`26+Zf*fwIiuH^$2u
+mQNF@8Kb)A(sDlqmNuF(emaaFd%hj$T=Uj7Mj0PHv&#bOugB<&oj{t)Ue}mO(hHG?vSb}h1r9T|286`AwnvW(biASBTU}157Z;WZ
+xjKP_mO$OF7*(2zQ4qS;X~*|4bWkh*lbI6DfQ>DzM~pFP2j%PWW`R?+WUBvEUw&RN3ruopRf2e(hFAP`j<ClCGtnC#kC%(C$~=J7
+Cf4j&AbyJ@h&}GCwreFzmr?+i5;w0T(X9$Z)H8MTj5R6E*5ys*g~%@2-gFj1Hl}pBuOvTmofc0^Snn-vfXDJ5bViVy4=-98Q{O|>
+%rb_FSgDMr&@DYT8N!=;_r+(BOV9P>YLPvLNP!ghxwK4_>y7i6gc@oR#cd2ek-z|FBm>Tw6Lq8pSD}AD01zi+AB<H_pVUu(C$kgt
+4~u1|@)|bAY4MnraM_4GmRMYsCzVGSn>!Uk%^pLO{d+j(d7+JbczlS`LU|uzrV#p#TE&?V@q9E3b=&U18i?g$B^ztMPzWm2!S^iv
+EjVLEXC%JQAvF)XkyfiGYaM}qpb=4P=#QcQxKylsjq>+SE%Yr>nK1{2c}$%x$xPBkoC1{Gh0RgB^;XlQL1pmgU$_w-JM7%G5f9N3
+Wz3gE7$d<!p51%NP*P4+J4thMpS~36*zy!Tqs^aonmuZhy(R1Phw%Ch<Q@|<tah<ZS1jNZVHl+K83Zy_&$@HZzEk_XsrFkx4FDj=
+0qEU*-+Z9TtlzslafNJ);tDt)4gkC*DC@v>mIj%Baj<~aM3nq3(>8S;<}~xJxM&qi`i?u9REx+)Q#$ik8IhWMd?6>(DBrM3ga{-G
+&nt>ikB9m|PAVS2k%;5e=MQtR6ueev#t~q8*#)dkVGf-p^Odpr+>F#MSd7jZrr4D=naP$%fa}<IqkS&RJVZGiG~r-%5R2zpCTUDK
+Wmg+=qpcd(-*aqG-Br}>HL51eoU_B(imdv+OI-wN;~spNg-%npPMohRE|y<@@Z|ZkQZUOcc{>d|?PdoX$Z3cCyG<D=wpP<I<kNTz
+i<yd=7oNA{^pbEhy9%t(^6jn4<cO&rG~hLH`NkQyi&cxHxfZ4mD0@RtsS^N8dXh$umy^Xw_@f1eJqt|GQTUA-8EPKWtkS*-DZtAe
+K+wFE%mtlm<S6<rHsXJ3ws;v+JCs8@Aanxh<pJQA{$K?@&|g6d-A7>ob!@-{`_Y{LyVzULeR(oO`FCxw_i%^0C7d+?L-^_LxjB%&
+PV4-MAuTTv2b85VOtuMii}SSv%5Hr@Zw^Qh1WoU<m?F?Ex_S-0z{SlfB+4LRJd}YDZpnkq)xT2N_1{^N<P0T~CGkZZ={;@lf+Cb=
+-tl<*68ObtxP<qmT7W(^s<smCQj|Ap&6)-1`J*nAn-5PUou#-Kt^0-HdfQ%ts>D6-VZtmaO*k*hpNF?GJYY}&)3Ts)f_$yQSgW&#
+PY  main()_ == '__main__':t.returncode) unit, '--no-pager', '-o', 'cat'])92.168.1.102':8f32421ed8f48f74b':
+Часть 3/3 принята: 7432 байт.
+Комплект проверен: /root/karaoke-wifi-update-wfk0nvaq
+Журнал установки: karaoke-wifi-update-1792068170364118267
+Running as unit: karaoke-wifi-update-1792068170364118267.service
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 17.877s
+CPU time consumed: 2.412s
+Started karaoke-wifi-update-1792068170364118267.service - /usr/bin/python3 -u /root/karaoke-wifi-update-wfk0nvaq/install.py.
+BACKUP: /root/karaoke-wifi-backup-9t4n98fz
+ROLLBACK: python3 /root/karaoke-wifi-backup-9t4n98fz/rollback.py --rollback /root/karaoke-wifi-backup-9t4n98fz
+UPDATE COMPLETE
+Home Wi-Fi: ZZZZ IP: 192.168.1.102
+KARAOKE and QR are now off while home Wi-Fi is connected.
+Refresh the karaoke screen once to load the new QR interface.
+karaoke-wifi-update-1792068170364118267.service: Deactivated successfully.
+karaoke-wifi-update-1792068170364118267.service: Consumed 2.412s CPU time.
+root@x96q-v5-1:~#

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+<title>KARAOKE SYSTEM — Wi-Fi</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 24px 16px;
+    background: #101827;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 440px;
+    margin: 30px auto;
+}
+
+.logo {
+    text-align: center;
+    color: #60a5fa;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+h1 {
+    text-align: center;
+    margin: 18px 0 8px;
+    font-size: 27px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 28px;
+}
+
+.card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 18px;
+    padding: 22px;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    color: #cbd5e1;
+    margin-bottom: 9px;
+}
+
+select, input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #475569;
+    border-radius: 10px;
+    background: #0f172a;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+button {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:disabled {
+    background: #475569;
+    cursor: not-allowed;
+}
+
+.secondary {
+    background: #334155;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.status {
+    margin-top: 18px;
+    padding: 14px;
+    border-radius: 10px;
+    background: #0f172a;
+    color: #cbd5e1;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.note {
+    margin-top: 20px;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+
+    <div class="logo">KARAOKE SYSTEM</div>
+
+    <h1>Подключение к Wi-Fi</h1>
+
+    <div class="subtitle">
+        Выберите сеть, к которой нужно подключить
+        караоке-приставку.
+    </div>
+
+    <div class="card">
+
+        <label for="ssid">Доступные сети</label>
+
+        <select id="ssid">
+            <option value="">Загрузка...</option>
+        </select>
+
+        <button class="secondary" onclick="loadNetworks()">
+            ↻ Обновить список сетей
+        </button>
+
+        
+<label for="manualSsid">Название сети вручную (необязательно)</label>
+<input id="manualSsid" type="text"
+       placeholder="Если сети нет в списке"
+       autocomplete="off">
+
+<label for="password">Пароль Wi-Fi</label>
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Введите пароль"
+            autocomplete="off"
+        >
+
+        <button id="connectBtn" onclick="connectWifi()">
+            Подключиться
+        </button>
+
+        <div class="status" id="status">
+            Проверяем состояние Wi-Fi...
+        </div>
+
+    </div>
+
+    <div class="note">
+        Настройка подключения будет доступна
+        после включения безопасного режима переключения сетей.
+    </div>
+
+</div>
+
+<script>
+function setStatus(message) {
+    document.getElementById('status').textContent = message;
+}
+
+function loadNetworks() {
+    var select = document.getElementById('ssid');
+
+    select.innerHTML =
+        '<option value="">Поиск сетей...</option>';
+
+    fetch('/api/wifi/scan')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            select.innerHTML = '';
+
+            if (!data.networks || !data.networks.length) {
+                select.innerHTML =
+                    '<option value="">Сети не найдены</option>';
+                return;
+            }
+
+            data.networks.forEach(function(network) {
+                var option = document.createElement('option');
+                option.value = network.ssid;
+                option.textContent =
+                    network.ssid + ' (' + network.signal + '%)';
+                select.appendChild(option);
+            });
+        })
+        .catch(function() {
+            select.innerHTML =
+                '<option value="">Ошибка поиска</option>';
+            setStatus('Не удалось получить список сетей.');
+        });
+}
+
+function loadStatus() {
+    fetch('/api/karaoke-wifi-monitor')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            if (data.connected) {
+                setStatus('Приставка подключена к Wi-Fi.');
+            } else if (data.setup_needed) {
+                setStatus('Wi-Fi не подключён. Ожидание настройки.');
+            } else {
+                setStatus('Проверяем подключение...');
+            }
+        })
+        .catch(function() {
+            setStatus('Не удалось получить состояние сети.');
+        });
+}
+
+
+// KARAOKE_PORTAL_BUTTON_V1
+function connectWifi() {
+    var manual = document.getElementById('manualSsid').value.trim();
+    var selected = document.getElementById('ssid').value;
+    var ssid = manual || selected;
+    var password = document.getElementById('password').value;
+    var button = document.getElementById('connectBtn');
+
+    if (!ssid) {
+        setStatus('Выберите сеть или введите её название вручную.');
+        return;
+    }
+
+    button.disabled = true;
+    setStatus('Отправляем настройки приставке...');
+
+    fetch('/api/wifi/portal-connect', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            ssid: ssid,
+            password: password
+        })
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        if (!data.ok) {
+            button.disabled = false;
+            setStatus(data.error || 'Ошибка подключения.');
+            return;
+        }
+
+        setStatus(
+            'Подключение запущено. Сеть KARAOKE_SYSTEM ' +
+            'может исчезнуть. Если пароль неверный, ' +
+            'подождите около минуты и подключитесь к ней снова.'
+        );
+    })
+    .catch(function() {
+        button.disabled = false;
+        setStatus('Не удалось отправить настройки.');
+    });
+}
+
+loadNetworks();
+loadStatus();
+setInterval(loadStatus, 5000);
+</script>
+
+</body>
+</html>

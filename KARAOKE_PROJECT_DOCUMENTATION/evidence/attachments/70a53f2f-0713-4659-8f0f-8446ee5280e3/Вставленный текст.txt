@@ -1,0 +1,444 @@
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32> $karaokeBackup = Join-Path $env:USERPROFILE ("Downloads\X96Q-karaoke-" + (Get-Date -Format "yyyyMMdd-HHmmss"))
+PS C:\Windows\System32> New-Item -ItemType Directory -Path $karaokeBackup | Out-Null
+PS C:\Windows\System32>
+PS C:\Windows\System32> ssh root@192.168.1.50 'tar -czf /root/karaoke-backup.tar.gz -C /root karaoke && sha256sum /root/karaoke-backup.tar.gz'
+root@192.168.1.50's password:
+
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32> $karaokeBackup = Join-Path $env:USERPROFILE ("Downloads\X96Q-karaoke-" + (Get-Date -Format "yyyyMMdd-HHmmss"))
+PS C:\Windows\System32> New-Item -ItemType Directory -Path $karaokeBackup | Out-Null
+PS C:\Windows\System32>
+PS C:\Windows\System32> ssh root@192.168.1.50 'set -e; archive=$(mktemp /root/karaoke-app-backup-XXXXXX.tar.gz); tar --one-file-system --exclude=karaoke/karaoke_media -czf "$archive" -C /root karaoke; sha256sum "$archive"'
+root@192.168.1.50's password:
+9a69e10a21bb404592ec787b20e99f45c222da8e11cf16c1554057feb4f49797  /root/karaoke-app-backup-1wqPpb.tar.gz
+PS C:\Windows\System32>
+PS C:\Windows\System32> PS C:\Windows\System32>
+Get-Process: Не удается найти процесс "C:\Windows\System32>". Проверьте имя процесса и вызовите командлет еще раз.
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32>
+PS C:\Windows\System32> scp root@192.168.1.50:/root/karaoke-app-backup-1wqPpb.tar.gz "$karaokeBackup\"
+root@192.168.1.50's password:
+karaoke-app-backup-1wqPpb.tar.gz                                                      100% 1700KB   1.3MB/s   00:01
+PS C:\Windows\System32>
+PS C:\Windows\System32> Get-FileHash "$karaokeBackup\karaoke-app-backup-1wqPpb.tar.gz" -Algorithm SHA256
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          9A69E10A21BB404592EC787B20E99F45C222DA8E11CF16C1554057FEB4F49797       C:\Users\potas\Downloads\X96Q-k…
+
+PS C:\Windows\System32>
+PS C:\Windows\System32> tar -tzf "$karaokeBackup\karaoke-app-backup-1wqPpb.tar.gz"
+karaoke/
+karaoke/karaoke_youtube_manager.py
+karaoke/.ytdl_archive
+karaoke/karaoke_youtube_manager.py.bak-1080p-20261014-171529
+karaoke/karaoke_youtube_manager.py.bak-20261014-183957
+karaoke/backups/
+karaoke/backups/ui5_final_20261013_150129/
+karaoke/backups/ui5_final_20261013_150129/youtube_manager.html
+karaoke/backups/poster_search_v2_20261012_100008/
+karaoke/backups/poster_search_v2_20261012_100008/poster_auto.py
+karaoke/backups/poster_search_v2_20261012_100008/settings.json
+karaoke/backups/poster_search_v2_20261012_100008/__pycache__/
+karaoke/backups/poster_search_v2_20261012_100008/__pycache__/poster_auto.cpython-311.pyc
+karaoke/backups/poster_search_v2_20261012_100008/app.py
+karaoke/backups/poster_search_v2_20261012_100008/search.json
+karaoke/backups/poster_search_v2_20261012_100008/missing.json
+karaoke/backups/poster_auto_before_filter.py
+karaoke/backups/keyboard_fullwidth_20261013_161109/
+karaoke/backups/keyboard_fullwidth_20261013_161109/app.py
+karaoke/backups/ui5_inline_20261013_145921/
+karaoke/backups/ui5_inline_20261013_145921/youtube_manager.html
+karaoke/backups/BEFORE_YANDEX_FIX_20261012_152830/
+karaoke/backups/BEFORE_YANDEX_FIX_20261012_152830/poster_auto.py
+karaoke/backups/BEFORE_YANDEX_FIX_20261012_152830/app.py
+karaoke/backups/posters_before_multisource_20261012_150032/
+karaoke/backups/posters_before_multisource_20261012_150032/poster_auto.py
+karaoke/backups/posters_before_multisource_20261012_150032/app.py
+karaoke/backups/posters_before_multisource_20261012_150032/poster_manager.html
+karaoke/backups/youtube_fast_20261012_112924/
+karaoke/backups/youtube_fast_20261012_112924/karaoke_youtube_manager.py
+karaoke/backups/youtube_fast_20261012_112924/youtube_manager.html
+karaoke/backups/youtube_fast_20261012_112924/__pycache__/
+karaoke/backups/youtube_fast_20261012_112924/__pycache__/karaoke_youtube_manager.cpython-311.pyc
+karaoke/backups/ui5_20261013_144716/
+karaoke/backups/ui5_20261013_144716/youtube_search.html
+karaoke/backups/ui5_20261013_144716/youtube_manager.html
+karaoke/backups/service_fix_20261012_092201/
+karaoke/backups/service_fix_20261012_092201/init_karaoke.sh
+karaoke/backups/service_fix_20261012_092201/karaoke-server.service
+karaoke/backups/service_fix_20261012_092201/10-fix-user.conf
+karaoke/backups/service_fix_20261012_092201/20-disable-init.conf
+karaoke/backups/karaoke-server.service.backup
+karaoke/backups/storage_posters_20261012_094717/
+karaoke/backups/storage_posters_20261012_094717/settings.json
+karaoke/backups/storage_posters_20261012_094717/app.py
+karaoke/backups/storage_posters_20261012_094717/missing.json
+karaoke/backups/poster_smart_20261013_152707/
+karaoke/backups/poster_smart_20261013_152707/poster_auto.py
+karaoke/backups/remove_youtube_preview_20261013_122612/
+karaoke/backups/remove_youtube_preview_20261013_122612/karaoke_youtube_manager.py
+karaoke/backups/remove_youtube_preview_20261013_122612/youtube_search.html
+karaoke/backups/keyboard_height_20261013_161344/
+karaoke/backups/keyboard_height_20261013_161344/app.py
+karaoke/backups/youtube_stop_20261012_112215/
+karaoke/backups/youtube_stop_20261012_112215/karaoke_youtube_manager.py
+karaoke/backups/youtube_stop_20261012_112215/youtube_manager.html
+karaoke/backups/STABLE_20261012/
+karaoke/backups/STABLE_20261012/karaoke_youtube_manager.py
+karaoke/backups/STABLE_20261012/poster_auto.py
+karaoke/backups/STABLE_20261012/socket.io.min.js
+karaoke/backups/STABLE_20261012/youtube_manager.html
+karaoke/backups/STABLE_20261012/__pycache__/
+karaoke/backups/STABLE_20261012/__pycache__/karaoke_youtube_manager.cpython-311.pyc
+karaoke/backups/STABLE_20261012/__pycache__/app.cpython-311.pyc
+karaoke/backups/STABLE_20261012/__pycache__/poster_auto.cpython-311.pyc
+karaoke/backups/STABLE_20261012/SHA256SUMS
+karaoke/backups/STABLE_20261012/app.py
+karaoke/backups/STABLE_20261012/poster_manager.html
+karaoke/backups/poster_search_v2_20261012_095954/
+karaoke/backups/poster_search_v2_20261012_095954/poster_auto.py
+karaoke/backups/poster_search_v2_20261012_095954/settings.json
+karaoke/backups/poster_search_v2_20261012_095954/app.py
+karaoke/backups/poster_search_v2_20261012_095954/search.json
+karaoke/backups/poster_search_v2_20261012_095954/missing.json
+karaoke/backups/posters_20261013_151632/
+karaoke/backups/posters_20261013_151632/app.py
+karaoke/backups/posters_20261013_151632/poster_manager.html
+karaoke/backups/poster_smart_safe_20261013_152811/
+karaoke/backups/poster_smart_safe_20261013_152811/poster_auto.py
+karaoke/backups/youtube_scan_before_20261012_140245/
+karaoke/backups/youtube_scan_before_20261012_140245/karaoke_youtube_manager.py
+karaoke/backups/youtube_scan_before_20261012_140245/youtube_manager.html
+karaoke/backups/keyboard_right_20261013_160432/
+karaoke/backups/keyboard_right_20261013_160432/app.py
+karaoke/backups/BEFORE_PLAYER_OPT_20261012_161117/
+karaoke/backups/BEFORE_PLAYER_OPT_20261012_161117/play_karaoke.sh
+karaoke/backups/BEFORE_PLAYER_OPT_20261012_161117/app.py
+karaoke/backups/BEFORE_YANDEX_20261012_151718/
+karaoke/backups/BEFORE_YANDEX_20261012_151718/poster_auto.py
+karaoke/backups/BEFORE_YANDEX_20261012_151718/poster_manager.html
+karaoke/backups/ui_repair_20261012_093751/
+karaoke/backups/ui_repair_20261012_093751/app.py
+karaoke/backups/init_karaoke.sh.backup
+karaoke/backups/youtube_batch_20261012_110927/
+karaoke/backups/youtube_batch_20261012_110927/karaoke_youtube_manager.py
+karaoke/backups/youtube_batch_20261012_110927/youtube_manager.html
+karaoke/backups/posters_20261012_092842/
+karaoke/backups/posters_20261012_092842/app.py
+karaoke/backups/poster_engine_20261013_152029/
+karaoke/backups/poster_engine_20261013_152029/poster_auto.py
+karaoke/backups/BEFORE_POSTER_VERIFIED_20261012_153901/
+karaoke/backups/BEFORE_POSTER_VERIFIED_20261012_153901/poster_auto.py
+karaoke/backups/poster_smart_20261013_152621/
+karaoke/backups/poster_smart_20261013_152621/poster_auto.py
+karaoke/backups/BEFORE_POSTER_SAFE/
+karaoke/backups/BEFORE_POSTER_SAFE/poster_auto.py
+karaoke/backups/BEFORE_POSTER_SAFE/app.py
+karaoke/backups/BEFORE_POSTER_SAFE/poster_manager.html
+karaoke/backups/poster_display_20261012_101100/
+karaoke/backups/poster_display_20261012_101100/artists.json
+karaoke/backups/poster_display_20261012_101100/app.py
+karaoke/backups/poster_smart_fixed_20261013_152729/
+karaoke/backups/poster_smart_fixed_20261013_152729/poster_auto.py
+karaoke/backups/ui5_apply_20261013_144827/
+karaoke/backups/ui5_apply_20261013_144827/youtube_manager.html
+karaoke/backups/youtube_manager_20261012_104924/
+karaoke/backups/youtube_manager_20261012_104924/__pycache__/
+karaoke/backups/youtube_manager_20261012_104924/__pycache__/app.cpython-311.pyc
+karaoke/backups/youtube_manager_20261012_104924/app.py
+karaoke/karaoke_youtube_manager.py.before_5000_20261013_154024
+karaoke/youtube_search.html.bak-validation-20261014-173430
+karaoke/.youtube_manager.json
+karaoke/app.py.before_queue_fix_20261013_125749
+karaoke/app.py.bak.wifi-ui.20261013_165250
+karaoke/app_recovered.py
+karaoke/app.py.before_responsive_20261013_214515
+karaoke/poster_auto.py.before_ranked
+karaoke/fix2.py
+karaoke/download_channel_batched.py
+karaoke/fonsound/
+karaoke/karaoke_name_normalizer.py
+karaoke/karaoke_youtube_manager.py.bak-names-v2-20261014-165643
+karaoke/init_karaoke.sh
+karaoke/clean_names.sh
+karaoke/karaoke_youtube_manager.py.bak-20261014-185034
+karaoke/cookies.txt
+karaoke/app.py.before_queue_restart_20261013_130047
+karaoke/fix.py
+karaoke/.app.py.swp
+karaoke/app.py.before_remove_preview_20261013_122412
+karaoke/install_quarantine_v4.py
+karaoke/youtube_search.html
+karaoke/karaoke.db
+karaoke/socket.io.fixed.js
+karaoke/.quarantine_admin_token
+karaoke/poster_auto.py
+karaoke/download.log
+karaoke/socket.io.min.js
+karaoke/app.py.bak_1791557926
+karaoke/.bgm_settings.json
+karaoke/karaoke_youtube_manager.py.bak-pot-ejs-20261014-160911
+karaoke/karaoke_quarantine.py
+karaoke/install_youtube_resilience.py
+karaoke/audio_setup.sh
+karaoke/youtube_manager.html
+karaoke/app.py.bak.portal.20261013_174731
+karaoke/requirements.txt
+karaoke/backup_recovery_20261012_130816/
+karaoke/backup_recovery_20261012_130816/karaoke_youtube_manager.py
+karaoke/backup_recovery_20261012_130816/poster_auto.py
+karaoke/backup_recovery_20261012_130816/youtube_manager.html
+karaoke/backup_recovery_20261012_130816/karaoke.db.backup
+karaoke/backup_recovery_20261012_130816/app.py
+karaoke/backup_recovery_20261012_130816/poster_manager.html
+karaoke/app.py.bak.safety.20261013_180036
+karaoke/karaoke_youtube_manager.py.bak-names-20261014-164551
+karaoke/__pycache__/
+karaoke/__pycache__/karaoke_name_normalizer.cpython-311.pyc
+karaoke/__pycache__/karaoke_youtube_manager.cpython-311.pyc
+karaoke/__pycache__/install_quarantine.cpython-311.pyc
+karaoke/__pycache__/app.py.cpython-311.pyc
+karaoke/__pycache__/app.cpython-311.pyc
+karaoke/__pycache__/poster_auto.cpython-311.pyc
+karaoke/__pycache__/karaoke_quarantine.cpython-311.pyc
+karaoke/app.py.bak.wifi-page.20261013_171643
+karaoke/app.py.before_search_fix_20261013_134541
+karaoke/posters
+karaoke/youtube_search.html.backup_20261013_123113
+karaoke/download_channel.py
+karaoke/app.py
+karaoke/karaoke_quarantine_v2.py
+karaoke/poster_manager.html
+karaoke/karaoke_youtube_manager.py.bak-retries
+karaoke/install_quarantine_v2.py
+karaoke/app.py.bak-search-fix
+karaoke/karaoke_youtube_manager.py.bak-resilience-20261013-002808
+karaoke/karaoke_name_normalizer.py.bak-20261014-170242
+karaoke/socket.io.min.js.broken_backup
+karaoke/backup_before_update_20261012_124535/
+karaoke/backup_before_update_20261012_124535/karaoke_youtube_manager.py
+karaoke/backup_before_update_20261012_124535/poster_auto.py
+karaoke/backup_before_update_20261012_124535/karaoke.db.backup
+karaoke/backup_before_update_20261012_124535/app.py
+karaoke/download_playlist.py.save
+karaoke/wifi/
+karaoke/wifi/diagnostic-20261013_183107/
+karaoke/wifi/diagnostic-20261013_183107/run.sh
+karaoke/wifi/diagnostic-20261013_183107/iptables-before.txt
+karaoke/wifi/diagnostic-20261013_183107/connections.txt
+karaoke/wifi/diagnostic-20261013_183107/rescue.sh
+karaoke/wifi/diagnostic-20261013_183107/http-test.py
+karaoke/wifi/diagnostic-20261013_183107/ap-profile.txt
+karaoke/wifi/diagnostic-20261013_183107/routes-before.txt
+karaoke/wifi/diagnostic-20261013_183107/ip-before.txt
+karaoke/wifi/monitor.py.bak.20261013_164637
+karaoke/wifi/safe-backup/
+karaoke/wifi/safe-backup/system-connections/
+karaoke/wifi/safe-backup/system-connections/ZZZZ.nmconnection
+karaoke/wifi/safe-backup/system-connections/Alisa.nmconnection
+karaoke/wifi/safe-backup/system-connections/KARAOKE_SYSTEM.nmconnection
+karaoke/wifi/safe-backup/auto-manager.py
+karaoke/wifi/restore-wifi.sh
+karaoke/wifi/setup.html.bak.portal.20261013_174731
+karaoke/wifi/diagnostic-20261013_183123/
+karaoke/wifi/diagnostic-20261013_183123/run.sh
+karaoke/wifi/diagnostic-20261013_183123/iptables-before.txt
+karaoke/wifi/diagnostic-20261013_183123/connections.txt
+karaoke/wifi/diagnostic-20261013_183123/rescue.sh
+karaoke/wifi/diagnostic-20261013_183123/result.log
+karaoke/wifi/diagnostic-20261013_183123/http-test.py
+karaoke/wifi/diagnostic-20261013_183123/ap-profile.txt
+karaoke/wifi/diagnostic-20261013_183123/routes-before.txt
+karaoke/wifi/diagnostic-20261013_183123/ip-before.txt
+karaoke/wifi/ap-http-check.log
+karaoke/wifi/final-auto-test.sh
+karaoke/wifi/connect-worker.py.bak.lock.20261013_180140
+karaoke/wifi/full-diagnostic-rescue.log
+karaoke/wifi/backup-controller/
+karaoke/wifi/backup-controller/auto-manager.py
+karaoke/wifi/phone-packets.log
+karaoke/wifi/final-auto-test.log
+karaoke/wifi/monitor.py
+karaoke/wifi/auto-manager.py
+karaoke/wifi/__pycache__/
+karaoke/wifi/__pycache__/connect-worker.cpython-311.pyc
+karaoke/wifi/__pycache__/auto-manager.cpython-311.pyc
+karaoke/wifi/__pycache__/monitor.cpython-311.pyc
+karaoke/wifi/connect-worker.py.bak.safety.20261013_180036
+karaoke/wifi/phone-access.log
+karaoke/wifi/connect-worker.py
+karaoke/wifi/ap-test.sh
+karaoke/wifi/packet-test-20261013_183748/
+karaoke/wifi/packet-test-20261013_183748/capture.log
+karaoke/wifi/packet-test-20261013_183748/capture.sh
+karaoke/wifi/setup.html
+karaoke/wifi/ap-http-check.sh
+karaoke/wifi/ap-test.log
+karaoke/wifi/full-backup-20261013_182201/
+karaoke/wifi/full-backup-20261013_182201/karaoke-wifi-monitor.service
+karaoke/wifi/full-backup-20261013_182201/connections.txt
+karaoke/wifi/full-backup-20261013_182201/connect-worker.py
+karaoke/wifi/full-backup-20261013_182201/app.py
+karaoke/wifi/full-backup-20261013_182201/setup.html
+karaoke/wifi/backup-final-20261013_184931/
+karaoke/wifi/backup-final-20261013_184931/auto-manager.py
+karaoke/wifi/backup-final-20261013_184931/ap-test.sh
+karaoke/install_quarantine_v3.py
+karaoke/app.py.bak
+karaoke/install_quarantine.py
+karaoke/karaoke_youtube_manager.py.bak-download-20261014-182650
+karaoke/karaoke_youtube_manager.py.bak-node22
+karaoke/app.py.before_menu_optimization_20261013_133454
+karaoke/recovery_safe_20261012/
+karaoke/recovery_safe_20261012/karaoke_youtube_manager.py
+karaoke/recovery_safe_20261012/poster_auto.py
+karaoke/recovery_safe_20261012/app.py
+karaoke/download_channel.log
+PS C:\Windows\System32>
+PS C:\Windows\System32> Write-Host "Папка копии: $karaokeBackup"
+Папка копии: C:\Users\potas\Downloads\X96Q-karaoke-20261014-234227
+PS C:\Windows\System32>

@@ -1,0 +1,153 @@
+PowerShell 7.6.6
+PS C:\Windows\System32> ssh root@192.168.1.50
+root@192.168.1.50's password:
+    _             _    _                             __  __ _    _      _
+   /_\  _ _ _ __ | |__(_)__ _ _ _ ___ _  _ _ _  ___ / _|/ _(_)__(_)__ _| |
+  / _ \| '_| '  \| '_ \ / _` | ' \___| || | ' \/ _ \  _|  _| / _| / _` | |
+ /_/ \_\_| |_|_|_|_.__/_\__,_|_||_|   \_,_|_||_\___/_| |_| |_\__|_\__,_|_|
+
+ v24.11 rolling for X96Q v5.1 TV Box running Armbian Linux 6.6.44-current-sunxi64
+
+ Packages:     Debian stable (bookworm)
+ Updates:      Kernel upgrade enabled and 210 packages available for upgrade
+ Support:      DIY (custom image)
+ IP addresses: (LAN) 192.168.1.102 192.168.1.50 (WAN) 95.31.28.234
+
+ Performance:
+
+ Load:         75%              Up time:       0 min
+ Memory usage: 28% of 1.88G
+ CPU temp:     61°C             Usage of /:    70% of 15G
+storage/:      9% of 229G       storage temp:  38°C
+
+ Commands:
+
+ System config  : sudo armbian-config
+ System monitor : htop
+
+Last login: Wed Oct 14 22:27:17 2026 from 192.168.1.33
+root@x96q-v5-1:~# printf 'SSH: %s\n' "$SSH_CONNECTION"
+nmcli device status
+ip -br -4 addr
+ip route get 1.1.1.1
+systemctl is-active karaoke-server.service bgutil-pot.service zapret.service
+
+journalctl --list-boots --no-pager
+
+journalctl -b -1 -u NetworkManager \
+  -u karaoke-ap-test-rollback.service --no-pager -n 160
+
+journalctl -b -1 -k --no-pager |
+  grep -Ei 'xradio|rtl8|wlan|wlxf|usb|watchdog|hung|oom' |
+  tail -80
+SSH: 192.168.1.33 50041 192.168.1.50 22
+DEVICE           TYPE      STATE                   CONNECTION
+wlxf0b040f7f699  wifi      connected               Alisa_USB
+lo               loopback  connected (externally)  lo
+wlan0            wifi      connected               Alisa
+p2p-dev-wlan0    wifi-p2p  disconnected            --
+end0             ethernet  unavailable             --
+lo               UNKNOWN        127.0.0.1/8
+wlan0            UP             192.168.1.102/24
+wlxf0b040f7f699  UP             192.168.1.50/24
+1.1.1.1 via 192.168.1.1 dev wlxf0b040f7f699 src 192.168.1.50 uid 0
+    cache
+active
+active
+active
+IDX BOOT ID                          FIRST ENTRY                 LAST ENTRY
+-12 310635128cc9413089ca9660e30107e4 Tue 2026-10-13 18:17:52 MSK Tue 2026-10-13 18:17:56 MSK
+-11 3a02ba702bf746f0905121408be15bd6 Tue 2026-10-13 20:17:01 MSK Tue 2026-10-13 20:17:05 MSK
+-10 624c2b5baa7d46a19f560317cfc32c9a Tue 2026-10-13 20:17:01 MSK Tue 2026-10-13 20:17:05 MSK
+ -9 43dcf4c58de14b76b82359cc0e7f0c40 Tue 2026-10-13 20:17:01 MSK Tue 2026-10-13 20:17:05 MSK
+ -8 a13a4e629be04530b20622947275508d Tue 2026-10-13 20:17:01 MSK Wed 2026-10-14 06:25:15 MSK
+ -7 39c4d048ce7e4b85a7e08574ca4c6ec8 Wed 2026-10-14 07:17:01 MSK Wed 2026-10-14 07:17:11 MSK
+ -6 855f4ba777ae42f39911a6b1fe494f1f Wed 2026-10-14 07:17:02 MSK Wed 2026-10-14 07:17:13 MSK
+ -5 5e0e48408b4b420eb9510cf302846397 Wed 2026-10-14 10:17:01 MSK Wed 2026-10-14 10:17:06 MSK
+ -4 a72e3cb859b54a38a717b59f53f70679 Wed 2026-10-14 10:17:01 MSK Wed 2026-10-14 10:17:05 MSK
+ -3 d62610c16cea4c6e9cf2511ce052f086 Wed 2026-10-14 17:17:03 MSK Wed 2026-10-14 17:17:15 MSK
+ -2 99be593f9eb44b7b88381f7b1cd1e9c7 Wed 2026-10-14 17:17:02 MSK Wed 2026-10-14 17:17:13 MSK
+ -1 3a70000be9d24b12b075c0139192f2fb Wed 2026-10-14 18:17:01 MSK Wed 2026-10-14 18:17:05 MSK
+  0 27e17ea761c34d32b85ac8c529d21fc4 Wed 2026-10-14 22:17:01 MSK Wed 2026-10-14 22:39:41 MSK
+-- No entries --
+Oct 14 18:17:01 x96q-v5-1 kernel: ehci-platform 5311000.usb: EHCI Host Controller
+Oct 14 18:17:01 x96q-v5-1 kernel: ehci-platform 5311000.usb: new USB bus registered, assigned bus number 4
+Oct 14 18:17:01 x96q-v5-1 kernel: usb_phy_generic usb_phy_generic.3.auto: dummy supplies not allowed for exclusive requests
+Oct 14 18:17:01 x96q-v5-1 kernel: ehci-platform 5311000.usb: irq 293, io mem 0x05311000
+Oct 14 18:17:01 x96q-v5-1 kernel: ohci-platform 5200400.usb: Generic Platform OHCI controller
+Oct 14 18:17:01 x96q-v5-1 kernel: ohci-platform 5200400.usb: new USB bus registered, assigned bus number 5
+Oct 14 18:17:01 x96q-v5-1 kernel: ohci-platform 5200400.usb: irq 295, io mem 0x05200400
+Oct 14 18:17:01 x96q-v5-1 kernel: ohci-platform 5310400.usb: Generic Platform OHCI controller
+Oct 14 18:17:01 x96q-v5-1 kernel: ohci-platform 5310400.usb: new USB bus registered, assigned bus number 6
+Oct 14 18:17:01 x96q-v5-1 kernel: ohci-platform 5310400.usb: irq 297, io mem 0x05310400
+Oct 14 18:17:01 x96q-v5-1 kernel: ohci-platform 5311400.usb: Generic Platform OHCI controller
+Oct 14 18:17:01 x96q-v5-1 kernel: ohci-platform 5311400.usb: new USB bus registered, assigned bus number 7
+Oct 14 18:17:01 x96q-v5-1 kernel: ohci-platform 5311400.usb: irq 298, io mem 0x05311400
+Oct 14 18:17:01 x96q-v5-1 kernel: ehci-platform 5101000.usb: USB 2.0 started, EHCI 1.00
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb1: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 6.06
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb1: Product: EHCI Host Controller
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb1: Manufacturer: Linux 6.6.44-current-sunxi64 ehci_hcd
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb1: SerialNumber: 5101000.usb
+Oct 14 18:17:01 x96q-v5-1 kernel: hub 1-0:1.0: USB hub found
+Oct 14 18:17:01 x96q-v5-1 kernel: ehci-platform 5200000.usb: USB 2.0 started, EHCI 1.00
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb2: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 6.06
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb2: Product: EHCI Host Controller
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb2: Manufacturer: Linux 6.6.44-current-sunxi64 ehci_hcd
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb2: SerialNumber: 5200000.usb
+Oct 14 18:17:01 x96q-v5-1 kernel: hub 2-0:1.0: USB hub found
+Oct 14 18:17:01 x96q-v5-1 kernel: ehci-platform 5310000.usb: USB 2.0 started, EHCI 1.00
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb3: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 6.06
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb3: Product: EHCI Host Controller
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb3: Manufacturer: Linux 6.6.44-current-sunxi64 ehci_hcd
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb3: SerialNumber: 5310000.usb
+Oct 14 18:17:01 x96q-v5-1 kernel: hub 3-0:1.0: USB hub found
+Oct 14 18:17:01 x96q-v5-1 kernel: ehci-platform 5311000.usb: USB 2.0 started, EHCI 1.00
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb5: New USB device found, idVendor=1d6b, idProduct=0001, bcdDevice= 6.06
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb5: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb5: Product: Generic Platform OHCI controller
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb5: Manufacturer: Linux 6.6.44-current-sunxi64 ohci_hcd
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb5: SerialNumber: 5200400.usb
+Oct 14 18:17:01 x96q-v5-1 kernel: hub 5-0:1.0: USB hub found
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb4: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 6.06
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb4: Product: EHCI Host Controller
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb4: Manufacturer: Linux 6.6.44-current-sunxi64 ehci_hcd
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb4: SerialNumber: 5311000.usb
+Oct 14 18:17:01 x96q-v5-1 kernel: hub 4-0:1.0: USB hub found
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb7: New USB device found, idVendor=1d6b, idProduct=0001, bcdDevice= 6.06
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb7: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb7: Product: Generic Platform OHCI controller
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb7: Manufacturer: Linux 6.6.44-current-sunxi64 ohci_hcd
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb7: SerialNumber: 5311400.usb
+Oct 14 18:17:01 x96q-v5-1 kernel: hub 7-0:1.0: USB hub found
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb6: New USB device found, idVendor=1d6b, idProduct=0001, bcdDevice= 6.06
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb6: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb6: Product: Generic Platform OHCI controller
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb6: Manufacturer: Linux 6.6.44-current-sunxi64 ohci_hcd
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb6: SerialNumber: 5310400.usb
+Oct 14 18:17:01 x96q-v5-1 kernel: hub 6-0:1.0: USB hub found
+Oct 14 18:17:01 x96q-v5-1 kernel: ohci-platform 5101400.usb: Generic Platform OHCI controller
+Oct 14 18:17:01 x96q-v5-1 kernel: ohci-platform 5101400.usb: new USB bus registered, assigned bus number 8
+Oct 14 18:17:01 x96q-v5-1 kernel: ohci-platform 5101400.usb: irq 294, io mem 0x05101400
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb8: New USB device found, idVendor=1d6b, idProduct=0001, bcdDevice= 6.06
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb8: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb8: Product: Generic Platform OHCI controller
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb8: Manufacturer: Linux 6.6.44-current-sunxi64 ohci_hcd
+Oct 14 18:17:01 x96q-v5-1 kernel: usb usb8: SerialNumber: 5101400.usb
+Oct 14 18:17:01 x96q-v5-1 kernel: hub 8-0:1.0: USB hub found
+Oct 14 18:17:01 x96q-v5-1 kernel: usb 1-1: new high-speed USB device number 2 using ehci-platform
+Oct 14 18:17:01 x96q-v5-1 kernel: usb 1-1: New USB device found, idVendor=152d, idProduct=2329, bcdDevice= 1.00
+Oct 14 18:17:01 x96q-v5-1 kernel: usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=5
+Oct 14 18:17:01 x96q-v5-1 kernel: usb 1-1: Product: USB to ATA/ATAPI bridge
+Oct 14 18:17:01 x96q-v5-1 kernel: usb 1-1: Manufacturer: JMicron
+Oct 14 18:17:01 x96q-v5-1 kernel: usb 1-1: SerialNumber: 7D578E408C42
+Oct 14 18:17:01 x96q-v5-1 kernel: usb-storage 1-1:1.0: USB Mass Storage device detected
+Oct 14 18:17:01 x96q-v5-1 kernel: usb-storage 1-1:1.0: Quirks match for vid 152d pid 2329: 8020
+Oct 14 18:17:01 x96q-v5-1 kernel: scsi host0: usb-storage 1-1:1.0
+Oct 14 18:17:01 x96q-v5-1 kernel: usbcore: registered new interface driver uas
+Oct 14 18:17:03 x96q-v5-1 kernel: xradio_wlan mmc3:0001:1:    Input buffers: 30 x 1632 bytes
+Oct 14 18:17:03 x96q-v5-1 kernel: xradio_wlan mmc3:0001:1: Firmware Label:XR_C01.08.52.58 Jul 19 2018 18:53:57
+root@x96q-v5-1:~#
